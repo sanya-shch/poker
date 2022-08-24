@@ -1,0 +1,26 @@
+.game_page {
+  background-color: #f6f6e9;
+  color: #313131;
+  width: 100vw;
+  height: 100vh;
+
+  .mid_game_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    font-size: 1.5rem;
+  }
+}
+
+.content {
+  transition: 0.5s;
+  position: relative;
+  z-index: 0;
+}
+.content_active {
+  //transform: translateX(30%);
+  //transform: translateX(-30%);
+  transform: translateX(-500px);
+}
