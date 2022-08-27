@@ -1,17 +1,19 @@
 import React from "react";
 
-import * as icons from "../../assets/playerIcons";
-import UserBlock from "../UserBlock";
+import { gameActionTypes } from "../../constants/gameActionTypes";
+import * as cardTypeIcons from "../../assets/cardTypeIcons";
+import cards from "../../constants/cards";
 
 import "./style.scss";
 
 const PlayersBlock = ({
-  // midgamePlayerUid,
   playerDataArr,
   playerCards,
   currentPlayerUid,
   playersList,
   uuid,
+  dealerUid,
+  lastActions,
 }) => {
   const players = playersList.reduce((acc, item) => {
     acc.push(playerDataArr.find((findItem) => findItem.uid === item));
@@ -23,13 +25,71 @@ const PlayersBlock = ({
     <div className="players_block">
       {players.map((player, index) => (
         <React.Fragment key={player.uid}>
-          <UserBlock
-            imgSrc={icons[player.icon_index]}
-            username={player.username}
-            itsI={uuid === player.uid}
-            isCurrentPlayer={currentPlayerUid === player.uid}
-            numberOfCards={playerCards[player.uid].length}
-          />
+          <div className="user_item_block">
+            {player.uid === uuid ? (
+              <div className="user_cards_block">
+                <div>
+                  <p>{cards[playerCards[player.uid][0]].number}</p>
+                  <img
+                    src={cardTypeIcons[cards[playerCards[player.uid][0]].type]}
+                    alt=""
+                  />
+                  <img
+                    src={cardTypeIcons[cards[playerCards[player.uid][0]].type]}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <p>{cards[playerCards[player.uid][1]].number}</p>
+                  <img
+                    src={cardTypeIcons[cards[playerCards[player.uid][1]].type]}
+                    alt=""
+                  />
+                  <img
+                    src={cardTypeIcons[cards[playerCards[player.uid][1]].type]}
+                    alt=""
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="hidden_user_cards_block">
+                <div />
+                <div />
+              </div>
+            )}
+            <div className={`username_block ${player.uid === uuid ? 'my_name_block' : ''}`}>
+              <p>{player.uid === uuid ? 'You' : player.username}</p>
+            </div>
+            <div className="user_info_block">
+              <div className="first">
+                <p>{player.money}</p>
+                {player.uid === dealerUid && (
+                  <div className="dealer_block">D</div>
+                )}
+              </div>
+              <div className="second">
+                {lastActions[player.uid]?.action ===
+                  gameActionTypes.small_blind && (
+                  <div className="action_block">Small Blind</div>
+                )}
+                {lastActions[player.uid]?.action ===
+                  gameActionTypes.big_blind && (
+                  <div className="action_block">Big Blind</div>
+                )}
+                {lastActions[player.uid]?.action === gameActionTypes.call && (
+                  <div className="action_block">Call</div>
+                )}
+                {lastActions[player.uid]?.action === gameActionTypes.check && (
+                  <div className="action_block">Check</div>
+                )}
+                {lastActions[player.uid]?.action === gameActionTypes.raise && (
+                  <div className="action_block">
+                    Raise to {lastActions[player.uid]?.number}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
           {players.length !== index + 1 && (
             <svg
               xmlns="http://www.w3.org/2000/svg"

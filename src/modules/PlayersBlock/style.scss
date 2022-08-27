@@ -1,6 +1,179 @@
 .players_block {
-  padding: 80px 100px 0;
+  padding: 80px 100px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 0;
+  user-select: none;
+
+  .user_item_block {
+    width: 100px;
+
+    .user_cards_block {
+      position: relative;
+      width: 100px;
+      height: 85px;
+
+      p {
+        margin: 0 1px;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      div {
+        background-color: #f2f4f6;
+        border: 1px solid #414141;
+        color: #525252;
+        width: 48px;
+        height: 72px;
+        border-radius: 3px;
+        //width: 58px;
+        //height: 88px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+      }
+
+      div:nth-of-type(1) {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        transform: rotate(340deg);
+
+        img:nth-of-type(1) {
+          position: absolute;
+          top: 2px;
+          right: 4px;
+          width: 25px;
+          height: 25px;
+        }
+        img:nth-of-type(2) {
+          position: absolute;
+          top: 32px;
+          right: 6px;
+          width: 33px;
+          height: 33px;
+        }
+      }
+      div:nth-of-type(2) {
+        position: absolute;
+        top: 5px;
+        left: 40px;
+        transform: rotate(25deg);
+
+        img:nth-of-type(1) {
+          position: absolute;
+          top: 2px;
+          right: 4px;
+          width: 25px;
+          height: 25px;
+        }
+        img:nth-of-type(2) {
+          position: absolute;
+          top: 32px;
+          right: 6px;
+          width: 33px;
+          height: 33px;
+        }
+      }
+
+      div:nth-of-type(1):hover,
+      div:nth-of-type(2):hover {
+        transform: scale(1.4);
+        z-index: 3;
+        transition: 1s;
+      }
+    }
+
+    .hidden_user_cards_block {
+      position: relative;
+      width: 100px;
+      height: 85px;
+
+      p {
+        margin: 0 1px;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      div {
+        background-color: #525252;
+        border: 1px solid #414141;
+        color: #f6f6e9;
+        width: 48px;
+        height: 72px;
+        border-radius: 3px;
+      }
+
+      div:nth-of-type(1) {
+        background-color: #313131;
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        transform: rotate(340deg);
+      }
+      div:nth-of-type(2) {
+        background-color: #414141;
+        position: absolute;
+        top: 5px;
+        left: 40px;
+        transform: rotate(25deg);
+      }
+    }
+
+    .username_block {
+      display: flex;
+      justify-content: center;
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75px;
+      }
+    }
+
+    .my_name_block {
+      background-color: #8ac6d1;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    .user_info_block {
+      div.first {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-evenly;
+        height: 25px;
+        align-items: center;
+      }
+
+      div.second {
+        color: #ca3e47;
+        font-weight: bold;
+      }
+    }
+
+    .dealer_block {
+      background-color: #ff6768;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      border: 2px dotted #f6f6e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .action_block {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+
+  svg {
+    min-width: 16px;
+    min-height: 16px;
+  }
 }
