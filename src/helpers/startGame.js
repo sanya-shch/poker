@@ -30,5 +30,23 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
     card_deck: randomizedCards,
     players_list: playersList,
     last_actions: lastActions,
+    bank: 75,
+    player_data_arr: playerDataArr.map((item) => {
+      if (item.uid === sbPlayerUid) {
+        return {
+          ...item,
+          money: item.money - 25,
+          chips: { ...item.chips, 25: item.chips[25] - 1 },
+        };
+      } else if (item.uid === bbPlayerUid) {
+        return {
+          ...item,
+          money: item.money - 50,
+          chips: { ...item.chips, 25: item.chips[25] - 2 },
+        };
+      }
+
+      return item;
+    }),
   });
 };

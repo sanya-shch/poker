@@ -14,6 +14,7 @@ import MainButton from "../../components/MainButton";
 import ChipsBlock from "../ChipsBlock";
 import PlayersBlock from "../PlayersBlock";
 import CardItem from "../CardItem";
+import bankIcon from "./coins.png";
 
 import "./style.scss";
 
@@ -30,6 +31,7 @@ const GameBlock = ({
   dealerUid,
   lastActions,
   gameCards,
+  bankCount,
 }) => {
   const { setToast } = useContext(ToastContext);
 
@@ -42,16 +44,23 @@ const GameBlock = ({
   return (
     <>
       <div className="game_block">
-        <PlayersBlock
-          midgamePlayerUid={midgamePlayerUid}
-          playerDataArr={playerDataArr}
-          playerCards={playerCards}
-          currentPlayerUid={currentPlayerUid}
-          playersList={playersList}
-          uuid={uuid}
-          dealerUid={dealerUid}
-          lastActions={lastActions}
-        />
+        <div className="players_block_wrapper">
+          <div className="bank_block">
+            <img src={bankIcon} width="50px" height="50px" alt="" />
+            <p>{bankCount || 0}</p>
+          </div>
+          <PlayersBlock
+            midgamePlayerUid={midgamePlayerUid}
+            playerDataArr={playerDataArr}
+            playerCards={playerCards}
+            currentPlayerUid={currentPlayerUid}
+            playersList={playersList}
+            uuid={uuid}
+            dealerUid={dealerUid}
+            lastActions={lastActions}
+            gameCards={gameCards}
+          />
+        </div>
 
         <div className="game_board">
           <div className="cards">

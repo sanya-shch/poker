@@ -180,6 +180,7 @@ const GamePage = () => {
               dealerUid={gameData?.dealer_uid}
               lastActions={gameData?.last_actions}
               gameCards={gameData?.game_cards}
+              bankCount={gameData?.bank}
             />
           )}
           {isMidGamePlayer && (

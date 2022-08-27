@@ -30,6 +30,7 @@ const Menu = ({
       last_actions: {},
       game_stage: 'start',
       game_cards: [],
+      bank: 0,
     });
   };
 

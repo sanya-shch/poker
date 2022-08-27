@@ -40,4 +40,30 @@
       margin-right: 5px;
     }
   }
+
+  .players_block_wrapper {
+    padding: 80px 100px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .bank_block {
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 20px;
+      user-select: none;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+      p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+    }
+  }
 }

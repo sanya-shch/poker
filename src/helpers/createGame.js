@@ -49,6 +49,7 @@ export const createGame = async ({
       last_actions: {},
       game_stage: 'start',
       game_cards: [],
+      bank: 0,
     });
 
     navigate(`/game/${gameId}`);

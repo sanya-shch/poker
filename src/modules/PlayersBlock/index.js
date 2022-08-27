@@ -14,6 +14,7 @@ const PlayersBlock = ({
   uuid,
   dealerUid,
   lastActions,
+  gameCards,
 }) => {
   const players = playersList.reduce((acc, item) => {
     acc.push(playerDataArr.find((findItem) => findItem.uid === item));
@@ -26,7 +27,7 @@ const PlayersBlock = ({
       {players.map((player, index) => (
         <React.Fragment key={player.uid}>
           <div className="user_item_block">
-            {player.uid === uuid ? (
+            {player.uid === uuid || gameCards.length === 5 ? (
               <div className="user_cards_block">
                 <div>
                   <p>{cards[playerCards[player.uid][0]].number}</p>
@@ -57,8 +58,12 @@ const PlayersBlock = ({
                 <div />
               </div>
             )}
-            <div className={`username_block ${player.uid === uuid ? 'my_name_block' : ''}`}>
-              <p>{player.uid === uuid ? 'You' : player.username}</p>
+            <div
+              className={`username_block ${
+                player.uid === uuid ? "my_name_block" : ""
+              }`}
+            >
+              <p>{player.uid === uuid ? "You" : player.username}</p>
             </div>
             <div className="user_info_block">
               <div className="first">
