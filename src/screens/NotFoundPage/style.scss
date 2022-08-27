@@ -1,0 +1,30 @@
+.not_found_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f1f1f1;
+  overflow: hidden;
+
+  #text_1 {
+    position: relative;
+    color: white;
+    font-weight: 900;
+    font-size: 12em;
+    line-height: 0.9em;
+    letter-spacing: 2px;
+    text-align: center;
+    transform: rotate(-28deg) skew(25deg);
+    user-select: none;
+  }
+  #text_1:before {
+    content: attr(data-text);
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    color: rgba(0, 0, 0, 0.3);
+    text-shadow: none;
+    filter: blur(8px);
+    z-index: -1;
+  }
+}
