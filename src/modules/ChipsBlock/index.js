@@ -2,7 +2,9 @@ import React from "react";
 
 import "./style.scss";
 
-const ChipsBlock = ({}) => {
+const ChipsBlock = ({ playerDataArr, uuid }) => {
+  const player = playerDataArr.find((findItem) => findItem.uid === uuid);
+
   return (
     <div className="chips_container">
       {/*<div id="#073d91" className="chip">*/}
@@ -27,10 +29,26 @@ const ChipsBlock = ({}) => {
       {/*<div className="pokerchip white"></div>*/}
       {/*<div className="pokerchip red"></div>*/}
       {/*<div className="pokerchip blue"></div>*/}
-      <div className="pokerchip green"></div>
-      <div className="pokerchip black"></div>
-      <div className="pokerchip purple"></div>
-      <div className="pokerchip yellow"></div>
+      {player.chips[25] && (
+        <div className="pokerchip green">
+          <div>{player.chips[25]}</div>
+        </div>
+      )}
+      {player.chips[100] && (
+        <div className="pokerchip black">
+          <div>{player.chips[100]}</div>
+        </div>
+      )}
+      {player.chips[500] && (
+        <div className="pokerchip purple">
+          <div>{player.chips[500]}</div>
+        </div>
+      )}
+      {player.chips[1000] && (
+        <div className="pokerchip yellow">
+          <div>{player.chips[1000]}</div>
+        </div>
+      )}
       {/*<div className="pokerchip orange"></div>*/}
     </div>
   );
