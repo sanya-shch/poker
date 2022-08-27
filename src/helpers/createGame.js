@@ -45,6 +45,10 @@ export const createGame = async ({
       ongoing_game: false,
       current_player_uid: uuid,
       players_list: [],
+      dealer_uid: uuid,
+      last_actions: {},
+      game_stage: 'start',
+      game_cards: [],
     });
 
     navigate(`/game/${gameId}`);

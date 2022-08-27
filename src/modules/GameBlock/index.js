@@ -13,6 +13,7 @@ import { ToastContext } from "../../components/Toast";
 import MainButton from "../../components/MainButton";
 import ChipsBlock from "../ChipsBlock";
 import PlayersBlock from "../PlayersBlock";
+import CardItem from "../CardItem";
 
 import "./style.scss";
 
@@ -26,6 +27,9 @@ const GameBlock = ({
   uuid,
   id,
   setOpenMenu,
+  dealerUid,
+  lastActions,
+  gameCards,
 }) => {
   const { setToast } = useContext(ToastContext);
 
@@ -45,23 +49,21 @@ const GameBlock = ({
           currentPlayerUid={currentPlayerUid}
           playersList={playersList}
           uuid={uuid}
+          dealerUid={dealerUid}
+          lastActions={lastActions}
         />
-
-        {/*<CardsBlock*/}
-
-        {/*/>*/}
 
         <div className="game_board">
           <div className="cards">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <CardItem cardId={gameCards[0]} />
+            <CardItem cardId={gameCards[1]} />
+            <CardItem cardId={gameCards[2]} />
+            <CardItem cardId={gameCards[3]} />
+            <CardItem cardId={gameCards[4]} />
           </div>
-
-          <ChipsBlock />
         </div>
+
+        <ChipsBlock playerDataArr={playerDataArr} uuid={uuid} />
 
         {currentPlayerUid === uuid && (
           <div className="game_buttons_block">

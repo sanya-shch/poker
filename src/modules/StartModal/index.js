@@ -38,6 +38,13 @@ const StartModal = ({
           uid: uuid,
           points: 0,
           icon_index: checked,
+          money: 5000,
+          chips: {
+            25: 4,
+            100: 4,
+            500: 4,
+            1000: 4,
+          }
         }),
       });
 

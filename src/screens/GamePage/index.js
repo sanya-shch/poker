@@ -161,6 +161,7 @@ const GamePage = () => {
                 playerDataArr={gameData?.player_data_arr}
                 uuid={uuid}
                 id={id}
+                dealerUid={gameData?.dealer_uid}
               />
             </Suspense>
           )}
@@ -176,6 +177,9 @@ const GamePage = () => {
               setOpenMenu={setOpenMenu}
               uuid={uuid}
               id={id}
+              dealerUid={gameData?.dealer_uid}
+              lastActions={gameData?.last_actions}
+              gameCards={gameData?.game_cards}
             />
           )}
           {isMidGamePlayer && (

@@ -16,12 +16,12 @@ import UserBlock from "../UserBlock";
 
 import "./style.scss";
 
-const StartBlock = ({ isHost, playerDataArr, uuid, id }) => {
+const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
   const { setToast } = useContext(ToastContext);
 
   const handleClickStart = () => {
     if (playerDataArr?.length >= 2) {
-      startGame({ playerDataArr, id });
+      startGame({ playerDataArr, id, dealerUid });
     } else {
       setToast({
         type: "danger",

@@ -75,7 +75,7 @@
 
     div:before {
       content: "";
-      border: 5px solid transparent;
+      border: 25px solid transparent;
       border-radius: 50%;
       width: 80px;
       height: 80px;
@@ -86,7 +86,7 @@
     }
     div.checked:before {
       content: "";
-      border: 5px solid #525252;
+      border: 25px solid #525252;
     }
   }
   .btn_block {

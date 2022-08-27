@@ -27,6 +27,9 @@ const Menu = ({
       players_list: [],
       // out_card_deck: [],
       current_player_uid: uuid,
+      last_actions: {},
+      game_stage: 'start',
+      game_cards: [],
     });
   };
 

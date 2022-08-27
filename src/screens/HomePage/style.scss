@@ -1,0 +1,91 @@
+.home_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a191d;
+
+  .animated_items {
+    position: relative;
+    width: 150px;
+    height: 150px;
+
+    span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    span:nth-child(1) {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-top: 0.25px solid rgba(255, 255, 255, 0.5);
+      border-left: 0.25px solid rgba(255, 255, 255, 0.5);
+      z-index: 2;
+    }
+    span:nth-child(2) {
+      background-color: #ca3e47;
+      animation: animate 4s ease-in-out infinite;
+    }
+    span:nth-child(3) {
+      background-color: #000;
+      animation: animate 4s ease-in-out infinite;
+      animation-delay: -2s;
+      border-radius: 0;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translate(-150px, 50px) scale(0.4) rotate(0deg);
+        z-index: 1;
+      }
+      50% {
+        transform: translate(150px, -50px) scale(0.4) rotate(180deg);
+        z-index: 1;
+      }
+      50.00001% {
+        transform: translate(150px, -50px) scale(0.4) rotate(180deg);
+        z-index: 3;
+      }
+      100% {
+        transform: translate(-150px, 50px) scale(0.4) rotate(360deg);
+        z-index: 3;
+      }
+    }
+  }
+
+  //h2.main_text {
+  //  position: relative;
+  //  font-size: 8rem;
+  //  color: #2d2d2d;
+  //}
+  //h2.main_text::before {
+  //  content: attr(data-text);
+  //  position: absolute;
+  //  color: white;
+  //  width: 50px;
+  //  overflow: hidden;
+  //  white-space: nowrap;
+  //  border-right: 4px solid white;
+  //  animation: text-animate 4s ease-in-out infinite;
+  //  //filter: drop-shadow(0 0 20px white) drop-shadow(0 0 1px white);
+  //}
+  //@keyframes text-animate {
+  //  0%,10%,100% {
+  //    width: 0;
+  //  }
+  //  70%,90% {
+  //    width: 100%;
+  //  }
+  //}
+
+  .input_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main_button {
+    margin-right: 15px;
+  }
+}
