@@ -5,17 +5,11 @@ import { db } from "../../firebase";
 import { ToastContext } from "../../components/Toast";
 import ButtonCopy from "../../components/ButtonCopy";
 import MainButton from "../../components/MainButton";
+import CombinationBlock from "../CombinationBlock";
 
 import "./style.scss";
 
-const Menu = ({
-  open,
-  setOpen,
-  id,
-  uuid,
-  isHost,
-  ongoingGame,
-}) => {
+const Menu = ({ open, setOpen, id, uuid, isHost, ongoingGame }) => {
   const { setToast } = useContext(ToastContext);
 
   const handleClickReset = async () => {
@@ -28,7 +22,7 @@ const Menu = ({
       // out_card_deck: [],
       current_player_uid: uuid,
       last_actions: {},
-      game_stage: 'start',
+      game_stage: "start",
       game_cards: [],
       bank: 0,
     });
@@ -65,6 +59,8 @@ const Menu = ({
             <span>Copy</span>
           </ButtonCopy>
         </div>
+
+        <CombinationBlock />
 
         {isHost && ongoingGame && (
           <div className="reset_btn">
