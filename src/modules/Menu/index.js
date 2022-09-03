@@ -6,10 +6,19 @@ import { ToastContext } from "../../components/Toast";
 import ButtonCopy from "../../components/ButtonCopy";
 import MainButton from "../../components/MainButton";
 import CombinationBlock from "../CombinationBlock";
+import Toggle from "../../components/Toggle";
 
 import "./style.scss";
 
-const Menu = ({ open, setOpen, id, uuid, isHost, ongoingGame }) => {
+const Menu = ({
+  open,
+  setOpen,
+  id,
+  uuid,
+  isHost,
+  ongoingGame,
+  withBackgroundAnimation = false,
+}) => {
   const { setToast } = useContext(ToastContext);
 
   const handleClickReset = async () => {
@@ -28,8 +37,14 @@ const Menu = ({ open, setOpen, id, uuid, isHost, ongoingGame }) => {
     });
   };
 
+  const handleToggle = async () => {
+    await updateDoc(doc(db, "game_rooms_poker", id), {
+      with_background_animation: !withBackgroundAnimation,
+    });
+  };
+
   return (
-    <div className={`menu ${open ? "menu_active" : ""}`}>
+    <div className={`menu ${open ? "menu_active" : ""} ${isHost && ongoingGame ? "" : "big_block"}`}>
       <button className="fancy-burger" onClick={() => setOpen(!open)}>
         <span
           className={`rectangle rectangle--top rectangle--small ${
@@ -61,6 +76,14 @@ const Menu = ({ open, setOpen, id, uuid, isHost, ongoingGame }) => {
         </div>
 
         <CombinationBlock />
+
+        {isHost && ongoingGame && (
+          <Toggle
+            text="Background animation"
+            onToggle={handleToggle}
+            isToggle={withBackgroundAnimation}
+          />
+        )}
 
         {isHost && ongoingGame && (
           <div className="reset_btn">

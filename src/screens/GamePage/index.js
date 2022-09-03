@@ -141,6 +141,20 @@ const GamePage = () => {
     uuid,
   ]);
 
+  const handleClickContent = () => {
+    if (openMenu) setOpenMenu((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (openMenu) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [openMenu]);
+
   return (
     <>
       <Menu
@@ -150,8 +164,12 @@ const GamePage = () => {
         uuid={uuid}
         ongoingGame={ongoingGame}
         isHost={isHost}
+        withBackgroundAnimation={gameData?.with_background_animation}
       />
-      <div className={`content ${openMenu ? "content_active" : ""}`}>
+      <div
+        className={`content ${openMenu ? "content_active" : ""}`}
+        onClick={handleClickContent}
+      >
         <Header playerDataArr={gameData?.player_data_arr} />
         <div className="game_page">
           {!ongoingGame && isWaitStart && (
@@ -181,6 +199,7 @@ const GamePage = () => {
               lastActions={gameData?.last_actions}
               gameCards={gameData?.game_cards}
               bankCount={gameData?.bank}
+              withBackgroundAnimation={gameData?.with_background_animation}
             />
           )}
           {isMidGamePlayer && (

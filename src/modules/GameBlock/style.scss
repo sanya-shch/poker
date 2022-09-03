@@ -1,3 +1,6 @@
+$green: #7ceaa4;
+$purple: #3b3d54;
+
 .game_block {
   width: 100%;
   min-height: 100vh;
@@ -34,6 +37,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 10px;
+    z-index: 10;
 
     .main_button {
       margin-left: 5px;
@@ -66,4 +70,10 @@
       }
     }
   }
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  overflow: hidden;
 }

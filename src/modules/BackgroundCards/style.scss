@@ -1,0 +1,32 @@
+.background_cards_wrap {
+  perspective-origin: 50% 50%;
+
+  .svg {
+    position: absolute;
+    bottom: -100vh;
+    transform-style: preserve-3d;
+    width: 100px;
+    height: 100px;
+  }
+
+  $total: 8;
+  @for $i from 1 through $total {
+    //$scale: random(1) - 0.2;
+
+    .svg:nth-child(#{$i}) {
+      left: random(120) * 1% - 20;
+      animation: raise#{$i} 6 + random(15) + s linear infinite;
+      animation-delay: random(5) - 5 + s;
+      transform: scale(0.3 * $i - 0.6) rotate(random(360) + deg);
+      z-index: $i;
+      filter: blur($i - 6 + px);
+
+      @keyframes raise#{$i} {
+        to {
+          bottom: 150vh;
+          transform: rotate(random(360) + deg);
+        }
+      }
+    }
+  }
+}

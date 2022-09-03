@@ -15,6 +15,7 @@ import ChipsBlock from "../ChipsBlock";
 import PlayersBlock from "../PlayersBlock";
 import CardItem from "../CardItem";
 import bankIcon from "./coins.png";
+import BackgroundCards from "../BackgroundCards";
 
 import "./style.scss";
 
@@ -32,6 +33,7 @@ const GameBlock = ({
   lastActions,
   gameCards,
   bankCount,
+  withBackgroundAnimation,
 }) => {
   const { setToast } = useContext(ToastContext);
 
@@ -81,6 +83,8 @@ const GameBlock = ({
             <MainButton text="Raise" onClick={handleClickRaise} />
           </div>
         )}
+
+        {withBackgroundAnimation && <BackgroundCards />}
       </div>
     </>
   );

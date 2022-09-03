@@ -28,6 +28,8 @@ const CardItem = ({ cardId }) => {
               key={`card-icon-${cardType}-${cardNumber}-${index}`}
               src={cardTypeIcons[iconItem ? cardType : `${cardType}Gray`]}
               alt=""
+              width="32px"
+              height="32px"
             />
           ))}
         </div>

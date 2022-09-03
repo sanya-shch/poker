@@ -50,6 +50,7 @@ export const createGame = async ({
       game_stage: 'start',
       game_cards: [],
       bank: 0,
+      with_background_animation: false,
     });
 
     navigate(`/game/${gameId}`);

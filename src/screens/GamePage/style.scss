@@ -18,9 +18,12 @@
   transition: 0.5s;
   position: relative;
   z-index: 0;
+  overflow: hidden;
 }
 .content_active {
   //transform: translateX(30%);
   //transform: translateX(-30%);
-  transform: translateX(-500px);
+  //transform: translateX(-500px);
+  filter: blur(8px);
+  cursor: pointer;
 }

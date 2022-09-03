@@ -105,4 +105,12 @@
       max-width: 100%;
     }
   }
+
+  .toggle_label {
+    margin: 0 20px 20px;
+  }
+}
+
+.menu_active.big_block .custom_scrollbar {
+  max-height: calc(100vh - 70px);
 }
