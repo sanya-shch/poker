@@ -15,6 +15,14 @@ const Header = ({ playerDataArr }) => {
         POKER
       </h1>
 
+      {/*<div className="words">*/}
+      {/*  <span>P</span>*/}
+      {/*  <span>O</span>*/}
+      {/*  <span>K</span>*/}
+      {/*  <span>E</span>*/}
+      {/*  <span>R</span>*/}
+      {/*</div>*/}
+
       <div className="players">
         {playerDataArr?.map((player) => (
           <Tooltip
