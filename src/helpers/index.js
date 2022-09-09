@@ -4,6 +4,7 @@ import { createGame } from "./createGame";
 import { startGame } from "./startGame";
 import { randomize } from "./randomize";
 import { getNextPlayer } from "./getNextPlayer";
+import { combinationCheck } from "./combimationCheck";
 
 export {
   getSixLetterCode,
@@ -12,4 +13,5 @@ export {
   startGame,
   randomize,
   getNextPlayer,
+  combinationCheck,
 };
