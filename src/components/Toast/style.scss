@@ -8,6 +8,7 @@
   cursor: pointer;
   transition: transform 300ms ease-in-out;
   overflow: hidden;
+  height: 70px;
 }
 
 .toast-container[data-position$="-right"] .toast {
@@ -45,7 +46,8 @@
   content: "\00D7";
   position: absolute;
   top: 2px;
-  right: 5px;
+  right: 10px;
+  font-size: 30px;
 }
 
 .toast-container {

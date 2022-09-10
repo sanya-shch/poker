@@ -28,3 +28,18 @@
     z-index: -1;
   }
 }
+
+@media (max-width: 800px) {
+  .not_found_page {
+    #text_1:before {
+      display: none;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .not_found_page {
+    #text_1 {
+      font-size: 5em;
+    }
+  }
+}

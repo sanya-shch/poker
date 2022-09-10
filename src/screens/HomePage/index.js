@@ -62,7 +62,7 @@ function HomePage({ gameId, setGameId }) {
       <div className="first_row">
         <svg viewBox="0 0 400 175">
           <symbol id="s-text">
-            <text text-anchor="middle" x="50%" y="50%" dy=".35em">
+            <text textAnchor="middle" x="50%" y="50%" dy=".35em">
               Poker
             </text>
           </symbol>

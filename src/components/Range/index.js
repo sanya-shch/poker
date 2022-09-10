@@ -5,20 +5,22 @@ import { RollCounterRange } from "./RollCounterRange";
 import "./style.scss";
 
 const Range = ({
-  value: rangeValue = "25",
+  // value: rangeValue = "25",
+  value,
+  setValue,
   min = "0",
   max = "5000",
   step = "25",
 }) => {
-  const [value, setValue] = React.useState(rangeValue);
+  // const [value, setValue] = React.useState(rangeValue);
 
   React.useEffect(() => {
     new RollCounterRange("#range2");
   }, []);
 
-  React.useEffect(() => {
-    setValue(rangeValue);
-  }, [rangeValue]);
+  // React.useEffect(() => {
+  //   setValue(rangeValue);
+  // }, [rangeValue]);
 
   return (
     <form>

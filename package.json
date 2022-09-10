@@ -2,6 +2,7 @@
   "name": "poker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sanya-shch.github.io/poker/",
   "dependencies": {
     "firebase": "9.9.0",
     "node-sass": "7.0.1",

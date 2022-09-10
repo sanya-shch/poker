@@ -183,7 +183,7 @@ const GamePage = () => {
               />
             </Suspense>
           )}
-          {ongoingGame && !isMidGamePlayer && !isStartModalOpen && (
+          {ongoingGame && !isMidGamePlayer && (
             <GameBlock
               midgamePlayerUid={gameData?.midgame_player_uid}
               playerDataArr={gameData?.player_data_arr}
@@ -200,6 +200,9 @@ const GamePage = () => {
               gameCards={gameData?.game_cards}
               bankCount={gameData?.bank}
               withBackgroundAnimation={gameData?.with_background_animation}
+              gameStage={gameData?.game_stage}
+              isHost={isHost}
+              currentBet={gameData?.current_bet}
             />
           )}
           {isMidGamePlayer && (

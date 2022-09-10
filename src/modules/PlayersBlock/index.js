@@ -5,6 +5,7 @@ import * as cardTypeIcons from "../../assets/cardTypeIcons";
 import cards from "../../constants/cards";
 
 import "./style.scss";
+import { isRoundOver } from "../../helpers";
 
 const PlayersBlock = ({
   playerDataArr,
@@ -27,7 +28,11 @@ const PlayersBlock = ({
       {players.map((player, index) => (
         <React.Fragment key={player.uid}>
           <div className="user_item_block">
-            {player.uid === uuid || gameCards.length === 5 ? (
+            {lastActions[player.uid]?.action === gameActionTypes.fold ? (
+              <div className="fold_block">FOLD</div>
+            ) : player.uid === uuid ||
+              (gameCards.length === 5 &&
+                isRoundOver({ lastActions, playersList })) ? (
               <div className="user_cards_block">
                 <div>
                   <p>{cards[playerCards[player.uid][0]].number}</p>
@@ -90,6 +95,11 @@ const PlayersBlock = ({
                 {lastActions[player.uid]?.action === gameActionTypes.raise && (
                   <div className="action_block">
                     Raise to {lastActions[player.uid]?.number}
+                  </div>
+                )}
+                {lastActions[player.uid]?.action === gameActionTypes.all_in && (
+                  <div className="action_block">
+                    All in {lastActions[player.uid]?.number}
                   </div>
                 )}
               </div>

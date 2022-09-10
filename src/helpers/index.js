@@ -5,6 +5,8 @@ import { startGame } from "./startGame";
 import { randomize } from "./randomize";
 import { getNextPlayer } from "./getNextPlayer";
 import { combinationCheck } from "./combimationCheck";
+import { isRoundOver } from "./isRoundOver";
+import { getGameCards } from "./getGameCards";
 
 export {
   getSixLetterCode,
@@ -14,4 +16,6 @@ export {
   randomize,
   getNextPlayer,
   combinationCheck,
+  isRoundOver,
+  getGameCards,
 };

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 
 import { db } from "../../firebase";
+import { gameStages } from "../../constants/gameStage";
 import { ToastContext } from "../../components/Toast";
 import ButtonCopy from "../../components/ButtonCopy";
 import MainButton from "../../components/MainButton";
@@ -31,9 +32,10 @@ const Menu = ({
       // out_card_deck: [],
       current_player_uid: uuid,
       last_actions: {},
-      game_stage: "start",
+      game_stage: gameStages.start,
       game_cards: [],
       bank: 0,
+      current_bet: 0,
     });
   };
 

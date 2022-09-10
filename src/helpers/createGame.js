@@ -2,13 +2,9 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 import { db } from "../firebase";
 import { getSixLetterCode } from "../helpers";
+import { gameStages } from "../constants/gameStage";
 
-export const createGame = async ({
-  uuid,
-  gameId,
-  setGameId,
-  navigate,
-}) => {
+export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
   try {
     let codeArr = [];
     const codesDoc = await getDoc(
@@ -47,10 +43,11 @@ export const createGame = async ({
       players_list: [],
       dealer_uid: uuid,
       last_actions: {},
-      game_stage: 'start',
+      game_stage: gameStages.start,
       game_cards: [],
       bank: 0,
       with_background_animation: false,
+      current_bet: 0,
     });
 
     navigate(`/game/${gameId}`);

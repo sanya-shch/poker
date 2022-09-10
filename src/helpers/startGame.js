@@ -36,17 +36,18 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
         return {
           ...item,
           money: item.money - 25,
-          chips: { ...item.chips, 25: item.chips[25] - 1 },
+          // chips: { ...item.chips, 25: item.chips[25] - 1 },
         };
       } else if (item.uid === bbPlayerUid) {
         return {
           ...item,
           money: item.money - 50,
-          chips: { ...item.chips, 25: item.chips[25] - 2 },
+          // chips: { ...item.chips, 25: item.chips[25] - 2 },
         };
       }
 
       return item;
     }),
+    // current_player_uid: sbPlayerUid,
   });
 };
