@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/poker/static/css/main.01abb347.css",
+    "main.js": "/poker/static/js/main.276be053.js",
+    "static/css/632.7f890127.chunk.css": "/poker/static/css/632.7f890127.chunk.css",
+    "static/js/632.391b3d2f.chunk.js": "/poker/static/js/632.391b3d2f.chunk.js",
+    "static/css/617.608cae00.chunk.css": "/poker/static/css/617.608cae00.chunk.css",
+    "static/js/617.ccf34dca.chunk.js": "/poker/static/js/617.ccf34dca.chunk.js",
+    "static/css/716.6bab9d96.chunk.css": "/poker/static/css/716.6bab9d96.chunk.css",
+    "static/js/716.189b1b7d.chunk.js": "/poker/static/js/716.189b1b7d.chunk.js",
+    "static/js/377.384f4779.chunk.js": "/poker/static/js/377.384f4779.chunk.js",
+    "index.html": "/poker/index.html",
+    "main.01abb347.css.map": "/poker/static/css/main.01abb347.css.map",
+    "main.276be053.js.map": "/poker/static/js/main.276be053.js.map",
+    "632.7f890127.chunk.css.map": "/poker/static/css/632.7f890127.chunk.css.map",
+    "632.391b3d2f.chunk.js.map": "/poker/static/js/632.391b3d2f.chunk.js.map",
+    "617.608cae00.chunk.css.map": "/poker/static/css/617.608cae00.chunk.css.map",
+    "617.ccf34dca.chunk.js.map": "/poker/static/js/617.ccf34dca.chunk.js.map",
+    "716.6bab9d96.chunk.css.map": "/poker/static/css/716.6bab9d96.chunk.css.map",
+    "716.189b1b7d.chunk.js.map": "/poker/static/js/716.189b1b7d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01abb347.css",
+    "static/js/main.276be053.js"
+  ]
+}
