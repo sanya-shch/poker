@@ -7,6 +7,7 @@ import { getNextPlayer } from "./getNextPlayer";
 import { combinationCheck } from "./combimationCheck";
 import { isRoundOver } from "./isRoundOver";
 import { getGameCards } from "./getGameCards";
+import { getWinners } from "./getWinners";
 
 export {
   getSixLetterCode,
@@ -18,4 +19,5 @@ export {
   combinationCheck,
   isRoundOver,
   getGameCards,
+  getWinners,
 };

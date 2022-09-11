@@ -48,6 +48,7 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       bank: 0,
       with_background_animation: false,
       current_bet: 0,
+      all_in_banks: {},
     });
 
     navigate(`/game/${gameId}`);

@@ -20,9 +20,11 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
   const bbPlayerUid = getNextPlayer(playersList, sbPlayerUid);
 
   const lastActions = {
-    [sbPlayerUid]: { action: gameActionTypes.small_blind },
-    [bbPlayerUid]: { action: gameActionTypes.big_blind },
+    [sbPlayerUid]: { action: gameActionTypes.small_blind, number: 25 },
+    [bbPlayerUid]: { action: gameActionTypes.big_blind, number: 50 },
   };
+
+  const newCurrentPlayerUid = getNextPlayer(playersList, bbPlayerUid);
 
   updateDoc(doc(db, "game_rooms_poker", id), {
     ongoing_game: true,
@@ -48,6 +50,7 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
 
       return item;
     }),
-    // current_player_uid: sbPlayerUid,
+    current_player_uid: newCurrentPlayerUid,
+    current_bet: 50,
   });
 };

@@ -34,6 +34,9 @@ const Range = ({
         value={value}
         step={step}
         onChange={(e) => setValue(e.target.value)}
+        onWheel={(e) =>
+          setValue(e.nativeEvent.wheelDelta > 0 ? +value + 25 : +value - 25)
+        }
       />
     </form>
   );

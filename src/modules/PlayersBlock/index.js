@@ -30,9 +30,9 @@ const PlayersBlock = ({
           <div className="user_item_block">
             {lastActions[player.uid]?.action === gameActionTypes.fold ? (
               <div className="fold_block">FOLD</div>
-            ) : player.uid === uuid ||
+            ) : player.uid === uuid /* ||
               (gameCards.length === 5 &&
-                isRoundOver({ lastActions, playersList })) ? (
+                isRoundOver({ lastActions, playersList })) */ ? (
               <div className="user_cards_block">
                 <div>
                   <p>{cards[playerCards[player.uid][0]].number}</p>
@@ -65,7 +65,7 @@ const PlayersBlock = ({
             )}
             <div
               className={`username_block ${
-                player.uid === uuid ? "my_name_block" : ""
+                player.uid === currentPlayerUid ? "my_name_block" : ""
               }`}
             >
               <p>{player.uid === uuid ? "You" : player.username}</p>

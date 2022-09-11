@@ -20,6 +20,7 @@ import "./style.scss";
 
 const StartBlock = lazy(() => import("../../modules/StartBlock"));
 const StartModal = lazy(() => import("../../modules/StartModal"));
+const FinishModal = lazy(() => import("../../modules/FinishModal"));
 
 const GamePage = () => {
   let { id } = useParams();
@@ -37,6 +38,7 @@ const GamePage = () => {
   const [isMidGamePlayer, setIsMidGamePlayer] = useState(false);
 
   const [isStartModalOpen, setIsStartModalOpen] = useState(false);
+  const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -203,6 +205,8 @@ const GamePage = () => {
               gameStage={gameData?.game_stage}
               isHost={isHost}
               currentBet={gameData?.current_bet}
+              allInBanks={gameData?.all_in_banks}
+              setIsFinishModalOpen={setIsFinishModalOpen}
             />
           )}
           {isMidGamePlayer && (
@@ -220,6 +224,25 @@ const GamePage = () => {
                 id={id}
                 uuid={uuid}
                 ongoingGame={ongoingGame}
+              />
+            </Suspense>
+          )}
+          {isFinishModalOpen && (
+            <Suspense>
+              <FinishModal
+                isOpen={isFinishModalOpen}
+                handleClose={setIsFinishModalOpen}
+                isHost={isHost}
+                id={id}
+                uuid={uuid}
+                playerCards={gameData?.player_cards}
+                lastActions={gameData?.last_actions}
+                gameCards={gameData?.game_cards}
+                playerDataArr={gameData?.player_data_arr}
+                playersList={gameData?.players_list}
+                dealerUid={gameData?.dealer_uid}
+                allInBanks={gameData?.all_in_banks}
+                bankCount={gameData?.bank}
               />
             </Suspense>
           )}

@@ -53,57 +53,21 @@
     cursor: pointer;
   }
 
-  .card_items {
-    position: relative;
-    width: 30px;
+  .dealer_block {
+    background-color: #525252;
     height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 2px dotted #f6f6e9;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3;
-    top: -4px;
-
-    div {
-      background-color: #525252;
-      border: 1px solid #414141;
-      color: #f6f6e9;
-      width: 16px;
-      height: 24px;
-      border-radius: 3px;
-    }
-
-    div:nth-of-type(1) {
-      background-color: #313131;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: rotate(340deg);
-    }
-    div:nth-of-type(2) {
-      background-color: #414141;
-      position: absolute;
-      top: 0;
-      left: 6px;
-    }
-    div:nth-of-type(3) {
-      background-color: #525252;
-      position: absolute;
-      top: 0;
-      left: 10px;
-      transform: rotate(20deg);
-    }
-    div:nth-of-type(4) {
-      background-color: #525252;
-      position: absolute;
-      top: 1px;
-      left: 14px;
-      transform: rotate(40deg);
-    }
-
-    span {
-      z-index: 1;
-      color: aliceblue;
-      font-size: 18px;
-    }
+    font-weight: bold;
+  }
+  .dealer_block.current {
+    background-color: #ff6768;
+  }
+  .dealer_block.is_host:not(.current) {
+    cursor: pointer;
   }
 }

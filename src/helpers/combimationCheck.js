@@ -1,3 +1,5 @@
+import { combinations } from "../constants/combinations";
+
 const cardCost = {
   2: 2,
   3: 3,
@@ -12,6 +14,29 @@ const cardCost = {
   Q: 12,
   K: 13,
   A: 14,
+};
+
+const cardTypesList = {
+  c: "clover",
+  d: "diamond",
+  h: "heart",
+  s: "spades",
+};
+
+const cardNumbersList = {
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  1: 10,
+  J: "J",
+  Q: "Q",
+  K: "K",
+  A: "A",
 };
 
 export const combinationCheck = (cards) => {
@@ -67,23 +92,37 @@ export const combinationCheck = (cards) => {
   ) {
     // Royal flush
 
-    return straight[0]
-      .slice(0, 5)
-      .reduce(
-        (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "9"
-      );
+    return {
+      combinationCost: straight[0]
+        .slice(0, 5)
+        .reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "9"
+        ),
+      combinationName: combinations.royal_flush,
+      cards: straight[0].slice(0, 5).map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (straight[0].length >= 5 && numbersOfCardTypes[0] >= 5) {
     // Straight flush
 
-    return straight[0]
-      .slice(0, 5)
-      .reduce(
-        (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "8"
-      );
+    return {
+      combinationCost: straight[0]
+        .slice(0, 5)
+        .reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "8"
+        ),
+      combinationName: combinations.straight_flush,
+      cards: straight[0].slice(0, 5).map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (numberOfCardsArr[0] === 4) {
@@ -102,13 +141,20 @@ export const combinationCheck = (cards) => {
       [[], []]
     );
 
-    return notPairArr.slice(0, 1).reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      fourArr.reduce(
+    return {
+      combinationCost: notPairArr.slice(0, 1).reduce(
         (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "7"
-      )
-    );
+        fourArr.reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "7"
+        )
+      ),
+      combinationName: combinations.four_of_a_kind,
+      cards: [...fourArr, ...notPairArr].map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (
@@ -130,13 +176,20 @@ export const combinationCheck = (cards) => {
       [[], []]
     );
 
-    return pairArr.reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      threeArr.reduce(
+    return {
+      combinationCost: pairArr.reduce(
         (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "6"
-      )
-    );
+        threeArr.reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "6"
+        )
+      ),
+      combinationName: combinations.full_house,
+      cards: [...threeArr, ...pairArr].map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (numbersOfCardTypes.some((item) => item === 5)) {
@@ -154,21 +207,35 @@ export const combinationCheck = (cards) => {
       return acc;
     }, []);
 
-    return flushCards.reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      "5"
-    );
+    return {
+      combinationCost: flushCards.reduce(
+        (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+        "5"
+      ),
+      combinationName: combinations.flush,
+      cards: flushCards.map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (straight[0].length >= 5) {
     // Straight
 
-    return straight[0]
-      .slice(0, 5)
-      .reduce(
-        (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "4"
-      );
+    return {
+      combinationCost: straight[0]
+        .slice(0, 5)
+        .reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "4"
+        ),
+      combinationName: combinations.straight,
+      cards: straight[0].slice(0, 5).map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (numberOfCardsArr[0] === 3) {
@@ -187,13 +254,20 @@ export const combinationCheck = (cards) => {
       [[], []]
     );
 
-    return notPairArr.slice(0, 2).reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      pairArr.reduce(
+    return {
+      combinationCost: notPairArr.slice(0, 2).reduce(
         (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "3"
-      )
-    );
+        pairArr.reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "3"
+        )
+      ),
+      combinationName: combinations.three_of_a_kind,
+      cards: [...pairArr, ...notPairArr.slice(0, 2)].map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (numberOfCardsArr[0] === 2 && numberOfCardsArr[1] === 2) {
@@ -214,13 +288,20 @@ export const combinationCheck = (cards) => {
       [[], []]
     );
 
-    return notPairArr.slice(0, 1).reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      pairArr.reduce(
+    return {
+      combinationCost: notPairArr.slice(0, 1).reduce(
         (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "2"
-      )
-    );
+        pairArr.reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "2"
+        )
+      ),
+      combinationName: combinations.two_pair,
+      cards: [...pairArr, ...notPairArr.slice(0, 1)].map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   if (numberOfCardsArr[0] === 2) {
@@ -239,20 +320,34 @@ export const combinationCheck = (cards) => {
       [[], []]
     );
 
-    return notPairArr.slice(0, 3).reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      pairArr.reduce(
+    return {
+      combinationCost: notPairArr.slice(0, 3).reduce(
         (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-        "1"
-      )
-    );
+        pairArr.reduce(
+          (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+          "1"
+        )
+      ),
+      combinationName: combinations.pair,
+      cards: [...pairArr, ...notPairArr.slice(0, 3)].map((item) => ({
+        number: cardNumbersList[item[0]],
+        type: cardTypesList[item.at(-1)],
+      })),
+    };
   }
 
   // High Card
-  return sortedCards
-    .slice(0, 5)
-    .reduce(
-      (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
-      ""
-    );
+  return {
+    combinationCost: sortedCards
+      .slice(0, 5)
+      .reduce(
+        (acc, item) => acc + cardCost[item[0]].toString().padStart(2, "0"),
+        ""
+      ),
+    combinationName: combinations.high_card,
+    cards: sortedCards.slice(0, 5).map((item) => ({
+      number: cardNumbersList[item[0]],
+      type: cardTypesList[item.at(-1)],
+    })),
+  };
 };

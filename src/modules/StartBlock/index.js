@@ -60,6 +60,9 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
             isHost={isHost}
             handleKick={() => handleKick(player.uid)}
             isStartBlock
+            dealerUid={dealerUid}
+            playerUid={player.uid}
+            id={id}
           />
         ))}
       </div>

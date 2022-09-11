@@ -1,4 +1,7 @@
 import React from "react";
+import { doc, updateDoc } from "firebase/firestore";
+
+import { db } from "../../firebase";
 
 import "./style.scss";
 
@@ -11,7 +14,18 @@ const UserBlock = ({
   isHost,
   isStartBlock,
   handleKick,
+  dealerUid,
+  playerUid,
+  id,
 }) => {
+  const handleClick = async () => {
+    if (playerUid !== dealerUid && isHost) {
+      await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+        dealer_uid: playerUid,
+      });
+    }
+  };
+
   return (
     <div
       className={`user_block ${itsI ? "itsI" : ""} ${
@@ -20,15 +34,14 @@ const UserBlock = ({
     >
       <p>{username}</p>
       <img src={imgSrc} alt="" width="65px" height="65px" loading="lazy" />
-      {!isStartBlock && (
-        <div className="card_items">
-          <div />
-          <div />
-          <div />
-          <div />
-          <span>{numberOfCards}</span>
-        </div>
-      )}
+      <div
+        className={`dealer_block ${
+          playerUid === dealerUid ? "current" : ""
+        } ${isHost ? 'is_host' : ''}`}
+        onClick={handleClick}
+      >
+        D
+      </div>
       {isHost && isStartBlock && !itsI && (
         <button onClick={handleKick}>X</button>
       )}

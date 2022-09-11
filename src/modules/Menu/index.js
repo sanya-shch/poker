@@ -36,6 +36,7 @@ const Menu = ({
       game_cards: [],
       bank: 0,
       current_bet: 0,
+      all_in_banks: {},
     });
   };
 

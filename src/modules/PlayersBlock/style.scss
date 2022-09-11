@@ -75,7 +75,7 @@
         img:nth-of-type(1) {
           position: absolute;
           top: 2px;
-          right: 4px;
+          right: 2px;
           width: 25px;
           height: 25px;
         }
@@ -143,6 +143,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 75px;
+        font-weight: bold;
       }
     }
 
