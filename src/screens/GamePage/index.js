@@ -169,7 +169,7 @@ const GamePage = () => {
         withBackgroundAnimation={gameData?.with_background_animation}
       />
       <div
-        className={`content ${openMenu ? "content_active" : ""}`}
+        className={['content', openMenu && 'content_active'].join(' ')}
         onClick={handleClickContent}
       >
         <Header playerDataArr={gameData?.player_data_arr} />

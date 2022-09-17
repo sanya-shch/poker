@@ -1,0 +1,727 @@
+.game_board_wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+
+  .game_board_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 1200px;
+    height: 620px;
+  }
+  .game_board_container:before {
+    content: "";
+    background-color: #dee2d1;
+    width: 1200px;
+    height: 620px;
+    position: absolute;
+    border-radius: 210px;
+  }
+
+  .bank_block {
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 85px;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+    p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+  }
+
+  .cards {
+    display: flex;
+    justify-content: center;
+  }
+
+  .player_block {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .fold_block {
+      width: 100px;
+      height: 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .player_cards {
+      position: relative;
+      width: 100px;
+      height: 85px;
+
+      p {
+        margin: 0 1px;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      div {
+        background-color: #f2f4f6;
+        border: 1px solid #414141;
+        color: #525252;
+        border-radius: 3px;
+        width: 54px;
+        height: 80px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+      }
+
+      div:nth-of-type(1) {
+        position: absolute;
+        top: -5px;
+        left: 0;
+        transform: rotate(340deg);
+        background-color: white;
+
+        img:nth-of-type(1) {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          width: 25px;
+          height: 25px;
+        }
+        img:nth-of-type(2) {
+          position: absolute;
+          top: 35px;
+          right: 9px;
+          width: 33px;
+          height: 33px;
+        }
+      }
+      div:nth-of-type(2) {
+        position: absolute;
+        top: -5px;
+        left: 44px;
+        transform: rotate(25deg);
+        background-color: white;
+
+        img:nth-of-type(1) {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          width: 25px;
+          height: 25px;
+        }
+        img:nth-of-type(2) {
+          position: absolute;
+          top: 35px;
+          right: 9px;
+          width: 33px;
+          height: 33px;
+        }
+      }
+    }
+
+    .hidden_player_cards {
+      position: relative;
+      width: 100px;
+      height: 85px;
+
+      p {
+        margin: 0 1px;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      div {
+        background-color: #525252;
+        border: 1px solid #414141;
+        color: #f6f6e9;
+        width: 48px;
+        height: 72px;
+        border-radius: 3px;
+      }
+
+      div:nth-of-type(1) {
+        background-color: #313131;
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        transform: rotate(340deg);
+      }
+      div:nth-of-type(2) {
+        background-color: #414141;
+        position: absolute;
+        top: 5px;
+        left: 40px;
+        transform: rotate(25deg);
+      }
+    }
+
+    .player_info {
+      display: flex;
+      position: relative;
+
+      &:after {
+        content: "";
+        border: 33px solid #414141;
+        border-radius: 50%;
+        width: 68px;
+        height: 68px;
+        position: absolute;
+        top: -8px;
+        right: -7px;
+        z-index: 1;
+      }
+
+      .player_text_info {
+        width: 136px;
+        margin-right: 30px;
+
+        img {
+          width: 52px;
+          height: 52px;
+          z-index: 10;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+
+        .username_block {
+          display: flex;
+          justify-content: center;
+          height: 20px;
+          background-color: #414141;
+          font-size: 14px;
+          line-height: 21px;
+          color: #f6f6e9;
+          padding-right: 32px;
+          border-top-left-radius: 13px;
+
+          p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 95px;
+            font-weight: bold;
+          }
+        }
+
+        .money_block {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          background-color: #525252;
+          height: 32px;
+          color: #f6f6e9;
+          padding-right: 32px;
+          border-bottom-left-radius: 13px;
+
+          p {
+            font-size: 18px;
+          }
+
+          .dealer_block {
+            background-color: #ff6768;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            border: 2px dotted #f6f6e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+      }
+
+      .player_action_block {
+        position: absolute;
+        bottom: -25px;
+        background-color: #525252;
+        height: 20px;
+        font-size: 14px;
+        line-height: 21px;
+        color: #f6f6e9;
+        border-radius: 13px;
+        padding: 0 15px;
+      }
+    }
+  }
+
+  .empty_card_item {
+    background-color: #dee2d1;
+  }
+
+  .current_player {
+    &.player_info:after {
+      border: 33px solid #005f6b !important;
+    }
+
+    .username_block {
+      background-color: #005f6b !important;
+    }
+
+    .money_block {
+      background-color: #008c9e !important;
+    }
+  }
+
+  .players_14 {
+    .player_1 {
+      bottom: 20px;
+      left: 375px;
+    }
+    .player_2 {
+      bottom: 20px;
+      left: 190px;
+    }
+    .player_3 {
+      bottom: 60px;
+      left: -20px;
+    }
+    .player_4 {
+      top: 230px;
+      left: -20px;
+    }
+    .player_5 {
+      top: 30px;
+      left: -20px;
+    }
+    .player_6 {
+      top: -20px;
+      left: 170px;
+    }
+    .player_7 {
+      top: -20px;
+      left: 400px;
+    }
+    .player_8 {
+      top: -20px;
+      right: 400px;
+    }
+    .player_9 {
+      top: -20px;
+      right: 170px;
+    }
+    .player_10 {
+      top: 30px;
+      right: -20px;
+    }
+    .player_11 {
+      top: 230px;
+      right: -20px;
+    }
+    .player_12 {
+      bottom: 60px;
+      right: -20px;
+    }
+    .player_13 {
+      bottom: 20px;
+      right: 190px;
+    }
+    .player_14 {
+      bottom: 20px;
+      right: 375px;
+    }
+  }
+  .players_13 {
+    .player_1 {
+      bottom: 20px;
+      left: 375px;
+    }
+    .player_2 {
+      bottom: 20px;
+      left: 190px;
+    }
+    .player_3 {
+      bottom: 60px;
+      left: -20px;
+    }
+    .player_4 {
+      top: 195px;
+      left: -20px;
+    }
+    .player_5 {
+      top: -20px;
+      left: 50px;
+    }
+    .player_6 {
+      top: -20px;
+      left: 285px;
+    }
+    .player_7 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_8 {
+      top: -20px;
+      right: 285px;
+    }
+    .player_9 {
+      top: -20px;
+      right: 50px;
+    }
+    .player_10 {
+      top: 195px;
+      right: -20px;
+    }
+    .player_11 {
+      bottom: 60px;
+      right: -20px;
+    }
+    .player_12 {
+      bottom: 20px;
+      right: 190px;
+    }
+    .player_13 {
+      bottom: 20px;
+      right: 375px;
+    }
+  }
+  .players_12 {
+    .player_1 {
+      bottom: 20px;
+      left: 375px;
+    }
+    .player_2 {
+      bottom: 20px;
+      left: 155px;
+    }
+    .player_3 {
+      left: -20px;
+      bottom: 160px;
+    }
+    .player_4 {
+      top: 100px;
+      left: -20px;
+    }
+    .player_5 {
+      top: -20px;
+      left: 180px;
+    }
+    .player_6 {
+      top: -20px;
+      left: 395px;
+    }
+    .player_7 {
+      top: -20px;
+      right: 395px;
+    }
+    .player_8 {
+      top: -20px;
+      right: 180px;
+    }
+    .player_9 {
+      top: 100px;
+      right: -20px;
+    }
+    .player_10 {
+      right: -20px;
+      bottom: 160px;
+    }
+    .player_11 {
+      bottom: 20px;
+      right: 155px;
+    }
+    .player_12 {
+      bottom: 20px;
+      right: 375px;
+    }
+  }
+  .players_11 {
+    .player_1 {
+      bottom: 20px;
+      left: 375px;
+    }
+    .player_2 {
+      bottom: 20px;
+      left: 155px;
+    }
+    .player_3 {
+      left: -20px;
+      bottom: 160px;
+    }
+    .player_4 {
+      top: 100px;
+      left: -20px;
+    }
+    .player_5 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_6 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_7 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_8 {
+      top: 100px;
+      right: -20px;
+    }
+    .player_9 {
+      right: -20px;
+      bottom: 160px;
+    }
+    .player_10 {
+      bottom: 20px;
+      right: 155px;
+    }
+    .player_11 {
+      bottom: 20px;
+      right: 375px;
+    }
+  }
+  .players_10 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      left: -20px;
+      bottom: 160px;
+    }
+    .player_3 {
+      top: 100px;
+      left: -20px;
+    }
+    .player_4 {
+      top: -20px;
+      left: 180px;
+    }
+    .player_5 {
+      top: -20px;
+      left: 395px;
+    }
+    .player_6 {
+      top: -20px;
+      right: 395px;
+    }
+    .player_7 {
+      top: -20px;
+      right: 180px;
+    }
+    .player_8 {
+      top: 100px;
+      right: -20px;
+    }
+    .player_9 {
+      right: -20px;
+      bottom: 160px;
+    }
+    .player_10 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_9 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      left: -20px;
+      bottom: 160px;
+    }
+    .player_3 {
+      top: 100px;
+      left: -20px;
+    }
+    .player_4 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_5 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_6 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_7 {
+      top: 100px;
+      right: -20px;
+    }
+    .player_8 {
+      right: -20px;
+      bottom: 160px;
+    }
+    .player_9 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_8 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      left: -20px;
+      bottom: 160px;
+    }
+    .player_3 {
+      top: 100px;
+      left: -20px;
+    }
+    .player_4 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_5 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_6 {
+      top: 100px;
+      right: -20px;
+    }
+    .player_7 {
+      right: -20px;
+      bottom: 160px;
+    }
+    .player_8 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_7 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      top: 230px;
+      left: -20px;
+    }
+    .player_3 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_4 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_5 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_6 {
+      top: 230px;
+      right: -20px;
+    }
+    .player_7 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_6 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      top: 230px;
+      left: -20px;
+    }
+    .player_3 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_4 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_5 {
+      top: 230px;
+      right: -20px;
+    }
+    .player_6 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_5 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_3 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_4 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_5 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_4 {
+    .player_1 {
+      bottom: 20px;
+      left: 260px;
+    }
+    .player_2 {
+      top: -20px;
+      left: 260px;
+    }
+    .player_3 {
+      top: -20px;
+      right: 260px;
+    }
+    .player_4 {
+      bottom: 20px;
+      right: 260px;
+    }
+  }
+  .players_3 {
+    .player_1 {
+      top: 230px;
+      left: -20px;
+    }
+    .player_2 {
+      top: -20px;
+      left: 520px;
+    }
+    .player_3 {
+      top: 230px;
+      right: -20px;
+    }
+  }
+  .players_2 {
+    .player_1 {
+      top: 230px;
+      left: -20px;
+    }
+    .player_2 {
+      top: 230px;
+      right: -20px;
+    }
+  }
+}
+
+@media (max-width: 1279px) {
+  .game_board_wrapper {
+    display: none;
+  }
+}

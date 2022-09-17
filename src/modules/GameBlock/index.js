@@ -16,16 +16,12 @@ import CardItem from "../CardItem";
 import bankIcon from "./coins.png";
 import BackgroundCards from "../BackgroundCards";
 import Range from "../../components/Range";
-import {
-  combinationCheck,
-  getGameCards,
-  getNextPlayer,
-  isRoundOver,
-} from "../../helpers";
+import { getGameCards, getNextPlayer, isRoundOver } from "../../helpers";
 import { gameActionTypes } from "../../constants/gameActionTypes";
 import { gameStages } from "../../constants/gameStage";
 
 import "./style.scss";
+import DesktopGameBoard from "../GameBoard";
 
 const GameBlock = ({
   midgamePlayerUid,
@@ -248,7 +244,7 @@ const GameBlock = ({
       default:
         break;
     }
-  }, [cardDeck, gameStage, id, lastActions]);
+  }, [cardDeck, gameStage, id, lastActions, setIsFinishModalOpen]);
 
   useEffect(() => {
     if (isHost) {
@@ -260,12 +256,12 @@ const GameBlock = ({
         setIsFinishModalOpen(true);
       }
     }
-  }, [gameStage, isHost, isOver, handleRoundOver]);
+  }, [gameStage, isHost, isOver, handleRoundOver, setIsFinishModalOpen]);
 
   return (
     <>
       <div className="game_block">
-        <div className="players_block_wrapper">
+        <div className="players_block_wrapper desktop_hide">
           <div className="bank_block">
             <img src={bankIcon} width="50px" height="50px" alt="" />
             <p>{bankCount || 0}</p>
@@ -283,7 +279,7 @@ const GameBlock = ({
           />
         </div>
 
-        <div className="game_board">
+        <div className="game_board desktop_hide">
           <div className="cards">
             <CardItem cardId={gameCards[0]} />
             <CardItem cardId={gameCards[1]} />
@@ -292,6 +288,18 @@ const GameBlock = ({
             <CardItem cardId={gameCards[4]} />
           </div>
         </div>
+
+        <DesktopGameBoard
+          gameCards={gameCards}
+          bankCount={bankCount}
+          playerDataArr={playerDataArr}
+          playersList={playersList}
+          lastActions={lastActions}
+          uuid={uuid}
+          playerCards={playerCards}
+          currentPlayerUid={currentPlayerUid}
+          dealerUid={dealerUid}
+        />
 
         {/*<ChipsBlock playerDataArr={playerDataArr} uuid={uuid} />*/}
 
