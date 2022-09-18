@@ -3,9 +3,10 @@ import React from "react";
 import { gameActionTypes } from "../../constants/gameActionTypes";
 import * as cardTypeIcons from "../../assets/cardTypeIcons";
 import cards from "../../constants/cards";
+// import { isRoundOver } from "../../helpers";
 
 import "./style.scss";
-import { isRoundOver } from "../../helpers";
+import * as icons from "../../assets/playerIcons";
 
 const PlayersBlock = ({
   playerDataArr,
@@ -17,23 +18,36 @@ const PlayersBlock = ({
   lastActions,
   gameCards,
 }) => {
-  const players = playersList.reduce((acc, item) => {
+  let players = playersList.reduce((acc, item) => {
     acc.push(playerDataArr.find((findItem) => findItem.uid === item));
 
     return acc;
   }, []);
 
+  players = [
+    ...players,
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+    players[1],
+  ];
+
   return (
     <div className="players_block">
       {players.map((player, index) => (
         <React.Fragment key={player.uid}>
-          <div className="user_item_block">
+          <div className="player_block">
             {lastActions[player.uid]?.action === gameActionTypes.fold ? (
               <div className="fold_block">FOLD</div>
-            ) : player.uid === uuid /* ||
-              (gameCards.length === 5 &&
-                isRoundOver({ lastActions, playersList })) */ ? (
-              <div className="user_cards_block">
+            ) : player.uid === uuid ? (
+              <div className="player_cards">
                 <div>
                   <p>{cards[playerCards[player.uid][0]].number}</p>
                   <img
@@ -58,51 +72,64 @@ const PlayersBlock = ({
                 </div>
               </div>
             ) : (
-              <div className="hidden_user_cards_block">
+              <div className="hidden_player_cards">
                 <div />
                 <div />
               </div>
             )}
             <div
-              className={`username_block ${
-                player.uid === currentPlayerUid ? "my_name_block" : ""
-              }`}
+              className={[
+                "player_info",
+                player.uid === currentPlayerUid && "current_player",
+              ]
+                .filter(Boolean)
+                .join(" ")}
             >
-              <p>{player.uid === uuid ? "You" : player.username}</p>
-            </div>
-            <div className="user_info_block">
-              <div className="first">
-                <p>{player.money}</p>
-                {player.uid === dealerUid && (
-                  <div className="dealer_block">D</div>
-                )}
+              <div className="player_text_info">
+                <div className="username_block">
+                  <p>{player.uid === uuid ? "You" : player.username}</p>
+                </div>
+
+                <div className="money_block">
+                  <p>{player.money}</p>
+
+                  {player.uid === dealerUid && (
+                    <div className="dealer_block">D</div>
+                  )}
+                </div>
+
+                <img
+                  src={icons[player.icon_index]}
+                  alt=""
+                  width="52px"
+                  height="52px"
+                />
               </div>
-              <div className="second">
-                {lastActions[player.uid]?.action ===
-                  gameActionTypes.small_blind && (
-                  <div className="action_block">Small Blind</div>
-                )}
-                {lastActions[player.uid]?.action ===
-                  gameActionTypes.big_blind && (
-                  <div className="action_block">Big Blind</div>
-                )}
-                {lastActions[player.uid]?.action === gameActionTypes.call && (
-                  <div className="action_block">Call</div>
-                )}
-                {lastActions[player.uid]?.action === gameActionTypes.check && (
-                  <div className="action_block">Check</div>
-                )}
-                {lastActions[player.uid]?.action === gameActionTypes.raise && (
-                  <div className="action_block">
-                    Raise to {lastActions[player.uid]?.number}
-                  </div>
-                )}
-                {lastActions[player.uid]?.action === gameActionTypes.all_in && (
-                  <div className="action_block">
-                    All in {lastActions[player.uid]?.number}
-                  </div>
-                )}
-              </div>
+
+              {lastActions[player.uid]?.action ===
+                gameActionTypes.small_blind && (
+                <div className="player_action_block">Small Blind</div>
+              )}
+              {lastActions[player.uid]?.action ===
+                gameActionTypes.big_blind && (
+                <div className="player_action_block">Big Blind</div>
+              )}
+              {lastActions[player.uid]?.action === gameActionTypes.call && (
+                <div className="player_action_block">Call</div>
+              )}
+              {lastActions[player.uid]?.action === gameActionTypes.check && (
+                <div className="player_action_block">Check</div>
+              )}
+              {lastActions[player.uid]?.action === gameActionTypes.raise && (
+                <div className="player_action_block">
+                  Raise to {lastActions[player.uid]?.number}
+                </div>
+              )}
+              {lastActions[player.uid]?.action === gameActionTypes.all_in && (
+                <div className="player_action_block">
+                  All in {lastActions[player.uid]?.number}
+                </div>
+              )}
             </div>
           </div>
           {players.length !== index + 1 && (

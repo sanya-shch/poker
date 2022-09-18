@@ -12,6 +12,7 @@
     position: relative;
     width: 1200px;
     height: 620px;
+    margin: 100px 0 50px;
   }
   .game_board_container:before {
     content: "";
@@ -52,6 +53,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &:hover {
+      z-index: 15;
+    }
 
     .fold_block {
       width: 100px;
@@ -254,6 +259,7 @@
         color: #f6f6e9;
         border-radius: 13px;
         padding: 0 15px;
+        white-space: nowrap;
       }
     }
   }
@@ -720,8 +726,1351 @@
   }
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 768px) {
   .game_board_wrapper {
     display: none;
   }
 }
+
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .game_board_wrapper {
+    .game_board_container {
+      width: 1010px;
+      height: 570px;
+      margin: 100px 0 50px;
+
+      &:before {
+        width: 950px;
+        height: 485px;
+        border-radius: 130px;
+      }
+    }
+
+    .player_block .player_info .player_text_info {
+      margin-right: 0;
+
+      .username_block {
+        padding-right: 0;
+        border-top-right-radius: 13px;
+      }
+
+      .money_block {
+        padding-right: 0;
+        border-bottom-right-radius: 13px;
+      }
+
+      img {
+        display: none;
+      }
+    }
+
+    .player_info:after {
+      display: none;
+    }
+
+    .players_14 {
+      .player_1 {
+        bottom: 30px;
+        left: 330px;
+      }
+      .player_2 {
+        bottom: 30px;
+        left: 175px;
+      }
+      .player_3 {
+        bottom: 55px;
+        left: 15px;
+      }
+      .player_4 {
+        top: 190px;
+        left: 15px;
+      }
+      .player_5 {
+        top: 5px;
+        left: 15px;
+      }
+      .player_6 {
+        top: 5px;
+        left: 185px;
+      }
+      .player_7 {
+        top: 5px;
+        left: 355px;
+      }
+      .player_8 {
+        top: 5px;
+        right: 355px;
+      }
+      .player_9 {
+        top: 5px;
+        right: 185px;
+      }
+      .player_10 {
+        top: 15px;
+        right: 15px;
+      }
+      .player_11 {
+        top: 190px;
+        right: 15px;
+      }
+      .player_12 {
+        bottom: 55px;
+        right: 15px;
+      }
+      .player_13 {
+        bottom: 30px;
+        right: 175px;
+      }
+      .player_14 {
+        bottom: 30px;
+        right: 330px;
+      }
+    }
+    .players_13 {
+      .player_1 {
+        bottom: 30px;
+        left: 330px;
+      }
+      .player_2 {
+        bottom: 30px;
+        left: 175px;
+      }
+      .player_3 {
+        bottom: 60px;
+        left: 15px;
+      }
+      .player_4 {
+        top: 190px;
+        left: 15px;
+      }
+      .player_5 {
+        top: 5px;
+        left: 70px;
+      }
+      .player_6 {
+        top: 5px;
+        left: 260px;
+      }
+      .player_7 {
+        top: 5px;
+        left: 440px;
+      }
+      .player_8 {
+        top: 5px;
+        right: 260px;
+      }
+      .player_9 {
+        top: 5px;
+        right: 70px;
+      }
+      .player_10 {
+        top: 190px;
+        right: 15px;
+      }
+      .player_11 {
+        bottom: 60px;
+        right: 15px;
+      }
+      .player_12 {
+        bottom: 30px;
+        right: 175px;
+      }
+      .player_13 {
+        bottom: 30px;
+        right: 330px;
+      }
+    }
+    .players_12 {
+      .player_1 {
+        bottom: 30px;
+        left: 320px;
+      }
+      .player_2 {
+        bottom: 30px;
+        left: 155px;
+      }
+      .player_3 {
+        left: 15px;
+        bottom: 150px;
+      }
+      .player_4 {
+        top: 100px;
+        left: 15px;
+      }
+      .player_5 {
+        top: 5px;
+        left: 180px;
+      }
+      .player_6 {
+        top: 5px;
+        left: 350px;
+      }
+      .player_7 {
+        top: 5px;
+        right: 350px;
+      }
+      .player_8 {
+        top: 5px;
+        right: 180px;
+      }
+      .player_9 {
+        top: 100px;
+        right: 15px;
+      }
+      .player_10 {
+        right: 15px;
+        bottom: 150px;
+      }
+      .player_11 {
+        bottom: 30px;
+        right: 155px;
+      }
+      .player_12 {
+        bottom: 30px;
+        right: 320px;
+      }
+    }
+    .players_11 {
+      .player_1 {
+        bottom: 30px;
+        left: 320px;
+      }
+      .player_2 {
+        bottom: 30px;
+        left: 155px;
+      }
+      .player_3 {
+        left: 15px;
+        bottom: 160px;
+      }
+      .player_4 {
+        top: 100px;
+        left: 15px;
+      }
+      .player_5 {
+        top: 5px;
+      }
+      .player_6 {
+        top: 5px;
+        left: 435px;
+      }
+      .player_7 {
+        top: 5px;
+      }
+      .player_8 {
+        top: 100px;
+        right: 15px;
+      }
+      .player_9 {
+        right: 15px;
+        bottom: 160px;
+      }
+      .player_10 {
+        bottom: 30px;
+        right: 155px;
+      }
+      .player_11 {
+        bottom: 30px;
+        right: 320px;
+      }
+    }
+    .players_10 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        left: 15px;
+        bottom: 145px;
+      }
+      .player_3 {
+        top: 90px;
+        left: 15px;
+      }
+      .player_4 {
+        top: 5px;
+        left: 180px;
+      }
+      .player_5 {
+        top: 5px;
+        left: 350px;
+      }
+      .player_6 {
+        top: 5px;
+        right: 350px;
+      }
+      .player_7 {
+        top: 5px;
+        right: 180px;
+      }
+      .player_8 {
+        top: 90px;
+        right: 15px;
+      }
+      .player_9 {
+        right: 15px;
+        bottom: 145px;
+      }
+      .player_10 {
+        bottom: 30px;
+      }
+    }
+    .players_9 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        left: 15px;
+        bottom: 145px;
+      }
+      .player_3 {
+        top: 90px;
+        left: 15px;
+      }
+      .player_4 {
+        top: 5px;
+      }
+      .player_5 {
+        top: 5px;
+        left: 435px;
+      }
+      .player_6 {
+        top: 5px;
+      }
+      .player_7 {
+        top: 90px;
+        right: 15px;
+      }
+      .player_8 {
+        right: 15px;
+        bottom: 145px;
+      }
+      .player_9 {
+        bottom: 30px;
+      }
+    }
+    .players_8 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        left: 15px;
+        bottom: 145px;
+      }
+      .player_3 {
+        top: 90px;
+        left: 15px;
+      }
+      .player_4 {
+        top: 5px;
+      }
+      .player_5 {
+        top: 5px;
+      }
+      .player_6 {
+        top: 90px;
+        right: 15px;
+      }
+      .player_7 {
+        right: 15px;
+        bottom: 145px;
+      }
+      .player_8 {
+        bottom: 30px;
+      }
+    }
+    .players_7 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        left: 15px;
+      }
+      .player_3 {
+        top: 5px;
+      }
+      .player_4 {
+        top: 5px;
+        left: 435px;
+      }
+      .player_5 {
+        top: 5px;
+      }
+      .player_6 {
+        right: 15px;
+      }
+      .player_7 {
+        bottom: 30px;
+      }
+    }
+    .players_6 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        left: 15px;
+      }
+      .player_3 {
+        top: 5px;
+      }
+      .player_4 {
+        top: 5px;
+      }
+      .player_5 {
+        right: 15px;
+      }
+      .player_6 {
+        bottom: 30px;
+      }
+    }
+    .players_5 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        top: 5px;
+        left: 260px;
+      }
+      .player_3 {
+        top: 5px;
+        left: 435px;
+      }
+      .player_4 {
+        top: 5px;
+        right: 260px;
+      }
+      .player_5 {
+        bottom: 30px;
+      }
+    }
+    .players_4 {
+      .player_1 {
+        bottom: 30px;
+      }
+      .player_2 {
+        top: 5px;
+      }
+      .player_3 {
+        top: 5px;
+      }
+      .player_4 {
+        bottom: 30px;
+      }
+    }
+    .players_3 {
+      .player_1 {
+        top: 230px;
+        left: 15px;
+      }
+      .player_2 {
+        top: 5px;
+        left: 435px;
+      }
+      .player_3 {
+        top: 230px;
+        right: 15px;
+      }
+    }
+    .players_2 {
+      .player_1 {
+        left: 15px;
+      }
+      .player_2 {
+        right: 15px;
+      }
+    }
+
+    .cards {
+      .empty_card_item {
+        height: 180px;
+        width: 120px;
+      }
+
+      .card_item {
+        height: 180px;
+        width: 120px;
+
+        img {
+          height: 100px;
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .game_board_wrapper {
+    .game_board_container {
+      width: 700px;
+      height: 400px;
+      margin: 100px 0;
+
+      &:before {
+        width: 750px;
+        height: 420px;
+        border-radius: 130px;
+      }
+    }
+
+    .player_block {
+      .player_info .player_text_info {
+        margin-right: 0;
+        width: 120px;
+
+        .username_block {
+          padding-right: 0;
+          border-top-right-radius: 13px;
+        }
+
+        .money_block {
+          padding-right: 0;
+          border-bottom-right-radius: 13px;
+        }
+
+        img {
+          display: none;
+        }
+      }
+      .player_info:after {
+        display: none;
+      }
+
+      .player_cards {
+        width: 90px;
+        height: 72px;
+
+        div {
+          width: 44px;
+          height: 65px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+        div:nth-of-type(1) {
+          transform: none;
+          top: 0;
+          left: 3px;
+
+          img:nth-of-type(1) {
+            position: static;
+          }
+          img:nth-of-type(2) {
+            display: none;
+          }
+        }
+        div:nth-of-type(2) {
+          transform: none;
+          top: 3px;
+          left: auto;
+          right: 3px;
+
+          img:nth-of-type(1) {
+            position: static;
+          }
+          img:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+
+      .hidden_player_cards {
+        width: 80px;
+        height: 72px;
+
+        div {
+          width: 44px;
+          height: 65px;
+        }
+        div:nth-of-type(1) {
+          transform: none;
+          top: 0;
+          left: 3px;
+        }
+        div:nth-of-type(2) {
+          transform: none;
+          top: 3px;
+          left: auto;
+          right: 3px;
+        }
+      }
+    }
+
+    .cards {
+      .empty_card_item {
+        width: 58px;
+        height: 88px;
+        border-radius: 8px;
+      }
+
+      .card_item {
+        width: 58px;
+        height: 88px;
+        border-radius: 8px;
+
+        img {
+          height: 40px;
+          width: 40px;
+        }
+
+        p:nth-of-type(1) {
+         position: static;
+        }
+        p:nth-of-type(2) {
+          display: none;
+        }
+      }
+    }
+
+    & > .players_14 {
+      .cards {
+        margin-bottom: 75px;
+      }
+
+      .bank_block {
+        bottom: 105px;
+      }
+    }
+
+    .players_14 {
+      .player_1 {
+        bottom: -30px;
+        left: 150px;
+      }
+      .player_2 {
+        bottom: -30px;
+        left: 10px;
+      }
+      .player_3 {
+        left: -30px;
+        bottom: 115px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        left: -30px;
+        top: 110px;
+        flex-direction: row-reverse;
+      }
+      .player_5 {
+        top: -25px;
+        left: 10px;
+
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_6 {
+        top: -25px;
+        left: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_7 {
+        top: -25px;
+        left: 290px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_8 {
+        top: -25px;
+        right: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_9 {
+        top: -25px;
+        right: 10px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_10 {
+        right: -30px;
+        top: 110px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_11 {
+        right: -30px;
+        bottom: 140px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_12 {
+        bottom: -30px;
+        right: 10px;
+      }
+      .player_13 {
+        bottom: -30px;
+        right: 150px;
+      }
+      .player_14 {
+        bottom: -30px;
+        right: 290px;
+      }
+    }
+    .players_13 {
+      .player_1 {
+        bottom: -30px;
+        left: 190px;
+      }
+      .player_2 {
+        bottom: -30px;
+        left: 35px;
+      }
+      .player_3 {
+        left: -30px;
+        bottom: 115px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        left: -30px;
+        top: 115px;
+        flex-direction: row-reverse;
+      }
+      .player_5 {
+        top: -25px;
+        left: 10px;
+
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_6 {
+        top: -25px;
+        left: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_7 {
+        top: -25px;
+        left: 290px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_8 {
+        top: -25px;
+        right: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_9 {
+        top: -25px;
+        right: 10px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_10 {
+        right: -30px;
+        top: 115px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_11 {
+        right: -30px;
+        bottom: 115px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_12 {
+        bottom: -30px;
+        right: 35px;
+      }
+      .player_13 {
+        bottom: -30px;
+        right: 190px;
+      }
+    }
+    .players_12 {
+      .player_1 {
+        bottom: -30px;
+        left: 190px;
+      }
+      .player_2 {
+        bottom: -30px;
+        left: 35px;
+      }
+      .player_3 {
+        left: -30px;
+        bottom: 115px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        left: -30px;
+        top: 115px;
+        flex-direction: row-reverse;
+      }
+      .player_5 {
+        left: 40px;
+        top: -25px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_6 {
+        //top: -50px;
+        left: 200px;
+        top: -25px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_7 {
+        //top: -50px;
+        right: 200px;
+        top: -25px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_8 {
+        //top: -50px;
+        right: 40px;
+        top: -25px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_9 {
+        right: -30px;
+        top: 115px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_10 {
+        right: -30px;
+        bottom: 115px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_11 {
+        bottom: -30px;
+        right: 35px;
+      }
+      .player_12 {
+        bottom: -30px;
+        right: 190px;
+      }
+    }
+    .players_11 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        bottom: 5px;
+        left: 35px;
+      }
+      .player_3 {
+        left: -30px;
+        top: 165px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        top: 0;
+        left: 10px;
+
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_5 {
+        top: 0;
+        left: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_6 {
+        top: 0;
+        left: 290px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_7 {
+        top: 0;
+        right: 150px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_8 {
+        top: 0;
+        right: 10px;
+        flex-direction: column-reverse;
+
+        .player_action_block {
+          top: -25px;
+          bottom: auto;
+        }
+        .hidden_player_cards {
+          margin-top: 3px;
+        }
+      }
+      .player_9 {
+        right: -30px;
+        top: 165px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_10 {
+        bottom: 5px;
+        right: 35px;
+      }
+      .player_11 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_10 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        left: -30px;
+        bottom: 50px;
+        flex-direction: row-reverse;
+      }
+      .player_3 {
+        left: -30px;
+        bottom: 160px;
+        top: auto;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        left: -30px;
+        top: 50px;
+        flex-direction: row-reverse;
+      }
+      .player_5 {
+        top: -20px;
+        left: 190px;
+      }
+      .player_6 {
+        top: -20px;
+        right: 190px;
+      }
+      .player_7 {
+        right: -30px;
+        top: 50px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_8 {
+        right: -30px;
+        bottom: 160px;
+        top: auto;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_9 {
+        right: -30px;
+        bottom: 50px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_10 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_9 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        left: -30px;
+        bottom: 70px;
+        flex-direction: row-reverse;
+      }
+      .player_3 {
+        left: -30px;
+        top: 150px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        top: -20px;
+        left: 120px;
+      }
+      .player_5 {
+        top: -20px;
+        left: 290px;
+      }
+      .player_6 {
+        top: -20px;
+        right: 120px;
+      }
+      .player_7 {
+        right: -30px;
+        top: 150px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_8 {
+        right: -30px;
+        bottom: 70px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_9 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_8 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        left: -30px;
+        bottom: 110px;
+        flex-direction: row-reverse;
+      }
+      .player_3 {
+        left: -30px;
+        top: 110px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        top: -20px;
+        left: 190px;
+      }
+      .player_5 {
+        top: -20px;
+        right: 190px;
+      }
+      .player_6 {
+        right: -30px;
+        top: 110px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_7 {
+        right: -30px;
+        bottom: 110px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_8 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_7 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        left: -30px;
+        bottom: 110px;
+        flex-direction: row-reverse;
+      }
+      .player_3 {
+        left: -30px;
+        top: 110px;
+        flex-direction: row-reverse;
+      }
+      .player_4 {
+        top: -20px;
+        left: 290px;
+      }
+      .player_5 {
+        right: -30px;
+        top: 110px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_6 {
+        right: -30px;
+        bottom: 110px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_7 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_6 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        left: -30px;
+        top: 165px;
+        flex-direction: row-reverse;
+      }
+      .player_3 {
+        top: -20px;
+        left: 190px;
+      }
+      .player_4 {
+        top: -20px;
+        right: 190px;
+      }
+      .player_5 {
+        right: -30px;
+        top: 165px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+      .player_6 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_5 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        top: -20px;
+        left: 120px;
+      }
+      .player_3 {
+        top: -20px;
+        left: 290px;
+      }
+      .player_4 {
+        top: -20px;
+        right: 120px;
+      }
+      .player_5 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_4 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+      }
+      .player_2 {
+        top: -20px;
+        left: 190px;
+      }
+      .player_3 {
+        top: -20px;
+        right: 190px;
+      }
+      .player_4 {
+        bottom: 5px;
+        right: 190px;
+      }
+    }
+    .players_3 {
+      .player_1 {
+        bottom: 5px;
+        left: 190px;
+        top: auto;
+      }
+      .player_2 {
+        top: -20px;
+        left: 290px;
+      }
+      .player_3 {
+        bottom: 5px;
+        right: 190px;
+        top: auto;
+      }
+    }
+    .players_2 {
+      .player_1 {
+        left: -30px;
+        top: 165px;
+        flex-direction: row-reverse;
+      }
+      .player_2 {
+        right: -30px;
+        top: 165px;
+        flex-direction: row;
+
+        .player_action_block {
+          right: 0;
+        }
+      }
+    }
+
+    .bank_block {
+      bottom: 65px;
+    }
+  }
+}
+
+//@media (min-width: 481px) and (max-width: 768px) {
+//  .game_board_wrapper {
+//  }
+//}

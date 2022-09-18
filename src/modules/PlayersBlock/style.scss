@@ -7,8 +7,11 @@
   user-select: none;
   z-index: 10;
 
-  .user_item_block {
-    width: 100px;
+  .player_block {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .fold_block {
       width: 100px;
@@ -20,7 +23,7 @@
       font-size: 25px;
     }
 
-    .user_cards_block {
+    .player_cards {
       position: relative;
       width: 100px;
       height: 85px;
@@ -35,40 +38,38 @@
         background-color: #f2f4f6;
         border: 1px solid #414141;
         color: #525252;
-        width: 48px;
-        height: 72px;
         border-radius: 3px;
-        //width: 58px;
-        //height: 88px;
+        width: 54px;
+        height: 80px;
         box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
       }
 
       div:nth-of-type(1) {
         position: absolute;
-        top: 5px;
-        left: 10px;
+        top: -5px;
+        left: 0;
         transform: rotate(340deg);
         background-color: white;
 
         img:nth-of-type(1) {
           position: absolute;
           top: 2px;
-          right: 4px;
+          right: 2px;
           width: 25px;
           height: 25px;
         }
         img:nth-of-type(2) {
           position: absolute;
-          top: 32px;
-          right: 6px;
+          top: 35px;
+          right: 9px;
           width: 33px;
           height: 33px;
         }
       }
       div:nth-of-type(2) {
         position: absolute;
-        top: 5px;
-        left: 40px;
+        top: -5px;
+        left: 44px;
         transform: rotate(25deg);
         background-color: white;
 
@@ -81,22 +82,15 @@
         }
         img:nth-of-type(2) {
           position: absolute;
-          top: 32px;
-          right: 6px;
+          top: 35px;
+          right: 9px;
           width: 33px;
           height: 33px;
         }
       }
-
-      div:nth-of-type(1):hover,
-      div:nth-of-type(2):hover {
-        transform: scale(1.4);
-        z-index: 3;
-        transition: 1s;
-      }
     }
 
-    .hidden_user_cards_block {
+    .hidden_player_cards {
       position: relative;
       width: 100px;
       height: 85px;
@@ -118,7 +112,6 @@
 
       div:nth-of-type(1) {
         background-color: #313131;
-        //background-image: linear-gradient(-90deg, #ca3e47 0%, #313131 99%);
         position: absolute;
         top: 5px;
         left: 10px;
@@ -126,7 +119,6 @@
       }
       div:nth-of-type(2) {
         background-color: #414141;
-        //background-image: linear-gradient(-120deg, #ca3e47 0%, #313131 99%);
         position: absolute;
         top: 5px;
         left: 40px;
@@ -134,58 +126,109 @@
       }
     }
 
+    .player_info {
+      display: flex;
+      position: relative;
+
+      &:after {
+        content: "";
+        border: 33px solid #414141;
+        border-radius: 50%;
+        width: 68px;
+        height: 68px;
+        position: absolute;
+        top: -8px;
+        right: -7px;
+        z-index: 1;
+      }
+
+      .player_text_info {
+        width: 136px;
+        margin-right: 30px;
+
+        img {
+          width: 52px;
+          height: 52px;
+          z-index: 10;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+
+        .username_block {
+          display: flex;
+          justify-content: center;
+          height: 20px;
+          background-color: #414141;
+          font-size: 14px;
+          line-height: 21px;
+          color: #f6f6e9;
+          padding-right: 32px;
+          border-top-left-radius: 13px;
+
+          p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 95px;
+            font-weight: bold;
+          }
+        }
+
+        .money_block {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          background-color: #525252;
+          height: 32px;
+          color: #f6f6e9;
+          padding-right: 32px;
+          border-bottom-left-radius: 13px;
+
+          p {
+            font-size: 18px;
+          }
+
+          .dealer_block {
+            background-color: #ff6768;
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            border: 2px dotted #f6f6e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+      }
+
+      .player_action_block {
+        position: absolute;
+        bottom: -25px;
+        background-color: #525252;
+        height: 20px;
+        font-size: 14px;
+        line-height: 21px;
+        color: #f6f6e9;
+        border-radius: 13px;
+        padding: 0 15px;
+      }
+    }
+  }
+
+  .current_player {
+    &.player_info:after {
+      border: 33px solid #005f6b !important;
+    }
+
     .username_block {
-      display: flex;
-      justify-content: center;
-
-      p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 75px;
-        font-weight: bold;
-      }
+      background-color: #005f6b !important;
     }
 
-    .my_name_block {
-      background-color: #8ac6d1;
-      border-radius: 12px;
-      font-weight: bold;
-    }
-
-    .user_info_block {
-      height: 45px;
-
-      div.first {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        display: flex;
-        justify-content: space-evenly;
-        height: 25px;
-        align-items: center;
-      }
-
-      div.second {
-        color: #ca3e47;
-        font-weight: bold;
-      }
-    }
-
-    .dealer_block {
-      background-color: #ff6768;
-      height: 25px;
-      width: 25px;
-      border-radius: 50%;
-      border: 2px dotted #f6f6e9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-    }
-
-    .action_block {
-      display: flex;
-      justify-content: space-evenly;
+    .money_block {
+      background-color: #008c9e !important;
     }
   }
 

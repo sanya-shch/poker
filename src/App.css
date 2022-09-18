@@ -18,11 +18,38 @@
 .custom_scrollbar::-webkit-scrollbar-thumb {
   border-radius: 100px;
   background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
-  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  box-shadow: inset 2px 2px 5px 0 rgba(255, 255, 255, 0.5);
 }
 
 @media (min-width: 1280px) {
   .desktop_hide {
+    display: none !important;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .laptop_hide {
+    display: none !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet_hide {
+    display: none !important;
+  }
+}
+@media (max-width: 769px) {
+  .mobile_hide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1279px) {
+  .desktop_show {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile_show {
     display: none !important;
   }
 }

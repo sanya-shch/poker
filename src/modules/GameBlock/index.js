@@ -261,33 +261,36 @@ const GameBlock = ({
   return (
     <>
       <div className="game_block">
-        <div className="players_block_wrapper desktop_hide">
-          <div className="bank_block">
-            <img src={bankIcon} width="50px" height="50px" alt="" />
-            <p>{bankCount || 0}</p>
-          </div>
-          <PlayersBlock
-            midgamePlayerUid={midgamePlayerUid}
-            playerDataArr={playerDataArr}
-            playerCards={playerCards}
-            currentPlayerUid={currentPlayerUid}
-            playersList={playersList}
-            uuid={uuid}
-            dealerUid={dealerUid}
-            lastActions={lastActions}
-            gameCards={gameCards}
-          />
-        </div>
+        {/*<div className="mobile_game_board mobile_show">*/}
+        {/*  <div className="game_board">*/}
+        {/*    <div className="cards">*/}
+        {/*      <CardItem cardId={gameCards[0]} />*/}
+        {/*      <CardItem cardId={gameCards[1]} />*/}
+        {/*      <CardItem cardId={gameCards[2]} />*/}
+        {/*      <CardItem cardId={gameCards[3]} />*/}
+        {/*      <CardItem cardId={gameCards[4]} />*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
 
-        <div className="game_board desktop_hide">
-          <div className="cards">
-            <CardItem cardId={gameCards[0]} />
-            <CardItem cardId={gameCards[1]} />
-            <CardItem cardId={gameCards[2]} />
-            <CardItem cardId={gameCards[3]} />
-            <CardItem cardId={gameCards[4]} />
-          </div>
-        </div>
+        {/*  <div className="bank_block">*/}
+        {/*    <img src={bankIcon} width="50px" height="50px" alt="" />*/}
+        {/*    <p>{bankCount || 0}</p>*/}
+        {/*  </div>*/}
+
+        {/*  <div className="players_block_wrapper">*/}
+        {/*    <PlayersBlock*/}
+        {/*      midgamePlayerUid={midgamePlayerUid}*/}
+        {/*      playerDataArr={playerDataArr}*/}
+        {/*      playerCards={playerCards}*/}
+        {/*      currentPlayerUid={currentPlayerUid}*/}
+        {/*      playersList={playersList}*/}
+        {/*      uuid={uuid}*/}
+        {/*      dealerUid={dealerUid}*/}
+        {/*      lastActions={lastActions}*/}
+        {/*      gameCards={gameCards}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
         <DesktopGameBoard
           gameCards={gameCards}

@@ -68,7 +68,9 @@ const GameBoard = ({
               className={[
                 "player_info",
                 player.uid === currentPlayerUid && "current_player",
-              ].join(" ")}
+              ]
+                .filter(Boolean)
+                .join(" ")}
             >
               <div className="player_text_info">
                 <div className="username_block">
