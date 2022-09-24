@@ -4,80 +4,105 @@
   display: flex;
   flex-direction: column;
 
-  .mobile_game_board {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 80px 0 10px;
-
-    .bank_block {
-      width: 90px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px 0;
-      user-select: none;
-
-      img {
-        width: 50px;
-        height: 50px;
-      }
-      p {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-top: 5px;
-      }
-    }
-
-    .game_board {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .cards {
-        display: flex;
-        justify-content: center;
-
-        .empty_card_item {
-          width: 58px;
-          height: 88px;
-          border-radius: 8px;
-        }
-
-        .card_item {
-          width: 58px;
-          height: 88px;
-          border-radius: 8px;
-
-          img {
-            height: 40px;
-            width: 40px;
-          }
-
-          p:nth-of-type(1) {
-            position: static;
-          }
-          p:nth-of-type(2) {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .players_block_wrapper {
-      width: 100vw;
-      height: 210px;
-      display: flex;
-      justify-content: flex-start;
-      padding: 10px 15px;
-    }
-
-    .players_block {
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-  }
+  //.mobile_game_board {
+  //  flex: 1;
+  //  display: flex;
+  //  flex-direction: column;
+  //  align-items: center;
+  //  padding: 80px 0 10px;
+  //
+  //  .game_board_container {
+  //    display: flex;
+  //    align-items: center;
+  //    justify-content: center;
+  //    flex-direction: column;
+  //    position: relative;
+  //    width: 95vw;
+  //    height: 80vh;
+  //    margin: 60px 0;
+  //    max-width: 550px;
+  //    max-height: 700px;
+  //
+  //    &:before {
+  //      content: "";
+  //      background-color: #dee2d1;
+  //      width: 95vw;
+  //      height: 80vh;
+  //      max-width: 550px;
+  //      max-height: 700px;
+  //      position: absolute;
+  //      border-radius: 130px;
+  //    }
+  //  }
+  //
+  //  .bank_block {
+  //    width: 90px;
+  //    display: flex;
+  //    flex-direction: column;
+  //    align-items: center;
+  //    margin: 20px 0;
+  //    user-select: none;
+  //    z-index: 10;
+  //
+  //    img {
+  //      width: 50px;
+  //      height: 50px;
+  //    }
+  //    p {
+  //      font-size: 1.5rem;
+  //      font-weight: bold;
+  //      margin-top: 5px;
+  //    }
+  //  }
+  //
+  //  .game_board {
+  //    display: flex;
+  //    align-items: center;
+  //    justify-content: center;
+  //
+  //    .cards {
+  //      display: flex;
+  //      justify-content: center;
+  //
+  //      .empty_card_item {
+  //        width: 58px;
+  //        height: 88px;
+  //        border-radius: 8px;
+  //      }
+  //
+  //      .card_item {
+  //        width: 58px;
+  //        height: 88px;
+  //        border-radius: 8px;
+  //
+  //        img {
+  //          height: 40px;
+  //          width: 40px;
+  //        }
+  //
+  //        p:nth-of-type(1) {
+  //          position: static;
+  //        }
+  //        p:nth-of-type(2) {
+  //          display: none;
+  //        }
+  //      }
+  //    }
+  //  }
+  //
+  //  .players_block_wrapper {
+  //    width: 100vw;
+  //    height: 210px;
+  //    display: flex;
+  //    justify-content: flex-start;
+  //    padding: 10px 15px;
+  //  }
+  //
+  //  .players_block {
+  //    flex-wrap: nowrap;
+  //    justify-content: flex-start;
+  //  }
+  //}
 
   .game_buttons_block {
     display: flex;

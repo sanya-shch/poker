@@ -18,26 +18,11 @@ const PlayersBlock = ({
   lastActions,
   gameCards,
 }) => {
-  let players = playersList.reduce((acc, item) => {
+  const players = playersList.reduce((acc, item) => {
     acc.push(playerDataArr.find((findItem) => findItem.uid === item));
 
     return acc;
   }, []);
-
-  players = [
-    ...players,
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-    players[1],
-  ];
 
   return (
     <div className="players_block">
