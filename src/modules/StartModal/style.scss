@@ -31,8 +31,6 @@
       input {
         height: 95px;
       }
-      label {
-      }
     }
   }
   .content_block {
@@ -54,6 +52,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    &.custom_scrollbar {
+      //max-height: 500px;
+      max-height: calc(90vh - 175px);
+    }
+    &.custom_scrollbar::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(180deg, #ca3e47 0%, #414141 99%);
+    }
 
     img {
       margin: 5px;
@@ -106,5 +112,17 @@
 @media (max-width: 600px) {
   .start-modal .modal-content {
     width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .start-modal {
+    .input_name_block {
+      .input_container {
+        span {
+          font-size: 28px;
+        }
+      }
+    }
   }
 }

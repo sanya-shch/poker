@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 import * as icons from "../../assets/playerIcons";
@@ -14,21 +14,14 @@ const StartModal = ({
   isOpen,
   handleClose,
   isHost,
-  iconIndex,
   id,
   uuid,
   ongoingGame,
 }) => {
   const { setToast } = useContext(ToastContext);
 
-  const [checked, setChecked] = useState("");
+  const [checked, setChecked] = useState(Object.keys(icons)[0]);
   const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (iconIndex) {
-      setChecked(iconIndex || "");
-    }
-  }, [iconIndex]);
 
   const handleClick = () => {
     if (checked && username) {
@@ -85,7 +78,7 @@ const StartModal = ({
             <Input maxLength={12} value={username} onChange={handleChange} />
           </div>
           <div className="content_block">
-            <div className="icons_block">
+            <div className="icons_block custom_scrollbar">
               {Object.keys(icons).map((item) => (
                 <div
                   key={`img-${item}`}
