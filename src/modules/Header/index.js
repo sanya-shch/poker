@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./style.scss";
 
-const Header = ({ playerDataArr }) => {
+const Header = ({ playerDataArr, isOpen, setOpen }) => {
   const navigate = useNavigate();
 
   return (
@@ -38,6 +38,12 @@ const Header = ({ playerDataArr }) => {
       {/*    </Tooltip>*/}
       {/*  ))}*/}
       {/*</div>*/}
+
+      <button className="fancy-burger" onClick={() => setOpen(!isOpen)}>
+        <span className="rectangle rectangle--top rectangle--small" />
+        <span className="rectangle rectangle--middle" />
+        <span className="rectangle rectangle--bottom rectangle--small" />
+      </button>
     </div>
   );
 };

@@ -47,8 +47,15 @@ const Menu = ({
   };
 
   return (
-    <div className={`menu ${open ? "menu_active" : ""} ${isHost && ongoingGame ? "" : "big_block"}`}>
-      <button className="fancy-burger" onClick={() => setOpen(!open)}>
+    <div
+      className={`menu ${open ? "menu_active" : ""} ${
+        isHost && ongoingGame ? "" : "big_block"
+      }`}
+    >
+      <button
+        className={`fancy-burger ${open ? "" : "not_active"}`}
+        onClick={() => setOpen(!open)}
+      >
         <span
           className={`rectangle rectangle--top rectangle--small ${
             open ? "open" : ""

@@ -54,20 +54,49 @@ const GameBlock = ({
   );
 
   const handleClickFold = async () => {
-    const nextUid = getNextPlayer(
-      playersList.filter(
-        (item) => lastActions[item]?.action !== gameActionTypes.fold
-      ),
-      uuid
+    const filteredPlayers = playersList.filter(
+      (item) => lastActions[item]?.action !== gameActionTypes.fold
     );
 
-    await updateDoc(doc(db, `game_rooms_poker/${id}`), {
-      current_player_uid: nextUid,
-      last_actions: {
-        ...lastActions,
-        [uuid]: { action: gameActionTypes.fold },
-      },
-    });
+    if (filteredPlayers.length - 1) {
+      const winnerPlayerUid = filteredPlayers.filter(
+        (item) => item !== uuid
+      )[0];
+
+      await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+        ongoing_game: false,
+        midgame_player_uid: [],
+        card_deck: [],
+        player_cards: {},
+        players_list: [],
+        last_actions: {},
+        game_stage: gameStages.start,
+        game_cards: [],
+        bank: 0,
+        current_bet: 0,
+        all_in_banks: {},
+
+        current_player_uid: winnerPlayerUid,
+        player_data_arr: playerDataArr.map((item) =>
+          item.uid === winnerPlayerUid
+            ? {
+                ...item,
+                money: item.money + bankCount,
+              }
+            : item
+        ),
+      });
+    } else {
+      const nextUid = getNextPlayer(filteredPlayers, uuid);
+
+      await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+        current_player_uid: nextUid,
+        last_actions: {
+          ...lastActions,
+          [uuid]: { action: gameActionTypes.fold },
+        },
+      });
+    }
   };
 
   const isOnlyAllIn = useMemo(
@@ -349,7 +378,9 @@ const GameBlock = ({
               )}
             </div>
           )
-        ) : null}
+        ) : (
+          <div className="empty_button_block" />
+        )}
 
         {withBackgroundAnimation && <BackgroundCards />}
       </div>

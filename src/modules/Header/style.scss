@@ -76,3 +76,46 @@
   //  animation-delay: 3s;
   //}
 }
+
+@media (max-width: 768px) {
+  .header {
+    position: static;
+    padding-right: 5px;
+
+    .fancy-burger {
+      position: relative;
+      width: var(--button-width);
+      height: var(--button-height);
+      border: 0;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+    }
+    .rectangle {
+      position: absolute;
+      height: var(--rectangle-height);
+      background: #313131;
+      border-radius: var(--rectangle-radius);
+      transition: transform 0.65s;
+    }
+    .rectangle--small {
+      width: calc(var(--button-width) / 2);
+    }
+    .rectangle--top {
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+    .rectangle--middle {
+      top: 50%;
+      left: 0;
+      width: var(--button-width);
+      transform: translateY(-50%);
+    }
+    .rectangle--bottom {
+      bottom: 0;
+      right: 0;
+      transform-origin: bottom right;
+    }
+  }
+}

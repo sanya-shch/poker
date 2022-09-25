@@ -6,17 +6,20 @@ import {
   arrayRemove,
   deleteDoc,
 } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 import { db } from "../../firebase";
 import * as icons from "../../assets/playerIcons";
 import { ToastContext } from "../../components/Toast";
-import { startGame } from "../../helpers";
+import { getNextPlayer, startGame } from "../../helpers";
 import MainButton from "../../components/MainButton";
 import UserBlock from "../UserBlock";
 
 import "./style.scss";
 
 const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
+  const navigate = useNavigate();
+
   const { setToast } = useContext(ToastContext);
 
   const handleClickStart = () => {
@@ -47,6 +50,19 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
     });
   };
 
+  const handleClickLeave = async () => {
+    const player = playerDataArr.find((arr) => arr.uid === uuid);
+
+    const playersList = playerDataArr.map((item) => item.uid);
+    const newDealerUid = getNextPlayer(playersList, dealerUid);
+
+    updateDoc(doc(db, "game_rooms_poker", id), {
+      player_data_arr: arrayRemove(player),
+      dealer_uid: player.uid === uuid ? newDealerUid : dealerUid,
+    });
+    navigate("/");
+  };
+
   return (
     <div className="start_block">
       <div className="player_block">
@@ -66,10 +82,14 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
           />
         ))}
       </div>
-      {isHost && (
+      {isHost ? (
         <div className="btn-block">
           <MainButton text="Delete Room ×" onClick={handleClickDelete} />
           <MainButton text="Start Game →" onClick={handleClickStart} />
+        </div>
+      ) : (
+        <div className="btn-block">
+          <MainButton text="Leave ↪" onClick={handleClickLeave} />
         </div>
       )}
     </div>

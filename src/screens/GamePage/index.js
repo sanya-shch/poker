@@ -169,10 +169,14 @@ const GamePage = () => {
         withBackgroundAnimation={gameData?.with_background_animation}
       />
       <div
-        className={['content', openMenu && 'content_active'].join(' ')}
+        className={["content", openMenu && "content_active"].join(" ")}
         onClick={handleClickContent}
       >
-        <Header playerDataArr={gameData?.player_data_arr} />
+        <Header
+          isOpen={openMenu}
+          setOpen={setOpenMenu}
+          playerDataArr={gameData?.player_data_arr}
+        />
         <div className="game_page">
           {!ongoingGame && isWaitStart && (
             <Suspense>
@@ -220,7 +224,6 @@ const GamePage = () => {
                 isOpen={isStartModalOpen}
                 handleClose={() => setIsStartModalOpen(false)}
                 isHost={isHost}
-                iconIndex={gameData?.icon_index}
                 id={id}
                 uuid={uuid}
                 ongoingGame={ongoingGame}

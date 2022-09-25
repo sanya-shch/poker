@@ -104,6 +104,10 @@
   //  }
   //}
 
+  .empty_button_block {
+    height: 80px;
+  }
+
   .game_buttons_block {
     display: flex;
     justify-content: center;
@@ -152,5 +156,31 @@
     align-items: center;
     min-width: 600px;
     height: 20px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .game_block {
+    .range_block {
+      min-width: calc(100vw - 280px);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .game_block {
+    .range_block_wrapper {
+      position: relative;
+
+      .range_block {
+        min-width: 95vw;
+        position: absolute;
+        top: -40px;
+      }
+    }
+
+    .main_button {
+      padding: 0;
+    }
   }
 }

@@ -2090,6 +2090,11 @@
   .game_board_wrapper {
     .game_board_container {
       flex-direction: column-reverse;
+      min-height: 580px;
+
+      &:before {
+        min-height: 580px;
+      }
 
       .player_action_block {
         max-width: 120px;

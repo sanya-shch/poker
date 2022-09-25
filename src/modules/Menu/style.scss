@@ -114,3 +114,26 @@
 .menu_active.big_block .custom_scrollbar {
   max-height: calc(100vh - 70px);
 }
+
+@media (max-width: 768px) {
+  .menu {
+    .fancy-burger.not_active {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 555px) {
+  .menu {
+    .fancy-burger {
+      left: auto;
+      right: 5px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .menu {
+    width: 100%;
+  }
+}
