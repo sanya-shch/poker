@@ -9,35 +9,29 @@ const MainButton = ({ text, onClick }) => {
   useEffect(() => {
     const mouseenter = (e) => {
       if (element?.current) {
-        const relX = e.pageX - element.current.offsetLeft;
-        const relY = e.pageY - element.current.offsetTop;
-
-        spanElement.current.style.top = `${relY}px`;
-        spanElement.current.style.left = `${relX}px`;
+        spanElement.current.style.top = `${e.offsetY}px`;
+        spanElement.current.style.left = `${e.offsetX}px`;
       }
     };
     const mouseout = (e) => {
       if (element?.current) {
-        const relX = e.pageX - element.current.offsetLeft;
-        const relY = e.pageY - element.current.offsetTop;
-
-        spanElement.current.style.top = `${relY}px`;
-        spanElement.current.style.left = `${relX}px`;
+        spanElement.current.style.top = `${e.offsetY}px`;
+        spanElement.current.style.left = `${e.offsetX}px`;
       }
     };
 
     if (element?.current) {
       element.current.addEventListener("mouseenter", mouseenter);
-      element.current.addEventListener("mouseout", mouseout);
+      element.current.addEventListener("mouseleave", mouseout);
     }
 
     return () => {
       if (element?.current) {
         element.current.removeEventListener("mouseenter", mouseenter);
-        element.current.removeEventListener("mouseout", mouseout);
+        element.current.removeEventListener("mouseleave", mouseout);
       }
     };
-  }, []);
+  }, [element]);
 
   return (
     <button ref={element} className="main_button" onClick={onClick}>

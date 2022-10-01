@@ -9,7 +9,6 @@
   border: none;
   border-radius: 6px;
   color: #e1e0e7;
-  //color: #ca3e47;
   background-color: #313131;
   cursor: pointer;
   user-select: none;
@@ -19,7 +18,7 @@
     font-family: "Comfortaa", cursive;
     font-weight: bold;
     position: relative;
-    z-index: 10;
+    z-index: 12;
   }
 
   span.focus-bg {
@@ -33,11 +32,10 @@
     transform: translate(-50%, -50%);
     z-index: 2;
   }
-  //&:hover {
-  //  color: #004d61;
-  //}
+
   &:hover span.focus-bg {
     width: 225%;
     height: 562.5px;
+    z-index: 10;
   }
 }

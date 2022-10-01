@@ -21,11 +21,24 @@
   .btn-block {
     display: flex;
 
-    .main_button {
+    button {
+      padding: 20px 40px;
+      background-color: inherit;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: "Comfortaa", cursive;
+      font-size: 20px;
+      user-select: none;
       max-width: 300px;
       width: max-content;
     }
-    .main_button:nth-of-type(2) {
+    button:hover {
+      padding: 18px 38px;
+      border: 2px dashed #414141;
+      border-radius: 30px;
+    }
+    button:nth-of-type(2) {
       margin-left: 20px;
     }
   }
@@ -45,8 +58,9 @@
     .btn-block {
       flex-direction: column;
       margin-bottom: 50px;
+      align-items: center;
 
-      .main_button:nth-of-type(2) {
+      button:nth-of-type(2) {
         margin-left: 0;
         margin-top: 20px;
       }

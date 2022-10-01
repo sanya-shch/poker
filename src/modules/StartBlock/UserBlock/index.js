@@ -1,7 +1,7 @@
 import React from "react";
 import { doc, updateDoc } from "firebase/firestore";
 
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 
 import "./style.scss";
 
@@ -10,7 +10,6 @@ const UserBlock = ({
   username,
   itsI,
   isCurrentPlayer,
-  numberOfCards,
   isHost,
   isStartBlock,
   handleKick,
@@ -34,14 +33,16 @@ const UserBlock = ({
     >
       <p>{username}</p>
       <img src={imgSrc} alt="" width="65px" height="65px" loading="lazy" />
-      <div
-        className={`dealer_block ${
-          playerUid === dealerUid ? "current" : ""
-        } ${isHost ? 'is_host' : ''}`}
-        onClick={handleClick}
-      >
-        D
-      </div>
+      {isHost && (
+        <div
+          className={`dealer_block ${
+            playerUid === dealerUid ? "current" : ""
+          } ${isHost ? "is_host" : ""}`}
+          onClick={handleClick}
+        >
+          D
+        </div>
+      )}
       {isHost && isStartBlock && !itsI && (
         <button onClick={handleKick}>X</button>
       )}

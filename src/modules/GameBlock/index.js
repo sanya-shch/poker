@@ -2,26 +2,24 @@ import React, {
   useState,
   useMemo,
   useEffect,
-  // useContext,
   useCallback,
+  lazy,
+  Suspense,
 } from "react";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 import { db } from "../../firebase";
-// import { ToastContext } from "../../components/Toast";
 import MainButton from "../../components/MainButton";
 // import ChipsBlock from "../ChipsBlock";
-// import PlayersBlock from "../PlayersBlock";
-// import CardItem from "../CardItem";
-// import bankIcon from "./coins.png";
-import BackgroundCards from "../BackgroundCards";
 import Range from "../../components/Range";
 import { getGameCards, getNextPlayer, isRoundOver } from "../../helpers";
 import { gameActionTypes } from "../../constants/gameActionTypes";
 import { gameStages } from "../../constants/gameStage";
+import DesktopGameBoard from "../GameBoard";
 
 import "./style.scss";
-import DesktopGameBoard from "../GameBoard";
+
+const BackgroundCards = lazy(() => import("../BackgroundCards"));
 
 const GameBlock = ({
   midgamePlayerUid,
@@ -44,8 +42,7 @@ const GameBlock = ({
   allInBanks,
   setIsFinishModalOpen,
 }) => {
-  // const { setToast } = useContext(ToastContext);
-
+  // ¯\_(ツ)_/¯
   const [isRaise, setIsRaise] = useState(false);
   const [value, setValue] = React.useState("50");
   const playerMoney = useMemo(
@@ -85,6 +82,20 @@ const GameBlock = ({
               }
             : item
         ),
+        history_list: arrayUnion(
+          ...[
+            {
+              message: gameActionTypes.fold,
+              uid: uuid,
+              gameStage,
+            },
+            {
+              message: "Winner",
+              uid: winnerPlayerUid,
+              gameStage,
+            },
+          ]
+        ),
       });
     } else {
       const nextUid = getNextPlayer(filteredPlayers, uuid);
@@ -95,6 +106,11 @@ const GameBlock = ({
           ...lastActions,
           [uuid]: { action: gameActionTypes.fold },
         },
+        history_list: arrayUnion({
+          message: gameActionTypes.fold,
+          uid: uuid,
+          gameStage,
+        }),
       });
     }
   };
@@ -142,6 +158,11 @@ const GameBlock = ({
       ...(isOnlyAllIn
         ? { all_in_banks: { ...allInBanks, [uuid]: { bank: bankCount } } }
         : {}),
+      history_list: arrayUnion({
+        message: currentBet === 0 ? gameActionTypes.check : gameActionTypes.call,
+        uid: uuid,
+        gameStage,
+      }),
     });
   };
 
@@ -200,7 +221,15 @@ const GameBlock = ({
       ...(isAllIn
         ? { all_in_banks: { ...allInBanks, [uuid]: { bank: bankCount } } }
         : {}),
+      history_list: arrayUnion({
+        message: isAllIn ? gameActionTypes.all_in : gameActionTypes.raise,
+        number: Number(value),
+        uid: uuid,
+        gameStage,
+      }),
     });
+
+    setIsRaise(false);
   };
 
   const isOver = useMemo(
@@ -224,6 +253,10 @@ const GameBlock = ({
           current_bet: 0,
           game_stage: gameStages.flop,
           game_cards: getGameCards({ gameStage, cardDeck }),
+          history_list: arrayUnion({
+            uid: uuid,
+            cards: getGameCards({ gameStage, cardDeck }),
+          }),
           card_deck: cardDeck.slice(4),
         });
         break;
@@ -241,6 +274,10 @@ const GameBlock = ({
           current_bet: 0,
           game_stage: gameStages.turn,
           game_cards: arrayUnion(...getGameCards({ gameStage, cardDeck })),
+          history_list: arrayUnion({
+            uid: uuid,
+            cards: getGameCards({ gameStage, cardDeck }),
+          }),
           card_deck: cardDeck.slice(2),
         });
         break;
@@ -258,17 +295,15 @@ const GameBlock = ({
           current_bet: 0,
           game_stage: gameStages.river,
           game_cards: arrayUnion(...getGameCards({ gameStage, cardDeck })),
+          history_list: arrayUnion({
+            uid: uuid,
+            cards: getGameCards({ gameStage, cardDeck }),
+          }),
           card_deck: cardDeck.slice(2),
         });
         break;
       case gameStages.river:
         setIsFinishModalOpen(true);
-
-        // setToast({
-        //   type: "success",
-        //   text: `${winner.username} won`,
-        //   duration: 10000,
-        // });
         break;
       default:
         break;
@@ -290,39 +325,6 @@ const GameBlock = ({
   return (
     <>
       <div className="game_block">
-        {/*<div className="mobile_game_board mobile_show">*/}
-        {/*  <div className="game_board_container">*/}
-        {/*    <div className="game_board">*/}
-        {/*      <div className="cards">*/}
-        {/*        <CardItem cardId={gameCards[0]} />*/}
-        {/*        <CardItem cardId={gameCards[1]} />*/}
-        {/*        <CardItem cardId={gameCards[2]} />*/}
-        {/*        <CardItem cardId={gameCards[3]} />*/}
-        {/*        <CardItem cardId={gameCards[4]} />*/}
-        {/*      </div>*/}
-        {/*    </div>*/}
-
-        {/*    <div className="bank_block">*/}
-        {/*      <img src={bankIcon} width="50px" height="50px" alt="" />*/}
-        {/*      <p>{bankCount || 0}</p>*/}
-        {/*    </div>*/}
-
-        {/*    <div className="players_block_wrapper">*/}
-        {/*      <PlayersBlock*/}
-        {/*        midgamePlayerUid={midgamePlayerUid}*/}
-        {/*        playerDataArr={playerDataArr}*/}
-        {/*        playerCards={playerCards}*/}
-        {/*        currentPlayerUid={currentPlayerUid}*/}
-        {/*        playersList={playersList}*/}
-        {/*        uuid={uuid}*/}
-        {/*        dealerUid={dealerUid}*/}
-        {/*        lastActions={lastActions}*/}
-        {/*        gameCards={gameCards}*/}
-        {/*      />*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-
         <DesktopGameBoard
           gameCards={gameCards}
           bankCount={bankCount}
@@ -378,11 +380,13 @@ const GameBlock = ({
               )}
             </div>
           )
-        ) : (
-          <div className="empty_button_block" />
-        )}
+        ) : null}
 
-        {withBackgroundAnimation && <BackgroundCards />}
+        {withBackgroundAnimation && (
+          <Suspense>
+            <BackgroundCards />
+          </Suspense>
+        )}
       </div>
     </>
   );

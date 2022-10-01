@@ -14,11 +14,13 @@ import { db } from "../../firebase";
 import { getUserId } from "../../helpers";
 import Header from "../../modules/Header";
 import Menu from "../../modules/Menu";
-import GameBlock from "../../modules/GameBlock";
+// import GameBlock from "../../modules/GameBlock";
 
 import "./style.scss";
 
 const StartBlock = lazy(() => import("../../modules/StartBlock"));
+const GameBlock = lazy(() => import("../../modules/GameBlock"));
+
 const StartModal = lazy(() => import("../../modules/StartModal"));
 const FinishModal = lazy(() => import("../../modules/FinishModal"));
 
@@ -167,16 +169,17 @@ const GamePage = () => {
         ongoingGame={ongoingGame}
         isHost={isHost}
         withBackgroundAnimation={gameData?.with_background_animation}
+        playerDataArr={gameData?.player_data_arr}
+        playersList={gameData?.players_list}
+        dealerUid={gameData?.dealer_uid}
+        messagesList={gameData?.messages_list}
+        historyList={gameData?.history_list}
       />
       <div
         className={["content", openMenu && "content_active"].join(" ")}
         onClick={handleClickContent}
       >
-        <Header
-          isOpen={openMenu}
-          setOpen={setOpenMenu}
-          playerDataArr={gameData?.player_data_arr}
-        />
+        <Header isOpen={openMenu} setOpen={setOpenMenu} />
         <div className="game_page">
           {!ongoingGame && isWaitStart && (
             <Suspense>
@@ -190,28 +193,29 @@ const GamePage = () => {
             </Suspense>
           )}
           {ongoingGame && !isMidGamePlayer && (
-            <GameBlock
-              midgamePlayerUid={gameData?.midgame_player_uid}
-              playerDataArr={gameData?.player_data_arr}
-              playerCards={gameData?.player_cards}
-              cardDeck={gameData?.card_deck}
-              // outCardDeck={gameData?.out_card_deck}
-              currentPlayerUid={gameData?.current_player_uid}
-              playersList={gameData?.players_list}
-              setOpenMenu={setOpenMenu}
-              uuid={uuid}
-              id={id}
-              dealerUid={gameData?.dealer_uid}
-              lastActions={gameData?.last_actions}
-              gameCards={gameData?.game_cards}
-              bankCount={gameData?.bank}
-              withBackgroundAnimation={gameData?.with_background_animation}
-              gameStage={gameData?.game_stage}
-              isHost={isHost}
-              currentBet={gameData?.current_bet}
-              allInBanks={gameData?.all_in_banks}
-              setIsFinishModalOpen={setIsFinishModalOpen}
-            />
+            <Suspense>
+              <GameBlock
+                midgamePlayerUid={gameData?.midgame_player_uid}
+                playerDataArr={gameData?.player_data_arr}
+                playerCards={gameData?.player_cards}
+                cardDeck={gameData?.card_deck}
+                currentPlayerUid={gameData?.current_player_uid}
+                playersList={gameData?.players_list}
+                setOpenMenu={setOpenMenu}
+                uuid={uuid}
+                id={id}
+                dealerUid={gameData?.dealer_uid}
+                lastActions={gameData?.last_actions}
+                gameCards={gameData?.game_cards}
+                bankCount={gameData?.bank}
+                withBackgroundAnimation={gameData?.with_background_animation}
+                gameStage={gameData?.game_stage}
+                isHost={isHost}
+                currentBet={gameData?.current_bet}
+                allInBanks={gameData?.all_in_banks}
+                setIsFinishModalOpen={setIsFinishModalOpen}
+              />
+            </Suspense>
           )}
           {isMidGamePlayer && (
             <div className="mid_game_text">

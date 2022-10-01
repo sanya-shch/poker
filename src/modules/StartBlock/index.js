@@ -9,11 +9,10 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../../firebase";
-import * as icons from "../../assets/playerIcons";
+import icons from "../../assets/playerIcons";
 import { ToastContext } from "../../components/Toast";
 import { getNextPlayer, startGame } from "../../helpers";
-import MainButton from "../../components/MainButton";
-import UserBlock from "../UserBlock";
+import UserBlock from "./UserBlock";
 
 import "./style.scss";
 
@@ -72,7 +71,6 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
             imgSrc={icons[player.icon_index]}
             username={player.username}
             itsI={uuid === player.uid}
-            numberOfCards={10}
             isHost={isHost}
             handleKick={() => handleKick(player.uid)}
             isStartBlock
@@ -84,12 +82,12 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
       </div>
       {isHost ? (
         <div className="btn-block">
-          <MainButton text="Delete Room ×" onClick={handleClickDelete} />
-          <MainButton text="Start Game →" onClick={handleClickStart} />
+          <button onClick={handleClickDelete}>Delete Room</button>
+          <button onClick={handleClickStart}>Start Game</button>
         </div>
       ) : (
         <div className="btn-block">
-          <MainButton text="Leave ↪" onClick={handleClickLeave} />
+          <button onClick={handleClickLeave}>Leave</button>
         </div>
       )}
     </div>

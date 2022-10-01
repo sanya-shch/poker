@@ -32,7 +32,6 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
     await setDoc(doc(db, `game_rooms_poker/${gameId}`), {
       host_uid: uuid,
       card_deck: [],
-      // out_card_deck: [],
       player_data_arr: [],
       player_cards: {},
       banned_player_uid: [],
@@ -49,11 +48,12 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       with_background_animation: false,
       current_bet: 0,
       all_in_banks: {},
+      messages_list: [],
+      history_list: [],
     });
 
     navigate(`/game/${gameId}`);
   } catch (e) {
     console.error("Error adding document: ", e);
-    // setErrorMessage("please try again later");
   }
 };

@@ -46,6 +46,8 @@ const FinishModal = ({
     lastActions,
   });
 
+  const winnersList = winners.map((item) => item.uid);
+
   const nextUid = getNextPlayer(playersList, dealerUid);
 
   const players = playerDataArr.reduce(
@@ -95,19 +97,19 @@ const FinishModal = ({
     return () => clearTimeout(timer);
   }, []);
 
-  // React.useEffect(() => {
-  //   if (isOpen) {
-  //     document.body.style.overflow = "hidden";
-  //   }
-  //   if (isOpen && window.innerWidth > 767) {
-  //     document.getElementById("root").style.filter = "blur(2px)";
-  //   }
-  //
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //     document.getElementById("root").style.filter = "";
-  //   };
-  // }, [isOpen]);
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    // if (isOpen && window.innerWidth > 767) {
+    //   document.getElementById("root").style.filter = "blur(2px)";
+    // }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      // document.getElementById("root").style.filter = "";
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -124,14 +126,16 @@ const FinishModal = ({
           <div className="content_block combination_block custom_scrollbar">
             {combinations.map((item) => (
               <div key={item.uid} className="combination_item">
-                <p>{players[item.uid].username}</p>
+                <p className={winnersList.includes(item.uid) ? "winner" : ""}>
+                  {players[item.uid].username}
+                </p>
 
                 <Tooltip
                   text={item.combination.combinationName}
                   position="left"
                 >
                   <div className="combination_item_row">
-                    {item.combination.cards.map((card) => (
+                    {item.combination.cards.slice(0, 5).map((card) => (
                       <div
                         key={`${players[item.uid].username}-${card.number}-${
                           card.type

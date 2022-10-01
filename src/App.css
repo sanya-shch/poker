@@ -17,7 +17,8 @@
 
 .custom_scrollbar::-webkit-scrollbar-thumb {
   border-radius: 100px;
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  /*background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);*/
+  background-image: linear-gradient(180deg, #ca3e47 0%, #414141 99%);
   box-shadow: inset 2px 2px 5px 0 rgba(255, 255, 255, 0.5);
 }
 

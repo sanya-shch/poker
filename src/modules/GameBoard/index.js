@@ -5,7 +5,7 @@ import bankIcon from "../GameBlock/coins.png";
 import { gameActionTypes } from "../../constants/gameActionTypes";
 import cards from "../../constants/cards";
 import * as cardTypeIcons from "../../assets/cardTypeIcons";
-import * as icons from "../../assets/playerIcons";
+import icons from "../../assets/playerIcons";
 
 import "./style.scss";
 
@@ -114,7 +114,7 @@ const GameBoard = ({
               )}
               {lastActions[player.uid]?.action === gameActionTypes.all_in && (
                 <div className="player_action_block">
-                  All in {lastActions[player.uid]?.number}
+                  All in ({lastActions[player.uid]?.number})
                 </div>
               )}
             </div>

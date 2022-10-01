@@ -1,4 +1,4 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 import cards from "../constants/cards";
 import { randomize } from "./randomize";
@@ -52,5 +52,19 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
     }),
     current_player_uid: newCurrentPlayerUid,
     current_bet: 50,
+    history_list: [
+      {
+        message: "Dealer",
+        uid: dealerUid,
+      },
+      {
+        message: gameActionTypes.small_blind,
+        uid: sbPlayerUid,
+      },
+      {
+        message: gameActionTypes.big_blind,
+        uid: bbPlayerUid,
+      },
+    ],
   });
 };

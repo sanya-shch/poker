@@ -4,27 +4,13 @@ import { RollCounterRange } from "./RollCounterRange";
 
 import "./style.scss";
 
-const Range = ({
-  // value: rangeValue = "25",
-  value,
-  setValue,
-  min = "0",
-  max = "5000",
-  step = "25",
-}) => {
-  // const [value, setValue] = React.useState(rangeValue);
-
+const Range = ({ value, setValue, min = "0", max = "5000", step = "25" }) => {
   React.useEffect(() => {
     new RollCounterRange("#range2");
   }, []);
 
-  // React.useEffect(() => {
-  //   setValue(rangeValue);
-  // }, [rangeValue]);
-
   return (
     <form>
-      {/*<label htmlFor="range2">More Digits</label>*/}
       <input
         id="range2"
         name="range2"
@@ -34,9 +20,9 @@ const Range = ({
         value={value}
         step={step}
         onChange={(e) => setValue(e.target.value)}
-        onWheel={(e) =>
-          setValue(e.nativeEvent.wheelDelta > 0 ? +value + 25 : +value - 25)
-        }
+        // onWheel={(e) =>
+        //   setValue(e.nativeEvent.wheelDelta > 0 ? +value + 25 : +value - 25)
+        // }
       />
     </form>
   );

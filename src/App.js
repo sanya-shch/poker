@@ -3,13 +3,14 @@ import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./screens/HomePage";
 import GamePage from "./screens/GamePage";
-import NotFoundPage from "./screens/NotFoundPage";
+// import NotFoundPage from "./screens/NotFoundPage";
 
 import Loader from "./components/Loader";
 
 import "./App.css";
 
 // const GamePage = lazy(() => import("./screens/GamePage"));
+const NotFoundPage = lazy(() => import("./screens/NotFoundPage"));
 
 function App() {
   const [gameId, setGameId] = useState("");
