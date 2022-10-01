@@ -160,10 +160,3 @@ function createContainer(position) {
   document.body.append(container);
   return container;
 }
-
-// new Toast({
-//   text: "Hello",
-//   position: "top-right",
-//   pauseOnHover: true,
-//   pauseOnFocusLoss: true,
-// });

@@ -51,23 +51,6 @@
       animation: animate 4s ease-in-out infinite;
       animation-delay: -2s;
     }
-    //span:nth-child(1) {
-    //  background: rgba(255, 255, 255, 0.1);
-    //  backdrop-filter: blur(10px);
-    //  border-top: 0.25px solid rgba(255, 255, 255, 0.5);
-    //  border-left: 0.25px solid rgba(255, 255, 255, 0.5);
-    //  z-index: 2;
-    //}
-    //span:nth-child(2) {
-    //  background-color: #ca3e47;
-    //  animation: animate 4s ease-in-out infinite;
-    //}
-    //span:nth-child(3) {
-    //  background-color: #000;
-    //  animation: animate 4s ease-in-out infinite;
-    //  animation-delay: -2s;
-    //  border-radius: 0;
-    //}
 
     @keyframes animate {
       0% {
@@ -89,31 +72,6 @@
     }
   }
 
-  //h2.main_text {
-  //  position: relative;
-  //  font-size: 8rem;
-  //  color: #2d2d2d;
-  //}
-  //h2.main_text::before {
-  //  content: attr(data-text);
-  //  position: absolute;
-  //  color: white;
-  //  width: 50px;
-  //  overflow: hidden;
-  //  white-space: nowrap;
-  //  border-right: 4px solid white;
-  //  animation: text-animate 4s ease-in-out infinite;
-  //  //filter: drop-shadow(0 0 20px white) drop-shadow(0 0 1px white);
-  //}
-  //@keyframes text-animate {
-  //  0%,10%,100% {
-  //    width: 0;
-  //  }
-  //  70%,90% {
-  //    width: 100%;
-  //  }
-  //}
-
   .input_block {
     display: flex;
     justify-content: center;
@@ -128,14 +86,9 @@
 
   /* svg */
   svg {
-    //position: absolute;
-    //width: 100%;
-    //height: 100%;
-    //font: 5em/1 Comfortaa, Open Sans, Impact;
     font: 130px Open Sans, Impact;
   }
 
-  //$colors: #f2385a, #f5a503, #e9f1df, #56d9cd, #3aa1bf;
   $colors: #ca3e47, #525252, #e1e0e7, #ca3e47, #525252;
   $max: length($colors);
   $dash: 70;
@@ -143,8 +96,6 @@
   $dash-space: $dash * ($max - 1) + $dash-gap * $max;
   $time: 6s;
   $time-step: $time/$max;
-
-  //@import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 
   .text {
     fill: none;
@@ -179,9 +130,6 @@
 
   .main_background_container {
     position: absolute;
-    //top: 50%;
-    //left: 50%;
-    //transform: translate(-50%, -50%);
     user-select: none;
 
     h2 {
@@ -194,44 +142,6 @@
       font-size: 5em;
       line-height: 0.9em;
       letter-spacing: 4px;
-
-      //span {
-      //  position: relative;
-      //  color: white;
-      //  animation: bganimate 5s linear infinite;
-      //}
-      //
-      //span.text2 {
-      //  animation-delay: -0.5s;
-      //  filter: hue-rotate(225deg);
-      //}
-      //
-      //@keyframes bganimate {
-      //  0%,
-      //  5%,
-      //  10.1%,
-      //  15.1%,
-      //  25.1%,
-      //  45%,
-      //  70.1%,
-      //  90%,
-      //  100% {
-      //    color: #151515;
-      //    text-shadow: 0 0 0 #151515;
-      //  }
-      //  5.1%,
-      //  10%,
-      //  15.2%,
-      //  25%,
-      //  45.1%,
-      //  7%,
-      //  90.1%,
-      //  95% {
-      //    color: white;
-      //    text-shadow: 0 0 10px #ca3e47, 0 0 20px #ca3e47, 0 0 40px #ca3e47,
-      //      0 0 80px #ca3e47, 0 0 160px #ca3e47;
-      //  }
-      //}
     }
   }
 }

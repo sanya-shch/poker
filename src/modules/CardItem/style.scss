@@ -1,15 +1,10 @@
 .empty_card_item {
   border: 2px dashed #525252;
   border-radius: 12px;
-  //height: 300px;
-  //width: 200px;
-  //height: 225px;
-  //width: 150px;
   margin-left: 5px;
   margin-right: 5px;
   height: 240px;
   width: 160px;
-  //box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
   z-index: 4;
   background-color: #f6f6e9;
 }
@@ -17,20 +12,15 @@
 .card_item {
   border: 2px solid #525252;
   border-radius: 12px;
-  //height: 300px;
-  //width: 200px;
   margin-left: 5px;
   margin-right: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 225px;
-  //width: 150px;
   height: 240px;
   width: 160px;
   position: relative;
-  //background-color: #f2f4f6;
   box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
   user-select: none;
   background-color: white;

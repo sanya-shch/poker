@@ -58,7 +58,6 @@ function HomePage({ gameId, setGameId }) {
 
   return (
     <div className="home_page">
-      {/*<h2 className="main_text" data-text="&nbsp;Poker&nbsp;">&nbsp;Poker&nbsp;</h2>*/}
       <div className="first_row">
         <svg viewBox="0 0 400 175">
           <symbol id="s-text">
@@ -66,11 +65,11 @@ function HomePage({ gameId, setGameId }) {
               Poker
             </text>
           </symbol>
-          <use className="text" xlinkHref="#s-text"></use>
-          <use className="text" xlinkHref="#s-text"></use>
-          <use className="text" xlinkHref="#s-text"></use>
-          <use className="text" xlinkHref="#s-text"></use>
-          <use className="text" xlinkHref="#s-text"></use>
+          <use className="text" xlinkHref="#s-text" />
+          <use className="text" xlinkHref="#s-text" />
+          <use className="text" xlinkHref="#s-text" />
+          <use className="text" xlinkHref="#s-text" />
+          <use className="text" xlinkHref="#s-text" />
         </svg>
       </div>
 
@@ -87,11 +86,9 @@ function HomePage({ gameId, setGameId }) {
           />
         </div>
         <div className="animated_items">
-          <span></span>
+          <span />
           <img src={cloverBig} alt="" />
           <img src={diamondBig} alt="" />
-          {/*<span></span>*/}
-          {/*<span></span>*/}
         </div>
       </div>
 

@@ -1,7 +1,6 @@
 .game_page {
   background-color: #f6f6e9;
   color: #313131;
-  //width: 100vw;
   min-height: 100vh;
 
   .mid_game_text {
@@ -21,9 +20,6 @@
   overflow: hidden;
 }
 .content_active {
-  //transform: translateX(30%);
-  //transform: translateX(-30%);
-  //transform: translateX(-500px);
   filter: blur(8px);
   cursor: pointer;
 }

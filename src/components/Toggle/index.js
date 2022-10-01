@@ -14,7 +14,7 @@ const Toggle = ({ text = "", onToggle, isToggle }) => {
           onChange={onToggle}
           checked={isToggle}
         />
-        <div className="indicator"></div>
+        <div className="indicator" />
       </div>
       <div className="label-text">{text}</div>
     </label>

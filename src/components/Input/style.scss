@@ -2,10 +2,7 @@
   input,
   span,
   label {
-    //font-family: 'Ubuntu', sans-serif;
     display: block;
-    //margin: 10px 0;
-    //padding: 5px 0;
     border: none;
     font-size: 22px;
   }
@@ -19,10 +16,8 @@
     font-family: "Comfortaa", cursive;
     font-size: 36px;
     font-weight: 300;
-    //border-radius: 2px;
     margin: 0;
     border: none;
-    //width: 80%;
     background: inherit;
     transition: padding-top 0.2s ease, margin-top 0.2s ease;
     overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
@@ -34,17 +29,10 @@
     white-space: nowrap;
     padding: 0;
     margin: 0;
-    //width: 100%;
     border-top: 2px solid #525252;
-    //-webkit-transition: width 0.4s ease;
-    //transition: width 0.4s ease;
     height: 0;
     z-index: 1;
   }
-
-  //input.question:focus + label {
-  //  width: 80%;
-  //}
 
   input.question:focus,
   input.question:valid {
@@ -57,10 +45,6 @@
     font-size: 22px;
     color: #333;
   }
-
-  //input.question:valid + label {
-  //  border-color: green;
-  //}
 
   input.question:invalid {
     box-shadow: none;
