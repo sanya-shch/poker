@@ -78,41 +78,30 @@
   width: 100%;
   height: 100%;
   //overflow-y: scroll;
-  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
 
-  .game_id_block {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-
-    button {
-      margin-left: 15px;
-    }
-
-    span {
-      font-size: 1.5rem;
-    }
+  h4 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 1.5em;
+    text-align: center;
+    user-select: none;
   }
 
-  .reset_btn {
-    margin: 5px 20px;
-
-    .main_button {
-      max-width: 100%;
-    }
+  .menu_navigation {
+    margin: auto;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
   }
 
-  .toggle_label {
-    margin: 0 20px 20px;
+  .custom_scrollbar {
+    max-height: calc(100vh - 170px);
+    flex: 1;
+    height: 100%;
   }
-}
-
-.menu_active.big_block .custom_scrollbar {
-  max-height: calc(100vh - 70px);
 }
 
 @media (max-width: 768px) {
@@ -135,5 +124,11 @@
 @media (max-width: 500px) {
   .menu {
     width: 100%;
+
+    .menu_navigation {
+      width: 100%;
+      border-radius: 0;
+      bottom: 0;
+    }
   }
 }

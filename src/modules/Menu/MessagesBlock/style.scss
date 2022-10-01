@@ -1,0 +1,72 @@
+.menu_messages_block {
+  flex: 1;
+
+  .custom_scrollbar {
+    max-height: calc(100vh - 285px) !important;
+    margin-right: 10px;
+  }
+
+  textarea {
+    font-size: .8rem;
+    letter-spacing: 1px;
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    margin: 8px 16px 0;
+    width: calc(100% - 32px);
+    resize: none;
+  }
+
+  .send_btn {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    padding: 8px 16px;
+    font-weight: bold;
+    margin: 4px 16px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  .message_item {
+    display: flex;
+    padding: 8px 16px;
+
+    img {
+      margin: 0 8px 0 0;
+    }
+
+    .message_block {
+      width: 100%;
+      background-color: #f2f4f6;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 8px;
+
+      .message_title {
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 8px;
+      }
+
+      .message_text {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .message_item.current {
+    flex-direction: row-reverse;
+
+    img {
+      margin: 0 0 0 8px;
+    }
+  }
+}

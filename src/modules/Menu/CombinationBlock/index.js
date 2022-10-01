@@ -1,14 +1,14 @@
 import React from "react";
 
-import * as cardTypeIcons from "../../assets/cardTypeIcons";
+import * as cardTypeIcons from "../../../assets/cardTypeIcons";
 
 import "./style.scss";
 
-const CombinationBlock = () => {
-  return (
-    <div className="combination_block custom_scrollbar">
-      <h4>Hand Rankings</h4>
+const CombinationBlock = () => (
+  <div className="combination_block">
+    <h4>Hand Rankings</h4>
 
+    <div className="custom_scrollbar">
       <div className="combination_item">
         <p>Royal flush</p>
         <div className="combination_item_row">
@@ -269,7 +269,7 @@ const CombinationBlock = () => {
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default CombinationBlock;

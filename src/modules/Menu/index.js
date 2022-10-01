@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import React, { lazy, Suspense, useState } from "react";
 
-import { db } from "../../firebase";
-import { gameStages } from "../../constants/gameStage";
-import { ToastContext } from "../../components/Toast";
-import ButtonCopy from "../../components/ButtonCopy";
-import MainButton from "../../components/MainButton";
-import CombinationBlock from "../CombinationBlock";
-import Toggle from "../../components/Toggle";
+import CombinationBlock from "./CombinationBlock";
+import MenuNavigation from "./MenuNavigation";
+// import SettingsBlock from "./SettingsBlock";
+import UsersBlock from "./UsersBlock";
+import HistoryBlock from "./HistoryBlock";
+import MessagesBlock from "./MessagesBlock";
 
 import "./style.scss";
+
+const SettingsBlock = lazy(() => import("./SettingsBlock"));
 
 const Menu = ({
   open,
@@ -19,32 +19,13 @@ const Menu = ({
   isHost,
   ongoingGame,
   withBackgroundAnimation = false,
+  playerDataArr,
+  playersList,
+  dealerUid,
+  messagesList,
+  historyList,
 }) => {
-  const { setToast } = useContext(ToastContext);
-
-  const handleClickReset = async () => {
-    await updateDoc(doc(db, "game_rooms_poker", id), {
-      ongoing_game: false,
-      midgame_player_uid: [],
-      card_deck: [],
-      player_cards: {},
-      players_list: [],
-      // out_card_deck: [],
-      current_player_uid: uuid,
-      last_actions: {},
-      game_stage: gameStages.start,
-      game_cards: [],
-      bank: 0,
-      current_bet: 0,
-      all_in_banks: {},
-    });
-  };
-
-  const handleToggle = async () => {
-    await updateDoc(doc(db, "game_rooms_poker", id), {
-      with_background_animation: !withBackgroundAnimation,
-    });
-  };
+  const [activeItem, setActiveItem] = useState("command");
 
   return (
     <div
@@ -70,36 +51,43 @@ const Menu = ({
       </button>
 
       <div className="menu_list">
-        <div className="game_id_block">
-          <span>{id}</span>
-          <ButtonCopy
-            value={window.location.href}
-            onClick={() =>
-              setToast({
-                type: "success",
-                text: "Copy",
-              })
-            }
-          >
-            <span>Copy</span>
-          </ButtonCopy>
-        </div>
-
-        <CombinationBlock />
-
-        {isHost && ongoingGame && (
-          <Toggle
-            text="Background animation"
-            onToggle={handleToggle}
-            isToggle={withBackgroundAnimation}
+        {activeItem === "command" ? (
+          <CombinationBlock />
+        ) : activeItem === "users" ? (
+          <UsersBlock
+            playerDataArr={playerDataArr}
+            playersList={playersList}
+            uuid={uuid}
+            ongoingGame={ongoingGame}
+            dealerUid={dealerUid}
           />
-        )}
+        ) : activeItem === "history" ? (
+          <HistoryBlock
+            historyList={historyList}
+            playerDataArr={playerDataArr}
+          />
+        ) : activeItem === "messages" ? (
+          <MessagesBlock
+            messagesList={messagesList}
+            id={id}
+            uuid={uuid}
+            playerDataArr={playerDataArr}
+            playersList={playersList}
+            ongoingGame={ongoingGame}
+          />
+        ) : activeItem === "settings" ? (
+          <Suspense>
+            <SettingsBlock
+              isHost={isHost}
+              withBackgroundAnimation={withBackgroundAnimation}
+              id={id}
+              ongoingGame={ongoingGame}
+              uuid={uuid}
+            />
+          </Suspense>
+        ) : null}
 
-        {isHost && ongoingGame && (
-          <div className="reset_btn">
-            <MainButton text="Reset Game ↬" onClick={handleClickReset} />
-          </div>
-        )}
+        <MenuNavigation activeItem={activeItem} setActiveItem={setActiveItem} />
       </div>
     </div>
   );

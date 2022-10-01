@@ -1,0 +1,31 @@
+.menu_settings_block {
+  flex: 1;
+
+  .game_id_block {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+
+    button {
+      margin-left: 15px;
+    }
+
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+  .reset_btn {
+    margin: 5px 20px;
+
+    .main_button {
+      max-width: 100%;
+    }
+  }
+
+  .toggle_label {
+    margin: 0 20px 20px;
+  }
+}

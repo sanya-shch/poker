@@ -1,0 +1,51 @@
+.combination_block {
+  margin: 0 10px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  user-select: none;
+
+  .combination_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 20px;
+  }
+
+  .combination_item_row {
+    display: flex;
+    gap: 5px;
+  }
+
+  .combination_card_item {
+    background-color: #f2f4f6;
+    border: 1px solid #414141;
+    color: #525252;
+    width: 48px;
+    height: 72px;
+    border-radius: 3px;
+    position: relative;
+
+    p {
+      margin: 2px 3px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    img {
+      position: absolute;
+      top: 32px;
+      right: 9px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .combination_block {
+    .combination_item {
+      flex-direction: column;
+    }
+  }
+}
