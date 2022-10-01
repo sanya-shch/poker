@@ -1,7 +1,12 @@
 import React, { useState, useContext } from "react";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
-import * as icons from "../../assets/playerIcons";
+import icons, {
+  catIcons,
+  peopleIcons,
+  // playerIcons,
+  // animalIcons,
+} from "../../assets/playerIcons";
 import { db } from "../../firebase";
 import { ToastContext } from "../../components/Toast";
 import ReactPortal from "../../components/ReactPortal";
@@ -10,17 +15,17 @@ import MainButton from "../../components/MainButton";
 
 import "./style.scss";
 
-const StartModal = ({
-  isOpen,
-  handleClose,
-  isHost,
-  id,
-  uuid,
-  ongoingGame,
-}) => {
+const iconsList = [
+  ...Object.keys(peopleIcons),
+  // ...Object.keys(animalIcons),
+  ...Object.keys(catIcons),
+  // ...Object.keys(playerIcons),
+];
+
+const StartModal = ({ isOpen, handleClose, isHost, id, uuid, ongoingGame }) => {
   const { setToast } = useContext(ToastContext);
 
-  const [checked, setChecked] = useState(Object.keys(icons)[0]);
+  const [checked, setChecked] = useState(Object.keys(peopleIcons)[0]);
   const [username, setUsername] = useState("");
 
   const handleClick = () => {
@@ -32,12 +37,12 @@ const StartModal = ({
           points: 0,
           icon_index: checked,
           money: 5000,
-          chips: {
-            25: 4,
-            100: 4,
-            500: 4,
-            1000: 4,
-          }
+          // chips: {
+          //   25: 4,
+          //   100: 4,
+          //   500: 4,
+          //   1000: 4,
+          // }
         }),
       });
 
@@ -68,6 +73,16 @@ const StartModal = ({
     setUsername(event.target.value);
   };
 
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -79,7 +94,7 @@ const StartModal = ({
           </div>
           <div className="content_block">
             <div className="icons_block custom_scrollbar">
-              {Object.keys(icons).map((item) => (
+              {iconsList.map((item) => (
                 <div
                   key={`img-${item}`}
                   className={item === checked ? "checked" : ""}
