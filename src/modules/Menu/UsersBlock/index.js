@@ -29,7 +29,7 @@ const UsersBlock = ({
         {[currentPlayer, ...Object.values(restPlayers)].map((player) => (
           <div key={player.uid} className="player_item">
             <img
-              src={icons[player.icon_index]}
+              src={icons?.[player?.icon_index]}
               alt=""
               width="64px"
               height="64px"

@@ -107,6 +107,11 @@ const GameBoard = ({
               {lastActions[player.uid]?.action === gameActionTypes.check && (
                 <div className="player_action_block">Check</div>
               )}
+              {lastActions[player.uid]?.action === gameActionTypes.bet && (
+                <div className="player_action_block">
+                  Bet {lastActions[player.uid]?.number}
+                </div>
+              )}
               {lastActions[player.uid]?.action === gameActionTypes.raise && (
                 <div className="player_action_block">
                   Raise to {lastActions[player.uid]?.number}
@@ -114,7 +119,7 @@ const GameBoard = ({
               )}
               {lastActions[player.uid]?.action === gameActionTypes.all_in && (
                 <div className="player_action_block">
-                  All in ({lastActions[player.uid]?.number})
+                  All in {lastActions[player.uid]?.number}
                 </div>
               )}
             </div>

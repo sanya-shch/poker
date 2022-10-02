@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 import icons, {
-  catIcons,
   peopleIcons,
+  // catIcons,
   // playerIcons,
   // animalIcons,
 } from "../../assets/playerIcons";
@@ -18,7 +18,7 @@ import "./style.scss";
 const iconsList = [
   ...Object.keys(peopleIcons),
   // ...Object.keys(animalIcons),
-  ...Object.keys(catIcons),
+  // ...Object.keys(catIcons),
   // ...Object.keys(playerIcons),
 ];
 
@@ -90,7 +90,12 @@ const StartModal = ({ isOpen, handleClose, isHost, id, uuid, ongoingGame }) => {
       <div className="start-modal">
         <div className="modal-content">
           <div className="input_name_block">
-            <Input maxLength={12} value={username} onChange={handleChange} />
+            <Input
+              maxLength={12}
+              value={username}
+              onChange={handleChange}
+              autofocus
+            />
           </div>
           <div className="content_block">
             <div className="icons_block custom_scrollbar">

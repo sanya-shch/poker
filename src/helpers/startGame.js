@@ -8,11 +8,18 @@ import { gameActionTypes } from "../constants/gameActionTypes";
 
 export const startGame = ({ playerDataArr, id, dealerUid }) => {
   const randomizedCards = randomize(Object.keys(cards));
-  const playerCards = playerDataArr.reduce((acc, item) => {
-    acc[item.uid] = randomizedCards.splice(0, 2);
+  const playerCards = playerDataArr.reduce(
+    (acc, item) => {
+      acc[item.uid].push(...randomizedCards.splice(0, 1));
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    playerDataArr.reduce((acc, item) => {
+      acc[item.uid] = randomizedCards.splice(0, 1);
+
+      return acc;
+    }, {})
+  );
 
   const playersList = playerDataArr.map((item) => item.uid);
 
@@ -21,7 +28,7 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
 
   const lastActions = {
     [sbPlayerUid]: { action: gameActionTypes.small_blind, number: 25 },
-    [bbPlayerUid]: { action: gameActionTypes.big_blind, number: 50 },
+    [bbPlayerUid]: { action: gameActionTypes.big_blind, number: 50, end: true },
   };
 
   const newCurrentPlayerUid = getNextPlayer(playersList, bbPlayerUid);
@@ -66,5 +73,6 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
         uid: bbPlayerUid,
       },
     ],
+    lastStreetBank: 0,
   });
 };

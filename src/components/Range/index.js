@@ -20,9 +20,16 @@ const Range = ({ value, setValue, min = "0", max = "5000", step = "25" }) => {
         value={value}
         step={step}
         onChange={(e) => setValue(e.target.value)}
-        // onWheel={(e) =>
-        //   setValue(e.nativeEvent.wheelDelta > 0 ? +value + 25 : +value - 25)
-        // }
+        onWheel={(e) =>
+          setValue(e.nativeEvent.wheelDelta > 0
+            ? Number(value) + 50 <= Number(max)
+              ? Number(value) + 50
+              : Number(max)
+            : Number(value) - 50 >= Number(min)
+              ? Number(value) - 50
+              : Number(min)
+          )
+        }
       />
     </form>
   );

@@ -214,6 +214,7 @@ const GamePage = () => {
                 currentBet={gameData?.current_bet}
                 allInBanks={gameData?.all_in_banks}
                 setIsFinishModalOpen={setIsFinishModalOpen}
+                lastStreetBank={gameData?.last_street_bank}
               />
             </Suspense>
           )}

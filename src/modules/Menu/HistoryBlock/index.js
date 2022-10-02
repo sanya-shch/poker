@@ -22,9 +22,14 @@ const HistoryBlock = ({ historyList, playerDataArr }) => {
           <div key={`history_item_${index}`} className="history_item">
             {item.cards ? (
               item.cards.map((card) => (
-                <div key={card} className="card_item">
+                <div key={card} className="cards_item">
                   <p>{cards?.[card]?.number}</p>
-                  <img src={cardTypeIcons[cards?.[card]?.type]} alt="" />
+                  <img
+                    src={cardTypeIcons[cards?.[card]?.type]}
+                    alt=""
+                    width="28px"
+                    height="28px"
+                  />
                 </div>
               ))
             ) : (
@@ -49,6 +54,8 @@ const HistoryBlock = ({ historyList, playerDataArr }) => {
                       ? "Call"
                       : item.message === gameActionTypes.check
                       ? "Check"
+                      : item.message === gameActionTypes.bet
+                      ? `Bet ${item.number}`
                       : item.message === gameActionTypes.raise
                       ? `Raise to ${item.number}`
                       : item.message === gameActionTypes.call

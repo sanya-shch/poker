@@ -8,6 +8,7 @@ import { combinationCheck } from "./combimationCheck";
 import { isRoundOver } from "./isRoundOver";
 import { getGameCards } from "./getGameCards";
 import { getWinners } from "./getWinners";
+import { isAllInAllInOrEnd } from "./isAllInAllInOrEnd";
 
 export {
   getSixLetterCode,
@@ -20,4 +21,5 @@ export {
   isRoundOver,
   getGameCards,
   getWinners,
+  isAllInAllInOrEnd,
 };

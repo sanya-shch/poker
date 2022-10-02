@@ -12,7 +12,12 @@ import { db } from "../../firebase";
 import MainButton from "../../components/MainButton";
 // import ChipsBlock from "../ChipsBlock";
 import Range from "../../components/Range";
-import { getGameCards, getNextPlayer, isRoundOver } from "../../helpers";
+import {
+  getGameCards,
+  getNextPlayer,
+  isAllInAllInOrEnd,
+  isRoundOver,
+} from "../../helpers";
 import { gameActionTypes } from "../../constants/gameActionTypes";
 import { gameStages } from "../../constants/gameStage";
 import DesktopGameBoard from "../GameBoard";
@@ -41,12 +46,13 @@ const GameBlock = ({
   currentBet = 0,
   allInBanks,
   setIsFinishModalOpen,
+  lastStreetBank = 0,
 }) => {
   // ¯\_(ツ)_/¯
   const [isRaise, setIsRaise] = useState(false);
-  const [value, setValue] = React.useState("50");
+  const [value, setValue] = React.useState(currentBet + 50);
   const playerMoney = useMemo(
-    () => playerDataArr.find((findItem) => findItem.uid === uuid)?.money,
+    () => playerDataArr.find((findItem) => findItem.uid === uuid)?.money || 0,
     [playerDataArr, uuid]
   );
 
@@ -79,6 +85,7 @@ const GameBlock = ({
             ? {
                 ...item,
                 money: item.money + bankCount,
+                points: item.points + 1,
               }
             : item
         ),
@@ -116,7 +123,10 @@ const GameBlock = ({
   };
 
   const isOnlyAllIn = useMemo(
-    () => playerDataArr.find((item) => item.uid === uuid).money <= currentBet,
+    () =>
+      (lastActions[uuid]?.number || 0) +
+        playerDataArr.find((item) => item.uid === uuid).money <=
+      currentBet,
     [playerDataArr, uuid, currentBet]
   );
 
@@ -135,33 +145,43 @@ const GameBlock = ({
       last_actions: {
         ...lastActions,
         [uuid]: {
-          action:
-            currentBet === 0 ? gameActionTypes.check : gameActionTypes.call,
-          number: currentBet,
+          action: isOnlyAllIn
+            ? gameActionTypes.all_in
+            : currentBet === 0
+            ? gameActionTypes.check
+            : gameActionTypes.call,
+          number: isOnlyAllIn ? spendMoney + playerMoney : currentBet,
           end: true,
         },
       },
       bank: isOnlyAllIn
-        ? bankCount + playerDataArr.find((item) => item.uid === uuid).money
+        ? bankCount + playerMoney
         : bankCount + currentBet - spendMoney,
       player_data_arr: playerDataArr.map((item) =>
         item.uid === uuid
           ? {
               ...item,
-              money:
-                item.money + spendMoney < currentBet
-                  ? 0
-                  : item.money + spendMoney - currentBet,
+              money: isOnlyAllIn ? 0 : item.money + spendMoney - currentBet,
             }
           : item
       ),
       ...(isOnlyAllIn
-        ? { all_in_banks: { ...allInBanks, [uuid]: { bank: bankCount } } }
+        ? {
+            all_in_banks: {
+              ...allInBanks,
+              [uuid]: { bank: lastStreetBank + spendMoney + playerMoney },
+            },
+          }
         : {}),
       history_list: arrayUnion({
-        message: currentBet === 0 ? gameActionTypes.check : gameActionTypes.call,
+        message: isOnlyAllIn
+          ? gameActionTypes.all_in
+          : currentBet === 0
+          ? gameActionTypes.check
+          : gameActionTypes.call,
         uid: uuid,
         gameStage,
+        ...(isOnlyAllIn ? { number: spendMoney + playerMoney } : {}),
       }),
     });
   };
@@ -182,7 +202,78 @@ const GameBlock = ({
       uuid
     );
 
-    const isAllIn = Number(playerMoney) === Number(value);
+    const spendMoney = lastActions[uuid]?.number || 0;
+
+    const isAllIn = Number(playerMoney) + spendMoney === Number(value);
+
+    await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+      current_player_uid: nextUid,
+      last_actions: {
+        // ...lastActions,
+        ...Object.keys(lastActions).reduce((acc, item) => {
+          if (
+            lastActions[item].action === gameActionTypes.fold ||
+            lastActions[item].action === gameActionTypes.all_in
+          ) {
+            acc[item] = lastActions[item];
+          } else {
+            acc[item] = { ...lastActions[item], end: false };
+          }
+
+          return acc;
+        }, {}),
+        [uuid]: {
+          action: isAllIn
+            ? gameActionTypes.all_in
+            : currentBet === 0
+            ? gameActionTypes.bet
+            : gameActionTypes.raise,
+          number: Number(value),
+          end: true,
+        },
+      },
+      current_bet: currentBet >= Number(value) ? currentBet : Number(value),
+      bank: isAllIn
+        ? bankCount + playerMoney
+        : bankCount + Number(value) - spendMoney,
+      player_data_arr: playerDataArr.map((item) =>
+        item.uid === uuid
+          ? {
+              ...item,
+              money: isAllIn ? 0 : item.money + spendMoney - Number(value),
+            }
+          : item
+      ),
+      ...(isAllIn
+        ? {
+            all_in_banks: {
+              ...allInBanks,
+              [uuid]: { bank: bankCount + playerMoney },
+            },
+          }
+        : {}),
+      history_list: arrayUnion({
+        message: isAllIn
+          ? gameActionTypes.all_in
+          : currentBet === 0
+          ? gameActionTypes.bet
+          : gameActionTypes.raise,
+        number: isAllIn ? spendMoney + playerMoney : Number(value),
+        uid: uuid,
+        gameStage,
+      }),
+    });
+
+    setIsRaise(false);
+  };
+
+  const handleClickAllin = async () => {
+    const nextUid = getNextPlayer(
+      playersList.filter(
+        (item) => lastActions[item]?.action !== gameActionTypes.fold
+      ),
+      uuid
+    );
 
     const spendMoney = lastActions[uuid]?.number || 0;
 
@@ -203,33 +294,32 @@ const GameBlock = ({
           return acc;
         }, {}),
         [uuid]: {
-          action: isAllIn ? gameActionTypes.all_in : gameActionTypes.raise,
-          number: Number(value),
+          action: gameActionTypes.all_in,
+          number: Number(playerMoney),
           end: true,
         },
       },
-      current_bet: currentBet >= Number(value) ? currentBet : Number(value),
-      bank: bankCount + Number(value) - spendMoney,
+      current_bet: spendMoney + Number(playerMoney),
+      bank: bankCount + Number(playerMoney),
       player_data_arr: playerDataArr.map((item) =>
         item.uid === uuid
           ? {
               ...item,
-              money: isAllIn ? 0 : item.money + spendMoney - Number(value),
+              money: 0,
             }
           : item
       ),
-      ...(isAllIn
-        ? { all_in_banks: { ...allInBanks, [uuid]: { bank: bankCount } } }
-        : {}),
+      all_in_banks: {
+        ...allInBanks,
+        [uuid]: { bank: bankCount + Number(playerMoney) },
+      },
       history_list: arrayUnion({
-        message: isAllIn ? gameActionTypes.all_in : gameActionTypes.raise,
-        number: Number(value),
+        message: gameActionTypes.all_in,
+        number: spendMoney + Number(playerMoney),
         uid: uuid,
         gameStage,
       }),
     });
-
-    setIsRaise(false);
   };
 
   const isOver = useMemo(
@@ -258,6 +348,7 @@ const GameBlock = ({
             cards: getGameCards({ gameStage, cardDeck }),
           }),
           card_deck: cardDeck.slice(4),
+          last_street_bank: bankCount,
         });
         break;
       case gameStages.flop:
@@ -279,6 +370,7 @@ const GameBlock = ({
             cards: getGameCards({ gameStage, cardDeck }),
           }),
           card_deck: cardDeck.slice(2),
+          last_street_bank: bankCount,
         });
         break;
       case gameStages.turn:
@@ -300,6 +392,7 @@ const GameBlock = ({
             cards: getGameCards({ gameStage, cardDeck }),
           }),
           card_deck: cardDeck.slice(2),
+          last_street_bank: bankCount,
         });
         break;
       case gameStages.river:
@@ -310,16 +403,30 @@ const GameBlock = ({
     }
   }, [cardDeck, gameStage, id, lastActions, setIsFinishModalOpen]);
 
+  const isOverAllin = useMemo(
+    () => isAllInAllInOrEnd({ lastActions, playersList }),
+    [lastActions, playersList]
+  );
+
   useEffect(() => {
+    let timer;
+
     if (isHost) {
-      if (isOver) {
+      if (isOverAllin) {
+        timer = setTimeout(() => handleRoundOver(), 4000);
+      } else if (isOver) {
         handleRoundOver();
       }
     } else {
+      if (isOverAllin && gameStage === gameStages.river) {
+        timer = setTimeout(() => setIsFinishModalOpen(true), 4000);
+      }
       if (isOver && gameStage === gameStages.river) {
         setIsFinishModalOpen(true);
       }
     }
+
+    return () => clearTimeout(timer);
   }, [gameStage, isHost, isOver, handleRoundOver, setIsFinishModalOpen]);
 
   return (
@@ -342,21 +449,23 @@ const GameBlock = ({
         {currentPlayerUid === uuid &&
         !(
           gameCards.length === 5 && isRoundOver({ lastActions, playersList })
-        ) ? (
+        ) &&
+        !isOverAllin ? (
           isRaise ? (
             <div className="range_block_wrapper">
               <button onClick={handleBack}>Back</button>
               <div className="range_block">
                 <Range
-                  min="50"
-                  max={playerMoney}
-                  step="25"
+                  min={currentBet + 50}
+                  max={(lastActions[uuid]?.number || 0) + playerMoney}
+                  step="50"
                   value={value}
                   setValue={setValue}
                 />
               </div>
               <button onClick={handleOk}>
-                {Number(playerMoney) === Number(value)
+                {(lastActions[uuid]?.number || 0) + playerMoney ===
+                Number(value)
                   ? "All in"
                   : currentBet === 0
                   ? "Bet"
@@ -372,12 +481,15 @@ const GameBlock = ({
                 }
                 onClick={handleClickCheck}
               />
-              {!isOnlyAllIn && (
-                <MainButton
-                  text={currentBet === 0 ? "Bet" : "Raise"}
-                  onClick={handleClickRaise}
-                />
-              )}
+              {!isOnlyAllIn &&
+                (Number(currentBet) + 50 === Number(playerMoney) ? (
+                  <MainButton text="All in" onClick={handleClickAllin} />
+                ) : (
+                  <MainButton
+                    text={currentBet === 0 ? "Bet" : "Raise"}
+                    onClick={handleClickRaise}
+                  />
+                ))}
             </div>
           )
         ) : null}

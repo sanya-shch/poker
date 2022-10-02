@@ -161,7 +161,13 @@ export class RollCounterRange {
   moveSlider(e) {
     if (this.fill) {
       this.el.value =
-        e.wheelDelta > 0 ? +this.el.value + 25 : +this.el.value - 25;
+        e.wheelDelta > 0
+          ? Number(this.el.value) + 50 < Number(this.el.max)
+            ? Number(this.el.value) + 50
+            : Number(this.el.max)
+          : Number(this.el.value) - 50 >= Number(this.el.min)
+            ? Number(this.el.value) - 50
+            : Number(this.el.min);
 
       const pct = this.el.value / this.el.max;
       const fillWidth = pct * 100;

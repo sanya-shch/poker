@@ -61,7 +61,7 @@ export const getWinners = ({
 
   if (filteredPlayersCombinations.length === 1) {
     if (
-      lastActions[filteredPlayersCombinations[0].uid].action ===
+      lastActions[filteredPlayersCombinations[0].uid]?.action ===
       gameActionTypes.all_in
     ) {
       const newFilteredPlayersCombinations = combinations.filter(

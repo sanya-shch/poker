@@ -28,7 +28,7 @@ const FinishModal = ({
   bankCount,
 }) => {
   const combinations = Object.keys(playerCards)
-    .filter((uid) => lastActions[uid].action !== gameActionTypes.fold)
+    .filter((uid) => lastActions[uid]?.action !== gameActionTypes.fold)
     .map((uid) => ({
       combination: combinationCheck([...playerCards[uid], ...gameCards]),
       uid,

@@ -50,6 +50,7 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       all_in_banks: {},
       messages_list: [],
       history_list: [],
+      last_street_bank: 0,
     });
 
     navigate(`/game/${gameId}`);
