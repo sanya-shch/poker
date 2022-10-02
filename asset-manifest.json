@@ -1,25 +1,30 @@
 {
   "files": {
-    "main.css": "/poker/static/css/main.89f38375.css",
-    "main.js": "/poker/static/js/main.4e926fdc.js",
-    "static/css/67.76977f1c.chunk.css": "/poker/static/css/67.76977f1c.chunk.css",
-    "static/js/67.4715cc9e.chunk.js": "/poker/static/js/67.4715cc9e.chunk.js",
-    "static/css/205.6e19f112.chunk.css": "/poker/static/css/205.6e19f112.chunk.css",
-    "static/js/205.37e94557.chunk.js": "/poker/static/js/205.37e94557.chunk.js",
-    "static/css/793.731e6795.chunk.css": "/poker/static/css/793.731e6795.chunk.css",
-    "static/js/793.73f389fa.chunk.js": "/poker/static/js/793.73f389fa.chunk.js",
+    "main.css": "/poker/static/css/main.979d7117.css",
+    "main.js": "/poker/static/js/main.ce5ffe0b.js",
+    "static/css/126.36bdd76f.chunk.css": "/poker/static/css/126.36bdd76f.chunk.css",
+    "static/js/126.9ef7feff.chunk.js": "/poker/static/js/126.9ef7feff.chunk.js",
+    "static/css/253.b9fe3861.chunk.css": "/poker/static/css/253.b9fe3861.chunk.css",
+    "static/js/253.f84a693e.chunk.js": "/poker/static/js/253.f84a693e.chunk.js",
+    "static/css/844.3a1fc388.chunk.css": "/poker/static/css/844.3a1fc388.chunk.css",
+    "static/js/844.028988a3.chunk.js": "/poker/static/js/844.028988a3.chunk.js",
+    "static/css/95.7138b3c0.chunk.css": "/poker/static/css/95.7138b3c0.chunk.css",
+    "static/js/95.2be33058.chunk.js": "/poker/static/js/95.2be33058.chunk.js",
+    "static/css/440.d303f632.chunk.css": "/poker/static/css/440.d303f632.chunk.css",
+    "static/js/440.34e1cb2d.chunk.js": "/poker/static/js/440.34e1cb2d.chunk.js",
+    "static/css/875.e621b1d6.chunk.css": "/poker/static/css/875.e621b1d6.chunk.css",
+    "static/js/875.ace5a2d3.chunk.js": "/poker/static/js/875.ace5a2d3.chunk.js",
+    "static/css/490.f697165b.chunk.css": "/poker/static/css/490.f697165b.chunk.css",
+    "static/js/490.dc795d56.chunk.js": "/poker/static/js/490.dc795d56.chunk.js",
+    "static/media/settings.svg": "/poker/static/media/settings.8588567d7abe6a39f8ce830321ab1234.svg",
     "index.html": "/poker/index.html",
-    "main.89f38375.css.map": "/poker/static/css/main.89f38375.css.map",
-    "main.4e926fdc.js.map": "/poker/static/js/main.4e926fdc.js.map",
-    "67.76977f1c.chunk.css.map": "/poker/static/css/67.76977f1c.chunk.css.map",
-    "67.4715cc9e.chunk.js.map": "/poker/static/js/67.4715cc9e.chunk.js.map",
-    "205.6e19f112.chunk.css.map": "/poker/static/css/205.6e19f112.chunk.css.map",
-    "205.37e94557.chunk.js.map": "/poker/static/js/205.37e94557.chunk.js.map",
-    "793.731e6795.chunk.css.map": "/poker/static/css/793.731e6795.chunk.css.map",
-    "793.73f389fa.chunk.js.map": "/poker/static/js/793.73f389fa.chunk.js.map"
+    "static/media/list.svg": "/poker/static/media/list.8486a1e6df1d1bbfdaae8ad928179eb6.svg",
+    "static/media/command.svg": "/poker/static/media/command.2531129b1ccfa8584252aceb63a2f08e.svg",
+    "static/media/users.svg": "/poker/static/media/users.3b97efeee0fe43d63e620bfd4954ba01.svg",
+    "static/media/message-square.svg": "/poker/static/media/message-square.da92dd7a0359c3b9e6fbb8b09043b968.svg"
   },
   "entrypoints": [
-    "static/css/main.89f38375.css",
-    "static/js/main.4e926fdc.js"
+    "static/css/main.979d7117.css",
+    "static/js/main.ce5ffe0b.js"
   ]
 }
