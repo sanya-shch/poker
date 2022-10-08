@@ -1,4 +1,4 @@
-.start-modal {
+.rename-modal {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
@@ -33,53 +33,6 @@
       }
     }
   }
-  .content_block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 5px 10px;
-  }
-  .icons_block {
-    user-select: none;
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    &.custom_scrollbar {
-      //max-height: calc(100vh - 245px);
-      max-height: 400px;
-    }
-
-    img {
-      margin: 5px;
-      width: 65px;
-      height: 65px;
-    }
-
-    div {
-      position: relative;
-      cursor: pointer;
-      z-index: 501;
-    }
-
-    div:before {
-      content: "";
-      border: 25px solid transparent;
-      border-radius: 50%;
-      width: 75px;
-      height: 75px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    div.checked:before {
-      content: "";
-      border: 25px solid #525252;
-    }
-  }
   .btn_block {
     width: 100%;
 
@@ -94,13 +47,13 @@
 }
 
 @media (max-width: 600px) {
-  .start-modal .modal-content {
+  .rename-modal .modal-content {
     width: 100%;
   }
 }
 
 @media (max-width: 500px) {
-  .start-modal {
+  .rename-modal {
     .input_name_block {
       .input_container {
         input {

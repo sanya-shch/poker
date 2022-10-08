@@ -5,7 +5,6 @@
   align-items: center;
   margin: 5px;
   padding: 5px;
-  //border-bottom: 2px solid #525252;
   position: relative;
   user-select: none;
 
@@ -19,6 +18,16 @@
     top: 26px;
     z-index: 1;
   }
+  &.itsI {
+    p,
+    img {
+      cursor: pointer;
+    }
+
+    p:hover {
+      color: #0071cd;
+    }
+  }
   &.itsI:after {
     content: "";
     border: 10px solid #525252;
@@ -26,6 +35,9 @@
   &.is_current_player:after {
     content: "";
     border: 10px solid #0071cd;
+  }
+  &.no_cash {
+    opacity: 0.5;
   }
 
   img {
@@ -38,36 +50,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 75px;
-  }
-
-  button {
-    border: none;
-    border-radius: 3px;
-    color: #f6f6e9;
-    background-color: #ca3e47;
-    padding: 5px;
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    z-index: 4;
-    cursor: pointer;
-  }
-
-  .dealer_block {
-    background-color: #525252;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    border: 2px dotted #f6f6e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-  }
-  .dealer_block.current {
-    background-color: #ff6768;
-  }
-  .dealer_block.is_host:not(.current) {
-    cursor: pointer;
   }
 }

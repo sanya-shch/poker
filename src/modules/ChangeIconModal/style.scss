@@ -1,4 +1,4 @@
-.start-modal {
+.change-icon-modal {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
@@ -23,16 +23,6 @@
     border: 2px solid #525252;
   }
 
-  .input_name_block {
-    height: 95px;
-    margin: 10px;
-
-    .input_container {
-      input {
-        height: 95px;
-      }
-    }
-  }
   .content_block {
     display: flex;
     flex-direction: column;
@@ -48,7 +38,6 @@
     justify-content: center;
 
     &.custom_scrollbar {
-      //max-height: calc(100vh - 245px);
       max-height: 400px;
     }
 
@@ -94,23 +83,7 @@
 }
 
 @media (max-width: 600px) {
-  .start-modal .modal-content {
+  .change-icon-modal .modal-content {
     width: 100%;
-  }
-}
-
-@media (max-width: 500px) {
-  .start-modal {
-    .input_name_block {
-      .input_container {
-        input {
-          font-size: 26px;
-        }
-
-        span {
-          font-size: 26px;
-        }
-      }
-    }
   }
 }

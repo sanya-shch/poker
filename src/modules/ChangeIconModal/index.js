@@ -1,5 +1,5 @@
-import React, { useState, useContext, useMemo } from "react";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import React, { useState, useMemo } from "react";
+import { doc, updateDoc } from "firebase/firestore";
 
 import icons, {
   peopleIcons,
@@ -8,10 +8,9 @@ import icons, {
   // animalIcons,
 } from "../../assets/playerIcons";
 import { db } from "../../firebase";
-import { ToastContext } from "../../components/Toast";
 import ReactPortal from "../../components/ReactPortal";
-import Input from "../../components/Input";
 import MainButton from "../../components/MainButton";
+import { useOutsideClick } from "../../helpers";
 
 import "./style.scss";
 
@@ -22,19 +21,15 @@ const iconsList = [
   // ...Object.keys(playerIcons),
 ];
 
-const StartModal = ({
-  isOpen,
-  handleClose,
-  isHost,
-  id,
-  uuid,
-  ongoingGame,
-  playerDataArr,
-}) => {
-  const { setToast } = useContext(ToastContext);
+const ChangeIconModal = ({ isOpen, handleClose, id, uuid, playerDataArr }) => {
+  const handleClickOutside = () => {
+    handleClose();
+  };
+
+  const ref = React.useRef(null);
+  useOutsideClick(ref, handleClickOutside);
 
   const [checked, setChecked] = useState(Object.keys(peopleIcons)[0]);
-  const [username, setUsername] = useState("");
 
   const usersIconsList = useMemo(
     () => playerDataArr.map((item) => item.icon_index),
@@ -46,48 +41,17 @@ const StartModal = ({
   );
 
   const handleClick = () => {
-    if (checked && username) {
+    if (checked) {
       updateDoc(doc(db, "game_rooms_poker", id), {
-        player_data_arr: arrayUnion({
-          username,
-          uid: uuid,
-          points: 0,
-          icon_index: checked,
-          money: 5000,
-          // chips: {
-          //   25: 4,
-          //   100: 4,
-          //   500: 4,
-          //   1000: 4,
-          // }
-        }),
+        player_data_arr: playerDataArr.map((item) =>
+          item.uid === uuid ? { ...item, icon_index: checked } : item
+        ),
       });
-
-      if (ongoingGame) {
-        updateDoc(doc(db, "game_rooms_poker", id), {
-          midgame_player_uid: arrayUnion(uuid),
-        });
-      }
 
       handleClose();
     } else {
-      if (!username) {
-        setToast({
-          type: "danger",
-          text: "Enter your username",
-        });
-      }
-      if (!checked) {
-        setToast({
-          type: "danger",
-          text: "Select the icon",
-        });
-      }
+      handleClose();
     }
-  };
-
-  const handleChange = (event) => {
-    setUsername(event.target.value);
   };
 
   React.useEffect(() => {
@@ -103,17 +67,9 @@ const StartModal = ({
   if (!isOpen) return null;
 
   return (
-    <ReactPortal wrapperId="react-portal-start-modal">
-      <div className="start-modal">
-        <div className="modal-content">
-          <div className="input_name_block">
-            <Input
-              maxLength={12}
-              value={username}
-              onChange={handleChange}
-              autofocus
-            />
-          </div>
+    <ReactPortal wrapperId="react-portal-change-icon-modal">
+      <div className="change-icon-modal">
+        <div className="modal-content" ref={ref}>
           <div className="content_block">
             <div className="icons_block custom_scrollbar">
               {filteredIconsList.map((item) => (
@@ -133,7 +89,7 @@ const StartModal = ({
             </div>
           </div>
           <div className="btn_block">
-            <MainButton text="Join" onClick={handleClick} />
+            <MainButton text="Change" onClick={handleClick} />
           </div>
         </div>
       </div>
@@ -141,4 +97,4 @@ const StartModal = ({
   );
 };
 
-export default StartModal;
+export default ChangeIconModal;

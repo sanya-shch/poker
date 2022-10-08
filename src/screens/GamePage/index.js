@@ -23,6 +23,8 @@ const GameBlock = lazy(() => import("../../modules/GameBlock"));
 
 const StartModal = lazy(() => import("../../modules/StartModal"));
 const FinishModal = lazy(() => import("../../modules/FinishModal"));
+const RenameModal = lazy(() => import("../../modules/RenameModal"));
+const ChangeIconModal = lazy(() => import("../../modules/ChangeIconModal"));
 
 const GamePage = () => {
   let { id } = useParams();
@@ -41,6 +43,8 @@ const GamePage = () => {
 
   const [isStartModalOpen, setIsStartModalOpen] = useState(false);
   const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
+  const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
+  const [isChangeIconModalOpen, setIsChangeIconModalOpen] = useState(false);
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -72,7 +76,9 @@ const GamePage = () => {
       }
     });
 
-    const currentNumberOfPlayers = gameData.player_data_arr.length;
+    const currentNumberOfPlayers = gameData.player_data_arr.filter(
+      (item) => item.money > 25
+    ).length;
     const possibleNumberOfPlayers = 14;
 
     if (!userExists) {
@@ -174,6 +180,8 @@ const GamePage = () => {
         dealerUid={gameData?.dealer_uid}
         messagesList={gameData?.messages_list}
         historyList={gameData?.history_list}
+        setIsRenameModalOpen={setIsRenameModalOpen}
+        setIsChangeIconModalOpen={setIsChangeIconModalOpen}
       />
       <div
         className={["content", openMenu && "content_active"].join(" ")}
@@ -189,6 +197,8 @@ const GamePage = () => {
                 uuid={uuid}
                 id={id}
                 dealerUid={gameData?.dealer_uid}
+                setIsRenameModalOpen={setIsRenameModalOpen}
+                setIsChangeIconModalOpen={setIsChangeIconModalOpen}
               />
             </Suspense>
           )}
@@ -232,6 +242,7 @@ const GamePage = () => {
                 id={id}
                 uuid={uuid}
                 ongoingGame={ongoingGame}
+                playerDataArr={gameData?.player_data_arr}
               />
             </Suspense>
           )}
@@ -251,6 +262,28 @@ const GamePage = () => {
                 dealerUid={gameData?.dealer_uid}
                 allInBanks={gameData?.all_in_banks}
                 bankCount={gameData?.bank}
+              />
+            </Suspense>
+          )}
+          {isRenameModalOpen && (
+            <Suspense>
+              <RenameModal
+                isOpen={isRenameModalOpen}
+                handleClose={() => setIsRenameModalOpen(false)}
+                id={id}
+                uuid={uuid}
+                playerDataArr={gameData?.player_data_arr}
+              />
+            </Suspense>
+          )}
+          {isChangeIconModalOpen && (
+            <Suspense>
+              <ChangeIconModal
+                isOpen={isChangeIconModalOpen}
+                handleClose={() => setIsChangeIconModalOpen(false)}
+                id={id}
+                uuid={uuid}
+                playerDataArr={gameData?.player_data_arr}
               />
             </Suspense>
           )}

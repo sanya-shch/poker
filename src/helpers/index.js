@@ -9,6 +9,7 @@ import { isRoundOver } from "./isRoundOver";
 import { getGameCards } from "./getGameCards";
 import { getWinners } from "./getWinners";
 import { isAllInAllInOrEnd } from "./isAllInAllInOrEnd";
+import { useOutsideClick } from "./useOutsideClick";
 
 export {
   getSixLetterCode,
@@ -22,4 +23,5 @@ export {
   getGameCards,
   getWinners,
   isAllInAllInOrEnd,
+  useOutsideClick,
 };

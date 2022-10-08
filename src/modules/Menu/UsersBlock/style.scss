@@ -9,6 +9,37 @@
     img {
       margin-right: 16px;
     }
+
+    button {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 1px #999;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      height: max-content;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+    button:nth-of-type(1) {
+      margin-left: auto;
+    }
+    button:nth-of-type(2) {
+      margin-left: 8px;
+    }
+
+    &.current {
+      & > img,
+      .info > p {
+        cursor: pointer;
+      }
+      .info > p:hover {
+        color: #0071cd;
+      }
+    }
   }
 
   .info {
@@ -35,6 +66,11 @@
       font-weight: bold;
       font-size: 16px;
       margin-left: 8px;
+
+      &.not_dealer {
+        background-color: #525252;
+        cursor: pointer;
+      }
     }
   }
 }

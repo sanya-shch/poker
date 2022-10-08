@@ -1,7 +1,4 @@
 import React from "react";
-import { doc, updateDoc } from "firebase/firestore";
-
-import { db } from "../../../firebase";
 
 import "./style.scss";
 
@@ -10,42 +7,27 @@ const UserBlock = ({
   username,
   itsI,
   isCurrentPlayer,
-  isHost,
-  isStartBlock,
-  handleKick,
-  dealerUid,
-  playerUid,
-  id,
+  money,
+  setIsRenameModalOpen,
+  setIsChangeIconModalOpen,
 }) => {
-  const handleClick = async () => {
-    if (playerUid !== dealerUid && isHost) {
-      await updateDoc(doc(db, `game_rooms_poker/${id}`), {
-        dealer_uid: playerUid,
-      });
-    }
-  };
+  const handleRename = () => itsI && setIsRenameModalOpen(true);
+  const handleChangeIcon = () => itsI && setIsChangeIconModalOpen(true);
 
   return (
     <div
       className={`user_block ${itsI ? "itsI" : ""} ${
         isCurrentPlayer ? "is_current_player" : ""
-      }`}
+      } ${money <= 25 ? "no_cash" : ""}`}
     >
-      <p>{username}</p>
-      <img src={imgSrc} alt="" width="65px" height="65px" loading="lazy" />
-      {isHost && (
-        <div
-          className={`dealer_block ${
-            playerUid === dealerUid ? "current" : ""
-          } ${isHost ? "is_host" : ""}`}
-          onClick={handleClick}
-        >
-          D
-        </div>
-      )}
-      {isHost && isStartBlock && !itsI && (
-        <button onClick={handleKick}>X</button>
-      )}
+      <p onClick={handleRename}>{username}</p>
+      <img
+        src={imgSrc}
+        alt=""
+        width="65px"
+        height="65px"
+        onClick={handleChangeIcon}
+      />
     </div>
   );
 };
