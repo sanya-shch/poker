@@ -10,6 +10,7 @@ import { getGameCards } from "./getGameCards";
 import { getWinners } from "./getWinners";
 import { isAllInAllInOrEnd } from "./isAllInAllInOrEnd";
 import { useOutsideClick } from "./useOutsideClick";
+import { useMount } from "./useMount";
 
 export {
   getSixLetterCode,
@@ -24,4 +25,5 @@ export {
   getWinners,
   isAllInAllInOrEnd,
   useOutsideClick,
+  useMount,
 };

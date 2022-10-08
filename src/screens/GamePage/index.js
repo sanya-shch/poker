@@ -276,17 +276,17 @@ const GamePage = () => {
               />
             </Suspense>
           )}
-          {isChangeIconModalOpen && (
-            <Suspense>
-              <ChangeIconModal
-                isOpen={isChangeIconModalOpen}
-                handleClose={() => setIsChangeIconModalOpen(false)}
-                id={id}
-                uuid={uuid}
-                playerDataArr={gameData?.player_data_arr}
-              />
-            </Suspense>
-          )}
+          {/*{isChangeIconModalOpen && (*/}
+          <Suspense>
+            <ChangeIconModal
+              isOpen={isChangeIconModalOpen}
+              handleClose={() => setIsChangeIconModalOpen(false)}
+              id={id}
+              uuid={uuid}
+              playerDataArr={gameData?.player_data_arr}
+            />
+          </Suspense>
+          {/*)}*/}
         </div>
       </div>
     </>
