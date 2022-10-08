@@ -83,7 +83,9 @@ const FinishModal = ({
         }),
         dealer_uid: nextUid,
         all_in_banks: {},
-      }).finally(() => handleClose());
+      });
+
+      handleClose()
     } else {
       handleClose();
     }

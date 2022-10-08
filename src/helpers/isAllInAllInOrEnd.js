@@ -5,8 +5,11 @@ export const isAllInAllInOrEnd = ({ lastActions, playersList }) => {
     playersList.length &&
     playersList.filter(
       (playerUid) =>
-        !(lastActions[playerUid]?.action === gameActionTypes.fold ||
-        lastActions[playerUid]?.action === gameActionTypes.all_in)
-    ).length <= 1
+        !(
+          lastActions[playerUid]?.action === gameActionTypes.fold ||
+          lastActions[playerUid]?.action === gameActionTypes.all_in ||
+          lastActions[playerUid]?.end
+        )
+    ).length === 0
   );
 };

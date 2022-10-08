@@ -24,6 +24,8 @@ const Menu = ({
   dealerUid,
   messagesList,
   historyList,
+  setIsRenameModalOpen,
+  setIsChangeIconModalOpen,
 }) => {
   const [activeItem, setActiveItem] = useState("command");
 
@@ -60,6 +62,10 @@ const Menu = ({
             uuid={uuid}
             ongoingGame={ongoingGame}
             dealerUid={dealerUid}
+            id={id}
+            isHost={isHost}
+            setIsRenameModalOpen={setIsRenameModalOpen}
+            setIsChangeIconModalOpen={setIsChangeIconModalOpen}
           />
         ) : activeItem === "history" ? (
           <HistoryBlock

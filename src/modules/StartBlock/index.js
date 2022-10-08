@@ -1,11 +1,5 @@
 import React, { useContext } from "react";
-import {
-  doc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  deleteDoc,
-} from "firebase/firestore";
+import { doc, updateDoc, arrayRemove, deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../../firebase";
@@ -16,13 +10,21 @@ import UserBlock from "./UserBlock";
 
 import "./style.scss";
 
-const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
+const StartBlock = ({
+  isHost,
+  playerDataArr,
+  uuid,
+  id,
+  dealerUid,
+  setIsRenameModalOpen,
+  setIsChangeIconModalOpen,
+}) => {
   const navigate = useNavigate();
 
   const { setToast } = useContext(ToastContext);
 
   const handleClickStart = () => {
-    if (playerDataArr?.length >= 2) {
+    if (playerDataArr?.filter((item) => item.money > 25).length >= 2) {
       startGame({ playerDataArr, id, dealerUid });
     } else {
       setToast({
@@ -42,22 +44,17 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
     });
   };
 
-  const handleKick = async (uid) => {
-    await updateDoc(doc(db, "game_rooms_poker", id), {
-      banned_player_uid: arrayUnion(uid),
-      player_data_arr: playerDataArr.filter((player) => player.uid !== uid),
-    });
-  };
-
   const handleClickLeave = async () => {
     const player = playerDataArr.find((arr) => arr.uid === uuid);
 
-    const playersList = playerDataArr.map((item) => item.uid);
+    const playersList = playerDataArr
+      .filter((item) => item.money > 25)
+      .map((item) => item.uid);
     const newDealerUid = getNextPlayer(playersList, dealerUid);
 
     updateDoc(doc(db, "game_rooms_poker", id), {
       player_data_arr: arrayRemove(player),
-      dealer_uid: player.uid === uuid ? newDealerUid : dealerUid,
+      dealer_uid: player.uid === dealerUid ? newDealerUid : dealerUid,
     });
     navigate("/");
   };
@@ -71,12 +68,9 @@ const StartBlock = ({ isHost, playerDataArr, uuid, id, dealerUid }) => {
             imgSrc={icons[player.icon_index]}
             username={player.username}
             itsI={uuid === player.uid}
-            isHost={isHost}
-            handleKick={() => handleKick(player.uid)}
-            isStartBlock
-            dealerUid={dealerUid}
-            playerUid={player.uid}
-            id={id}
+            money={player.money}
+            setIsRenameModalOpen={setIsRenameModalOpen}
+            setIsChangeIconModalOpen={setIsChangeIconModalOpen}
           />
         ))}
       </div>

@@ -197,7 +197,11 @@ const GameBlock = ({
   const handleOk = async () => {
     const nextUid = getNextPlayer(
       playersList.filter(
-        (item) => lastActions[item]?.action !== gameActionTypes.fold
+        (item) =>
+          !(
+            lastActions[item]?.action === gameActionTypes.fold ||
+            lastActions[item]?.action === gameActionTypes.all_in
+          )
       ),
       uuid
     );
@@ -328,9 +332,17 @@ const GameBlock = ({
   );
 
   const handleRoundOver = useCallback(async () => {
+    const nextUid = getNextPlayer(
+      playersList.filter(
+        (item) => lastActions[item]?.action !== gameActionTypes.fold
+      ),
+      dealerUid
+    );
+
     switch (gameStage) {
       case gameStages.start:
         await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+          current_player_uid: nextUid,
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
@@ -353,6 +365,7 @@ const GameBlock = ({
         break;
       case gameStages.flop:
         await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+          current_player_uid: nextUid,
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
@@ -375,6 +388,7 @@ const GameBlock = ({
         break;
       case gameStages.turn:
         await updateDoc(doc(db, `game_rooms_poker/${id}`), {
+          current_player_uid: nextUid,
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
@@ -413,15 +427,14 @@ const GameBlock = ({
 
     if (isHost) {
       if (isOverAllin) {
-        timer = setTimeout(() => handleRoundOver(), 4000);
+        timer = setTimeout(() => handleRoundOver(), 3000);
       } else if (isOver) {
         handleRoundOver();
       }
     } else {
       if (isOverAllin && gameStage === gameStages.river) {
-        timer = setTimeout(() => setIsFinishModalOpen(true), 4000);
-      }
-      if (isOver && gameStage === gameStages.river) {
+        timer = setTimeout(() => setIsFinishModalOpen(true), 3000);
+      } else if (isOver && gameStage === gameStages.river) {
         setIsFinishModalOpen(true);
       }
     }
@@ -450,7 +463,8 @@ const GameBlock = ({
         !(
           gameCards.length === 5 && isRoundOver({ lastActions, playersList })
         ) &&
-        !isOverAllin ? (
+        !isOverAllin &&
+        !lastActions[uuid]?.end ? (
           isRaise ? (
             <div className="range_block_wrapper">
               <button onClick={handleBack}>Back</button>
@@ -477,7 +491,7 @@ const GameBlock = ({
               <MainButton text="Fold" onClick={handleClickFold} />
               <MainButton
                 text={
-                  currentBet === 0 ? "Check" : isOnlyAllIn ? "All in" : "Call"
+                  currentBet === 0 ? "Check" : isOnlyAllIn ? "All in" : `Call (${currentBet})`
                 }
                 onClick={handleClickCheck}
               />

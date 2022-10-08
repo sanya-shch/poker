@@ -80,7 +80,7 @@ const CombinationBlock = () => (
             <p>9</p>
             <img src={cardTypeIcons.heart} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>7</p>
             <img src={cardTypeIcons.clover} alt="" />
           </div>
@@ -180,11 +180,11 @@ const CombinationBlock = () => (
             <p>7</p>
             <img src={cardTypeIcons.diamond} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>Q</p>
             <img src={cardTypeIcons.clover} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>4</p>
             <img src={cardTypeIcons.clover} alt="" />
           </div>
@@ -210,7 +210,7 @@ const CombinationBlock = () => (
             <p>5</p>
             <img src={cardTypeIcons.spades} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>3</p>
             <img src={cardTypeIcons.diamond} alt="" />
           </div>
@@ -228,15 +228,15 @@ const CombinationBlock = () => (
             <p>K</p>
             <img src={cardTypeIcons.spades} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>J</p>
             <img src={cardTypeIcons.diamond} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>8</p>
             <img src={cardTypeIcons.clover} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>3</p>
             <img src={cardTypeIcons.heart} alt="" />
           </div>
@@ -250,19 +250,19 @@ const CombinationBlock = () => (
             <p>A</p>
             <img src={cardTypeIcons.diamond} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>J</p>
             <img src={cardTypeIcons.clover} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>7</p>
             <img src={cardTypeIcons.heart} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>4</p>
             <img src={cardTypeIcons.spades} alt="" />
           </div>
-          <div className="combination_card_item">
+          <div className="combination_card_item opacity">
             <p>2</p>
             <img src={cardTypeIcons.diamond} alt="" />
           </div>

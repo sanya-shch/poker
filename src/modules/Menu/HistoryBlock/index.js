@@ -58,8 +58,8 @@ const HistoryBlock = ({ historyList, playerDataArr }) => {
                       ? `Bet ${item.number}`
                       : item.message === gameActionTypes.raise
                       ? `Raise to ${item.number}`
-                      : item.message === gameActionTypes.call
-                      ? `All in (${item.number})`
+                      : item.message === gameActionTypes.all_in
+                      ? `All in ${item.number}`
                       : item.message === gameActionTypes.fold
                       ? "Fold"
                       : item.message}

@@ -21,7 +21,9 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
     }, {})
   );
 
-  const playersList = playerDataArr.map((item) => item.uid);
+  const playersList = playerDataArr
+    .filter((item) => item.money > 25)
+    .map((item) => item.uid);
 
   const sbPlayerUid = getNextPlayer(playersList, dealerUid);
   const bbPlayerUid = getNextPlayer(playersList, sbPlayerUid);
@@ -40,23 +42,25 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
     players_list: playersList,
     last_actions: lastActions,
     bank: 75,
-    player_data_arr: playerDataArr.map((item) => {
-      if (item.uid === sbPlayerUid) {
-        return {
-          ...item,
-          money: item.money - 25,
-          // chips: { ...item.chips, 25: item.chips[25] - 1 },
-        };
-      } else if (item.uid === bbPlayerUid) {
-        return {
-          ...item,
-          money: item.money - 50,
-          // chips: { ...item.chips, 25: item.chips[25] - 2 },
-        };
-      }
+    player_data_arr: playerDataArr
+      .filter((item) => item.money > 25)
+      .map((item) => {
+        if (item.uid === sbPlayerUid) {
+          return {
+            ...item,
+            money: item.money - 25,
+            // chips: { ...item.chips, 25: item.chips[25] - 1 },
+          };
+        } else if (item.uid === bbPlayerUid) {
+          return {
+            ...item,
+            money: item.money - 50,
+            // chips: { ...item.chips, 25: item.chips[25] - 2 },
+          };
+        }
 
-      return item;
-    }),
+        return item;
+      }),
     current_player_uid: newCurrentPlayerUid,
     current_bet: 50,
     history_list: [

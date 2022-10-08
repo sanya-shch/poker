@@ -21,6 +21,10 @@
     justify-content: center;
     border-radius: 33px;
     border: 2px solid #525252;
+
+    .custom_scrollbar {
+      max-height: 400px;
+    }
   }
 
   .modal-header {
