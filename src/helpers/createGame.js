@@ -49,6 +49,8 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       current_bet: 0,
       all_in_banks: {},
       messages_list: [],
+      messages_last_updates: "",
+      messages_info: {},
       history_list: [],
       last_street_bank: 0,
     });

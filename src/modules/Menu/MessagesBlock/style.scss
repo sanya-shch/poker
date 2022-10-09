@@ -6,6 +6,16 @@
     margin-right: 10px;
   }
 
+  .write_players {
+    height: 20px;
+    margin: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 24px;
+  }
+
   textarea {
     font-size: .8rem;
     letter-spacing: 1px;

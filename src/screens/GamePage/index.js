@@ -179,6 +179,8 @@ const GamePage = () => {
         playersList={gameData?.players_list}
         dealerUid={gameData?.dealer_uid}
         messagesList={gameData?.messages_list}
+        messagesLastUpdates={gameData?.messages_last_updates}
+        messagesInfo={gameData?.messages_info}
         historyList={gameData?.history_list}
         setIsRenameModalOpen={setIsRenameModalOpen}
         setIsChangeIconModalOpen={setIsChangeIconModalOpen}

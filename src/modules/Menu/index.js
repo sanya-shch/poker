@@ -23,6 +23,8 @@ const Menu = ({
   playersList,
   dealerUid,
   messagesList,
+  messagesLastUpdates,
+  messagesInfo,
   historyList,
   setIsRenameModalOpen,
   setIsChangeIconModalOpen,
@@ -50,6 +52,9 @@ const Menu = ({
             open ? "open" : ""
           }`}
         />
+        {messagesLastUpdates > messagesInfo?.[uuid]?.lastView && (
+          <span className="messages" />
+        )}
       </button>
 
       <div className="menu_list">
@@ -80,6 +85,9 @@ const Menu = ({
             playerDataArr={playerDataArr}
             playersList={playersList}
             ongoingGame={ongoingGame}
+            open={open}
+            messagesLastUpdates={messagesLastUpdates}
+            messagesInfo={messagesInfo}
           />
         ) : activeItem === "settings" ? (
           <Suspense>

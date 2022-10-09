@@ -34,6 +34,16 @@
     background: transparent;
     outline: none;
     cursor: pointer;
+
+    .messages {
+      width: 16px;
+      height: 16px;
+      background-color: #ff6768;
+      position: absolute;
+      right: -2px;
+      top: -6px;
+      border-radius: 50%;
+    }
   }
   .rectangle {
     position: absolute;

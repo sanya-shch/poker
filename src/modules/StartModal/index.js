@@ -33,9 +33,6 @@ const StartModal = ({
 }) => {
   const { setToast } = useContext(ToastContext);
 
-  const [checked, setChecked] = useState(Object.keys(peopleIcons)[0]);
-  const [username, setUsername] = useState("");
-
   const usersIconsList = useMemo(
     () => playerDataArr.map((item) => item.icon_index),
     [playerDataArr]
@@ -44,6 +41,9 @@ const StartModal = ({
     () => iconsList.filter((item) => !usersIconsList.includes(item)),
     [iconsList, usersIconsList]
   );
+
+  const [checked, setChecked] = useState(filteredIconsList[0]);
+  const [username, setUsername] = useState("");
 
   const handleClick = () => {
     if (checked && username) {
