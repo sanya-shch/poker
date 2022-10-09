@@ -271,17 +271,17 @@ const GamePage = () => {
             />
           </Suspense>
           {/*)}*/}
-          {isRenameModalOpen && (
-            <Suspense>
-              <RenameModal
-                isOpen={isRenameModalOpen}
-                handleClose={() => setIsRenameModalOpen(false)}
-                id={id}
-                uuid={uuid}
-                playerDataArr={gameData?.player_data_arr}
-              />
-            </Suspense>
-          )}
+          {/*{isRenameModalOpen && (*/}
+          <Suspense>
+            <RenameModal
+              isOpen={isRenameModalOpen}
+              handleClose={() => setIsRenameModalOpen(false)}
+              id={id}
+              uuid={uuid}
+              playerDataArr={gameData?.player_data_arr}
+            />
+          </Suspense>
+          {/*// )}*/}
           {/*{isChangeIconModalOpen && (*/}
           <Suspense>
             <ChangeIconModal
