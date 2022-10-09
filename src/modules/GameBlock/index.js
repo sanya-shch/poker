@@ -491,7 +491,11 @@ const GameBlock = ({
               <MainButton text="Fold" onClick={handleClickFold} />
               <MainButton
                 text={
-                  currentBet === 0 ? "Check" : isOnlyAllIn ? "All in" : `Call (${currentBet})`
+                  currentBet === 0
+                    ? "Check"
+                    : isOnlyAllIn
+                    ? "All in"
+                    : `Call (${currentBet - (lastActions[uuid]?.number || 0)})`
                 }
                 onClick={handleClickCheck}
               />

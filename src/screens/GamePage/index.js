@@ -151,8 +151,12 @@ const GamePage = () => {
     uuid,
   ]);
 
-  const handleClickContent = () => {
-    if (openMenu) setOpenMenu((prev) => !prev);
+  const handleClickContent = (event) => {
+    if (openMenu) {
+      event.stopPropagation();
+
+      setOpenMenu((prev) => !prev);
+    }
   };
 
   useEffect(() => {
@@ -187,7 +191,7 @@ const GamePage = () => {
       />
       <div
         className={["content", openMenu && "content_active"].join(" ")}
-        onClick={handleClickContent}
+        onClickCapture={handleClickContent}
       >
         <Header isOpen={openMenu} setOpen={setOpenMenu} />
         <div className="game_page">
@@ -248,25 +252,25 @@ const GamePage = () => {
               />
             </Suspense>
           )}
-          {isFinishModalOpen && (
-            <Suspense>
-              <FinishModal
-                isOpen={isFinishModalOpen}
-                handleClose={setIsFinishModalOpen}
-                isHost={isHost}
-                id={id}
-                uuid={uuid}
-                playerCards={gameData?.player_cards}
-                lastActions={gameData?.last_actions}
-                gameCards={gameData?.game_cards}
-                playerDataArr={gameData?.player_data_arr}
-                playersList={gameData?.players_list}
-                dealerUid={gameData?.dealer_uid}
-                allInBanks={gameData?.all_in_banks}
-                bankCount={gameData?.bank}
-              />
-            </Suspense>
-          )}
+          {/*{isFinishModalOpen && (*/}
+          <Suspense>
+            <FinishModal
+              isOpen={isFinishModalOpen}
+              handleClose={setIsFinishModalOpen}
+              isHost={isHost}
+              id={id}
+              uuid={uuid}
+              playerCards={gameData?.player_cards}
+              lastActions={gameData?.last_actions}
+              gameCards={gameData?.game_cards}
+              playerDataArr={gameData?.player_data_arr}
+              playersList={gameData?.players_list}
+              dealerUid={gameData?.dealer_uid}
+              allInBanks={gameData?.all_in_banks}
+              bankCount={gameData?.bank}
+            />
+          </Suspense>
+          {/*)}*/}
           {isRenameModalOpen && (
             <Suspense>
               <RenameModal
