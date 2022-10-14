@@ -26,6 +26,10 @@ const FinishModal = lazy(() => import("../../modules/FinishModal"));
 const RenameModal = lazy(() => import("../../modules/RenameModal"));
 const ChangeIconModal = lazy(() => import("../../modules/ChangeIconModal"));
 
+let finishModalInitial = false;
+let renameModalInitial = false;
+let changeIconModalInitial = false;
+
 const GamePage = () => {
   let { id } = useParams();
   id = id.toUpperCase();
@@ -49,6 +53,23 @@ const GamePage = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [isWaitStart, setIsWaitStart] = useState(false);
+
+  useEffect(() => {
+    if (isFinishModalOpen && !finishModalInitial) finishModalInitial = true;
+
+    setIsFinishModalOpen(isFinishModalOpen);
+  }, [isFinishModalOpen]);
+  useEffect(() => {
+    if (isRenameModalOpen && !renameModalInitial) renameModalInitial = true;
+
+    setIsRenameModalOpen(isRenameModalOpen);
+  }, [isRenameModalOpen]);
+  useEffect(() => {
+    if (isChangeIconModalOpen && !changeIconModalInitial)
+      changeIconModalInitial = true;
+
+    setIsChangeIconModalOpen(isChangeIconModalOpen);
+  }, [isChangeIconModalOpen]);
 
   const checkIfGameExists = useCallback(async () => {
     const docSnap = await getDoc(doc(db, "game_rooms_poker", id));
@@ -178,6 +199,7 @@ const GamePage = () => {
         uuid={uuid}
         ongoingGame={ongoingGame}
         isHost={isHost}
+        setIsHost={setIsHost}
         withBackgroundAnimation={gameData?.with_background_animation}
         playerDataArr={gameData?.player_data_arr}
         playersList={gameData?.players_list}
@@ -252,47 +274,47 @@ const GamePage = () => {
               />
             </Suspense>
           )}
-          {/*{isFinishModalOpen && (*/}
-          <Suspense>
-            <FinishModal
-              isOpen={isFinishModalOpen}
-              handleClose={setIsFinishModalOpen}
-              isHost={isHost}
-              id={id}
-              uuid={uuid}
-              playerCards={gameData?.player_cards}
-              lastActions={gameData?.last_actions}
-              gameCards={gameData?.game_cards}
-              playerDataArr={gameData?.player_data_arr}
-              playersList={gameData?.players_list}
-              dealerUid={gameData?.dealer_uid}
-              allInBanks={gameData?.all_in_banks}
-              bankCount={gameData?.bank}
-            />
-          </Suspense>
-          {/*)}*/}
-          {/*{isRenameModalOpen && (*/}
-          <Suspense>
-            <RenameModal
-              isOpen={isRenameModalOpen}
-              handleClose={() => setIsRenameModalOpen(false)}
-              id={id}
-              uuid={uuid}
-              playerDataArr={gameData?.player_data_arr}
-            />
-          </Suspense>
-          {/*// )}*/}
-          {/*{isChangeIconModalOpen && (*/}
-          <Suspense>
-            <ChangeIconModal
-              isOpen={isChangeIconModalOpen}
-              handleClose={() => setIsChangeIconModalOpen(false)}
-              id={id}
-              uuid={uuid}
-              playerDataArr={gameData?.player_data_arr}
-            />
-          </Suspense>
-          {/*)}*/}
+          {(isFinishModalOpen || finishModalInitial) && (
+            <Suspense>
+              <FinishModal
+                isOpen={isFinishModalOpen}
+                handleClose={setIsFinishModalOpen}
+                isHost={isHost}
+                id={id}
+                uuid={uuid}
+                playerCards={gameData?.player_cards}
+                lastActions={gameData?.last_actions}
+                gameCards={gameData?.game_cards}
+                playerDataArr={gameData?.player_data_arr}
+                playersList={gameData?.players_list}
+                dealerUid={gameData?.dealer_uid}
+                allInBanks={gameData?.all_in_banks}
+                bankCount={gameData?.bank}
+              />
+            </Suspense>
+          )}
+          {(isRenameModalOpen || renameModalInitial) && (
+            <Suspense>
+              <RenameModal
+                isOpen={isRenameModalOpen}
+                handleClose={() => setIsRenameModalOpen(false)}
+                id={id}
+                uuid={uuid}
+                playerDataArr={gameData?.player_data_arr}
+              />
+            </Suspense>
+          )}
+          {(isChangeIconModalOpen || changeIconModalInitial) && (
+            <Suspense>
+              <ChangeIconModal
+                isOpen={isChangeIconModalOpen}
+                handleClose={() => setIsChangeIconModalOpen(false)}
+                id={id}
+                uuid={uuid}
+                playerDataArr={gameData?.player_data_arr}
+              />
+            </Suspense>
+          )}
         </div>
       </div>
     </>

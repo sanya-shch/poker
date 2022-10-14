@@ -1,15 +1,23 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 
-import CombinationBlock from "./CombinationBlock";
-import MenuNavigation from "./MenuNavigation";
+// import CombinationBlock from "./CombinationBlock";
+// import MenuNavigation from "./MenuNavigation";
 // import SettingsBlock from "./SettingsBlock";
-import UsersBlock from "./UsersBlock";
-import HistoryBlock from "./HistoryBlock";
-import MessagesBlock from "./MessagesBlock";
+// import UsersBlock from "./UsersBlock";
+// import HistoryBlock from "./HistoryBlock";
+// import MessagesBlock from "./MessagesBlock";
 
 import "./style.scss";
 
+const CombinationBlock = lazy(() => import("./CombinationBlock"));
+const MenuNavigation = lazy(() => import("./MenuNavigation"));
+
 const SettingsBlock = lazy(() => import("./SettingsBlock"));
+const UsersBlock = lazy(() => import("./UsersBlock"));
+const HistoryBlock = lazy(() => import("./HistoryBlock"));
+const MessagesBlock = lazy(() => import("./MessagesBlock"));
+
+let openInitial = false;
 
 const Menu = ({
   open,
@@ -17,6 +25,7 @@ const Menu = ({
   id,
   uuid,
   isHost,
+  setIsHost,
   ongoingGame,
   withBackgroundAnimation = false,
   playerDataArr,
@@ -31,13 +40,21 @@ const Menu = ({
 }) => {
   const [activeItem, setActiveItem] = useState("command");
 
+  useEffect(() => {
+    if (open && !openInitial) openInitial = true;
+  }, [open]);
+
   return (
     <div
       className={`menu ${open ? "menu_active" : ""} ${
         isHost && ongoingGame ? "" : "big_block"
       }`}
     >
-      <button
+      <div
+        id="menu-burger-btn"
+        title=""
+        role="button"
+        tabIndex="-1"
         className={`fancy-burger ${open ? "" : "not_active"}`}
         onClick={() => setOpen(!open)}
       >
@@ -55,53 +72,69 @@ const Menu = ({
         {messagesLastUpdates > messagesInfo?.[uuid]?.lastView && (
           <span className="messages" />
         )}
-      </button>
+      </div>
 
       <div className="menu_list">
         {activeItem === "command" ? (
           <CombinationBlock />
         ) : activeItem === "users" ? (
-          <UsersBlock
-            playerDataArr={playerDataArr}
-            playersList={playersList}
-            uuid={uuid}
-            ongoingGame={ongoingGame}
-            dealerUid={dealerUid}
-            id={id}
-            isHost={isHost}
-            setIsRenameModalOpen={setIsRenameModalOpen}
-            setIsChangeIconModalOpen={setIsChangeIconModalOpen}
-          />
+          <Suspense>
+            <UsersBlock
+              playerDataArr={playerDataArr}
+              playersList={playersList}
+              uuid={uuid}
+              ongoingGame={ongoingGame}
+              dealerUid={dealerUid}
+              id={id}
+              isHost={isHost}
+              setIsRenameModalOpen={setIsRenameModalOpen}
+              setIsChangeIconModalOpen={setIsChangeIconModalOpen}
+              setOpen={setOpen}
+            />
+          </Suspense>
         ) : activeItem === "history" ? (
-          <HistoryBlock
-            historyList={historyList}
-            playerDataArr={playerDataArr}
-          />
+          <Suspense>
+            <HistoryBlock
+              historyList={historyList}
+              playerDataArr={playerDataArr}
+            />
+          </Suspense>
         ) : activeItem === "messages" ? (
-          <MessagesBlock
-            messagesList={messagesList}
-            id={id}
-            uuid={uuid}
-            playerDataArr={playerDataArr}
-            playersList={playersList}
-            ongoingGame={ongoingGame}
-            open={open}
-            messagesLastUpdates={messagesLastUpdates}
-            messagesInfo={messagesInfo}
-          />
+          <Suspense>
+            <MessagesBlock
+              messagesList={messagesList}
+              id={id}
+              uuid={uuid}
+              playerDataArr={playerDataArr}
+              playersList={playersList}
+              ongoingGame={ongoingGame}
+              open={open}
+              messagesLastUpdates={messagesLastUpdates}
+              messagesInfo={messagesInfo}
+            />
+          </Suspense>
         ) : activeItem === "settings" ? (
           <Suspense>
             <SettingsBlock
               isHost={isHost}
+              setIsHost={setIsHost}
               withBackgroundAnimation={withBackgroundAnimation}
               id={id}
               ongoingGame={ongoingGame}
               uuid={uuid}
+              playerDataArr={playerDataArr}
             />
           </Suspense>
         ) : null}
 
-        <MenuNavigation activeItem={activeItem} setActiveItem={setActiveItem} />
+        {(open || openInitial) && (
+          <Suspense>
+            <MenuNavigation
+              activeItem={activeItem}
+              setActiveItem={setActiveItem}
+            />
+          </Suspense>
+        )}
       </div>
     </div>
   );
