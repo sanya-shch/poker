@@ -2,6 +2,15 @@
   flex: 1;
   user-select: none;
 
+  .empty_state {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
+
   .custom_scrollbar {
     margin-right: 10px;
   }

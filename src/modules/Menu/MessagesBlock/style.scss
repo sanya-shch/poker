@@ -1,6 +1,15 @@
 .menu_messages_block {
   flex: 1;
 
+  .empty_state {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
+
   .custom_scrollbar {
     max-height: calc(100vh - 285px) !important;
     margin-right: 10px;

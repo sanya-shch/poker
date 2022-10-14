@@ -122,6 +122,12 @@ const MessagesBlock = ({
         ))}
       </div>
 
+      {messagesList.length === 0 && (
+        <div className="empty_state">
+          <p>Nothing Here</p>
+        </div>
+      )}
+
       <p className="write_players">
         {Object.values(messagesInfo)
           .filter((item) => item.isWriting && item.uid !== uuid)

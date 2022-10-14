@@ -70,6 +70,12 @@ const HistoryBlock = ({ historyList, playerDataArr }) => {
           </div>
         ))}
       </div>
+
+      {historyList.length === 0 && (
+        <div className="empty_state">
+          <p>Nothing Here</p>
+        </div>
+      )}
     </div>
   );
 };
