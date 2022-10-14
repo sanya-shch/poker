@@ -4,17 +4,20 @@ import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 
 import ToastProvider from "./components/Toast";
+import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
 
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ToastProvider>
-    <HashRouter>
-      {/*<React.StrictMode>*/}
-      <App />
-      {/*</React.StrictMode>*/}
-    </HashRouter>
-  </ToastProvider>
+  <ErrorBoundary>
+    <ToastProvider>
+      <HashRouter>
+        {/*<React.StrictMode>*/}
+        <App />
+        {/*</React.StrictMode>*/}
+      </HashRouter>
+    </ToastProvider>
+  </ErrorBoundary>
 );
