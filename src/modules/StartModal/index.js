@@ -124,8 +124,8 @@ const StartModal = ({
                   <img
                     src={icons[item]}
                     alt={item}
-                    width="65px"
-                    height="65px"
+                    width="64px"
+                    height="64px"
                     onClick={() => setChecked(item)}
                   />
                 </div>

@@ -125,7 +125,7 @@ const GameBlock = ({
   const isOnlyAllIn = useMemo(
     () =>
       (lastActions[uuid]?.number || 0) +
-        playerDataArr.find((item) => item.uid === uuid).money <=
+        playerDataArr.find((item) => item.uid === uuid)?.money <=
       currentBet,
     [playerDataArr, uuid, currentBet]
   );

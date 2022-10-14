@@ -113,7 +113,7 @@ const Layout = ({
           {combinations.map((item) => (
             <div key={item.uid} className="combination_item">
               <p className={winnersList.includes(item.uid) ? "winner" : ""}>
-                {players[item.uid].username}
+                {item.uid === uuid ? "You" : players[item.uid].username}
               </p>
 
               <Tooltip text={item.combination.combinationName} position="left">

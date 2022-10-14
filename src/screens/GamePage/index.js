@@ -230,32 +230,34 @@ const GamePage = () => {
               />
             </Suspense>
           )}
-          {ongoingGame && !isMidGamePlayer && (
-            <Suspense>
-              <GameBlock
-                midgamePlayerUid={gameData?.midgame_player_uid}
-                playerDataArr={gameData?.player_data_arr}
-                playerCards={gameData?.player_cards}
-                cardDeck={gameData?.card_deck}
-                currentPlayerUid={gameData?.current_player_uid}
-                playersList={gameData?.players_list}
-                setOpenMenu={setOpenMenu}
-                uuid={uuid}
-                id={id}
-                dealerUid={gameData?.dealer_uid}
-                lastActions={gameData?.last_actions}
-                gameCards={gameData?.game_cards}
-                bankCount={gameData?.bank}
-                withBackgroundAnimation={gameData?.with_background_animation}
-                gameStage={gameData?.game_stage}
-                isHost={isHost}
-                currentBet={gameData?.current_bet}
-                allInBanks={gameData?.all_in_banks}
-                setIsFinishModalOpen={setIsFinishModalOpen}
-                lastStreetBank={gameData?.last_street_bank}
-              />
-            </Suspense>
-          )}
+          {ongoingGame &&
+            !isMidGamePlayer &&
+            gameData?.players_list?.includes(uuid) && (
+              <Suspense>
+                <GameBlock
+                  midgamePlayerUid={gameData?.midgame_player_uid}
+                  playerDataArr={gameData?.player_data_arr}
+                  playerCards={gameData?.player_cards}
+                  cardDeck={gameData?.card_deck}
+                  currentPlayerUid={gameData?.current_player_uid}
+                  playersList={gameData?.players_list}
+                  setOpenMenu={setOpenMenu}
+                  uuid={uuid}
+                  id={id}
+                  dealerUid={gameData?.dealer_uid}
+                  lastActions={gameData?.last_actions}
+                  gameCards={gameData?.game_cards}
+                  bankCount={gameData?.bank}
+                  withBackgroundAnimation={gameData?.with_background_animation}
+                  gameStage={gameData?.game_stage}
+                  isHost={isHost}
+                  currentBet={gameData?.current_bet}
+                  allInBanks={gameData?.all_in_banks}
+                  setIsFinishModalOpen={setIsFinishModalOpen}
+                  lastStreetBank={gameData?.last_street_bank}
+                />
+              </Suspense>
+            )}
           {isMidGamePlayer && (
             <div className="mid_game_text">
               <p>Please wait for the next game to begin ⏱</p>

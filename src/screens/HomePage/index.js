@@ -87,8 +87,8 @@ function HomePage({ gameId, setGameId }) {
         </div>
         <div className="animated_items">
           <span />
-          <img src={cloverBig} alt="" />
-          <img src={diamondBig} alt="" />
+          <img src={cloverBig} alt="" width="300px" height="300px" />
+          <img src={diamondBig} alt="" width="300px" height="300px" />
         </div>
       </div>
 

@@ -41,17 +41,9 @@ const GameBoard = ({
                     src={cardTypeIcons[cards[playerCards[player.uid][0]].type]}
                     alt=""
                   />
-                  <img
-                    src={cardTypeIcons[cards[playerCards[player.uid][0]].type]}
-                    alt=""
-                  />
                 </div>
                 <div>
                   <p>{cards[playerCards[player.uid][1]].number}</p>
-                  <img
-                    src={cardTypeIcons[cards[playerCards[player.uid][1]].type]}
-                    alt=""
-                  />
                   <img
                     src={cardTypeIcons[cards[playerCards[player.uid][1]].type]}
                     alt=""
@@ -74,7 +66,15 @@ const GameBoard = ({
             >
               <div className="player_text_info">
                 <div className="username_block">
-                  <p>{player.uid === uuid ? "You" : player.username}</p>
+                  <p>
+                    {player.uid === uuid ? (
+                      <>
+                        You<span>- {player.username}</span>
+                      </>
+                    ) : (
+                      player.username
+                    )}
+                  </p>
                 </div>
 
                 <div className="money_block">

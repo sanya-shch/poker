@@ -70,64 +70,39 @@
       height: 85px;
 
       p {
-        margin: 0 1px;
+        margin-left: 4px;
+        margin-top: 2px;
         font-weight: bold;
         font-size: 1.5rem;
       }
 
       div {
-        background-color: #f2f4f6;
+        background-color: white;
         border: 1px solid #414141;
         color: #525252;
         border-radius: 3px;
-        width: 54px;
-        height: 80px;
+        width: 48px;
+        height: 72px;
         box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+
+        img {
+          position: absolute;
+          top: 30px;
+          right: 6px;
+          width: 33px;
+          height: 33px;
+        }
       }
 
       div:nth-of-type(1) {
         position: absolute;
-        top: -5px;
+        top: -3px;
         left: 0;
-        transform: rotate(340deg);
-        background-color: white;
-
-        img:nth-of-type(1) {
-          position: absolute;
-          top: 2px;
-          right: 2px;
-          width: 25px;
-          height: 25px;
-        }
-        img:nth-of-type(2) {
-          position: absolute;
-          top: 35px;
-          right: 9px;
-          width: 33px;
-          height: 33px;
-        }
       }
       div:nth-of-type(2) {
         position: absolute;
-        top: -5px;
+        top: 0;
         left: 44px;
-        transform: rotate(25deg);
-        background-color: white;
-
-        img:nth-of-type(1) {
-          position: absolute;
-          top: 2px;
-          right: 2px;
-          width: 25px;
-          height: 25px;
-        }
-        img:nth-of-type(2) {
-          position: absolute;
-          top: 35px;
-          right: 9px;
-          width: 33px;
-          height: 33px;
-        }
       }
     }
 
@@ -213,6 +188,10 @@
             text-overflow: ellipsis;
             max-width: 95px;
             font-weight: bold;
+          }
+
+          span {
+            display: none;
           }
         }
 
@@ -733,6 +712,33 @@
       .player_2 {
         top: 230px;
         right: -20px;
+      }
+    }
+
+    .player_info .player_text_info .username_block {
+      &:hover {
+        justify-content: flex-start;
+        width: max-content;
+        min-width: 120px;
+        padding-right: 8px;
+        z-index: 11;
+        position: relative;
+        border-bottom-right-radius: 9px;
+        border-top-right-radius: 9px;
+
+        p {
+          max-width: max-content;
+          width: max-content;
+        }
+
+        span {
+          display: inline;
+          padding-left: 8px;
+        }
+      }
+
+      p {
+        margin-left: 8px;
       }
     }
   }
@@ -1262,35 +1268,20 @@
         div {
           width: 44px;
           height: 65px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          align-items: center;
+
+          img {
+            width: 28px;
+            height: 28px;
+          }
         }
         div:nth-of-type(1) {
-          transform: none;
           top: 0;
           left: 3px;
-
-          img:nth-of-type(1) {
-            position: static;
-          }
-          img:nth-of-type(2) {
-            display: none;
-          }
         }
         div:nth-of-type(2) {
-          transform: none;
           top: 3px;
           left: auto;
           right: 3px;
-
-          img:nth-of-type(1) {
-            position: static;
-          }
-          img:nth-of-type(2) {
-            display: none;
-          }
         }
       }
 
@@ -2135,35 +2126,22 @@
         div {
           width: 44px;
           height: 65px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          align-items: center;
+
+          img {
+            width: 28px;
+            height: 28px;
+          }
         }
         div:nth-of-type(1) {
           transform: none;
           top: 0;
           left: 3px;
-
-          img:nth-of-type(1) {
-            position: static;
-          }
-          img:nth-of-type(2) {
-            display: none;
-          }
         }
         div:nth-of-type(2) {
           transform: none;
           top: 3px;
           left: auto;
           right: 3px;
-
-          img:nth-of-type(1) {
-            position: static;
-          }
-          img:nth-of-type(2) {
-            display: none;
-          }
         }
       }
 
