@@ -51,7 +51,7 @@ export const startGame = ({
     card_deck: randomizedCards,
     players_list: playersList,
     last_actions: lastActions,
-    bank: 75,
+    bank: smallBlind + bigBlind,
     player_data_arr: playerDataArr
       .filter((item) => item.money > smallBlind)
       .map((item) => {

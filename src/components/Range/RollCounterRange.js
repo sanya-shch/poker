@@ -1,7 +1,8 @@
 export class RollCounterRange {
-  constructor(id, step) {
+  constructor(id, step, addedMax) {
     this.el = document.querySelector(id);
     this.step = step;
+    this.addedMax = addedMax;
     this.srValue = null;
     this.fill = null;
     this.digitCols = null;
@@ -12,7 +13,7 @@ export class RollCounterRange {
     if (this.el) {
       this.buildSlider();
       this.el.addEventListener("input", this.changeValue.bind(this));
-      this.el.addEventListener("mousewheel", this.moveSlider.bind(this));
+      // this.el.addEventListener("mousewheel", this.moveSlider.bind(this));
     }
   }
   buildSlider() {
@@ -83,7 +84,7 @@ export class RollCounterRange {
   }
   changeValue() {
     // keep the value within range
-    if (+this.el.value > this.el.max) this.el.value = this.el.max;
+    if (+this.el.value > +this.el.max) this.el.value = this.el.max;
     else if (+this.el.value < this.el.min) this.el.value = this.el.min;
 
     // update the screen reader value
@@ -99,7 +100,10 @@ export class RollCounterRange {
     }
 
     if (this.digitCols) {
-      let rangeVal = this.el.value;
+      let rangeVal =
+        +this.el.value === +this.el.max
+          ? String(+this.el.value - this.addedMax)
+          : this.el.value;
 
       // add blanks at the start if needed
       while (rangeVal.length < this.digitCols.length) rangeVal = " " + rangeVal;
@@ -178,7 +182,10 @@ export class RollCounterRange {
     }
 
     if (this.digitCols) {
-      let rangeVal = this.el.value;
+      let rangeVal =
+        +this.el.value === +this.el.max
+          ? String(+this.el.value - this.addedMax)
+          : this.el.value;
 
       // add blanks at the start if needed
       while (rangeVal.length < this.digitCols.length) rangeVal = " " + rangeVal;

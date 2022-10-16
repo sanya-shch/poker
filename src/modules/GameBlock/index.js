@@ -49,7 +49,7 @@ const GameBlock = ({
 }) => {
   // ¯\_(ツ)_/¯
   const [isRaise, setIsRaise] = useState(false);
-  const [value, setValue] = React.useState(currentBet + bigBlind);
+  const [value, setValue] = useState(currentBet + bigBlind);
   const playerMoney = useMemo(
     () => playerDataArr.find((findItem) => findItem.uid === uuid)?.money || 0,
     [playerDataArr, uuid]
@@ -60,7 +60,7 @@ const GameBlock = ({
       (item) => lastActions[item]?.action !== gameActionTypes.fold
     );
 
-    if (filteredPlayers.length - 1) {
+    if (filteredPlayers.length === 2) {
       const winnerPlayerUid = filteredPlayers.filter(
         (item) => item !== uuid
       )[0];
@@ -132,7 +132,11 @@ const GameBlock = ({
   const handleClickCheck = async () => {
     const nextUid = getNextPlayer(
       playersList.filter(
-        (item) => lastActions[item]?.action !== gameActionTypes.fold
+        (item) =>
+          !(
+            lastActions[item]?.action === gameActionTypes.fold ||
+            lastActions[item]?.action === gameActionTypes.all_in
+          )
       ),
       uuid
     );
@@ -426,13 +430,13 @@ const GameBlock = ({
 
     if (isHost) {
       if (isOverAllin) {
-        timer = setTimeout(() => handleRoundOver(), 3000);
+        timer = setTimeout(() => handleRoundOver(), 1000);
       } else if (isOver) {
         handleRoundOver();
       }
     } else {
       if (isOverAllin && gameStage === gameStages.river) {
-        timer = setTimeout(() => setIsFinishModalOpen(true), 3000);
+        timer = setTimeout(() => setIsFinishModalOpen(true), 1000);
       } else if (isOver && gameStage === gameStages.river) {
         setIsFinishModalOpen(true);
       }
@@ -440,6 +444,12 @@ const GameBlock = ({
 
     return () => clearTimeout(timer);
   }, [gameStage, isHost, isOver, handleRoundOver, setIsFinishModalOpen]);
+
+  useEffect(() => {
+    if (currentPlayerUid === uuid) {
+      setValue(currentBet + (bigBlind || 50));
+    }
+  }, [currentBet, bigBlind, currentPlayerUid, uuid]);
 
   return (
     <>
@@ -471,6 +481,11 @@ const GameBlock = ({
                 <Range
                   min={currentBet + (bigBlind || 50)}
                   max={(lastActions[uuid]?.number || 0) + playerMoney}
+                  addedMax={
+                    bigBlind -
+                    (((lastActions[uuid]?.number || 0) + playerMoney) %
+                      bigBlind)
+                  }
                   step={bigBlind || "50"}
                   value={value}
                   setValue={setValue}

@@ -81,7 +81,9 @@ const GameBoard = ({
                   <p>{player.money}</p>
 
                   {player.uid === dealerUid && (
-                    <div className="dealer_block">D</div>
+                    <div className="dealer_block">
+                      <p>D</p>
+                    </div>
                   )}
                 </div>
 
