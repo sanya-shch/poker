@@ -5,6 +5,7 @@ export const getWinners = ({
   combinations,
   bankCount,
   lastActions,
+  smallBlind = 25,
 }) => {
   const cardsCost = [
     ...new Set(combinations.map((item) => item.combination.combinationCost)),
@@ -28,7 +29,7 @@ export const getWinners = ({
     );
 
     const notAllInPlayersBank =
-      Math.floor(bank / 25 / notAllInPlayers.length) * 25;
+      Math.floor(bank / smallBlind / notAllInPlayers.length) * smallBlind;
 
     return notAllInPlayers.reduce(
       (acc, item, index) => {
@@ -44,7 +45,8 @@ export const getWinners = ({
       },
       allInPlayers.reduce((acc, item) => {
         const currentBank =
-          Math.floor(allInBanks[item.uid].bank / 25 / length) * 25;
+          Math.floor(allInBanks[item.uid].bank / smallBlind / length) *
+          smallBlind;
 
         bank -= currentBank;
 
@@ -77,8 +79,9 @@ export const getWinners = ({
             return { uid: item.uid, bank: bank };
           } else {
             const currentBank =
-              Math.floor(bank / 25 / newFilteredPlayersCombinations.length) *
-              25;
+              Math.floor(
+                bank / smallBlind / newFilteredPlayersCombinations.length
+              ) * smallBlind;
 
             bank -= currentBank;
 
@@ -106,7 +109,8 @@ export const getWinners = ({
           return { uid: item.uid, bank: bank };
         } else {
           const currentBank =
-            Math.floor(bank / 25 / filteredPlayersCombinations.length) * 25;
+            Math.floor(bank / smallBlind / filteredPlayersCombinations.length) *
+            smallBlind;
 
           bank -= currentBank;
 
@@ -132,7 +136,7 @@ export const getWinners = ({
         );
 
       const notAllInPlayersBank =
-        Math.floor(bank / 25 / notAllInPlayers.length) * 25;
+        Math.floor(bank / smallBlind / notAllInPlayers.length) * smallBlind;
 
       return notAllInPlayers.reduce(
         (acc, item, index) => {
@@ -148,7 +152,8 @@ export const getWinners = ({
         },
         allInPlayers.reduce((acc, item) => {
           const currentBank =
-            Math.floor(allInBanks[item.uid].bank / 25 / length) * 25;
+            Math.floor(allInBanks[item.uid].bank / smallBlind / length) *
+            smallBlind;
 
           bank -= currentBank;
 

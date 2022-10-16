@@ -27,6 +27,7 @@ const Layout = ({
   dealerUid,
   allInBanks,
   bankCount,
+  smallBlind,
 }) => {
   const combinations = Object.keys(playerCards)
     .filter((uid) => lastActions[uid]?.action !== gameActionTypes.fold)
@@ -45,6 +46,7 @@ const Layout = ({
     combinations,
     bankCount,
     lastActions,
+    smallBlind,
   });
 
   const winnersList = winners.map((item) => item.uid);

@@ -10,6 +10,7 @@ const UserBlock = ({
   money,
   setIsRenameModalOpen,
   setIsChangeIconModalOpen,
+  smallBlind = 25,
 }) => {
   const handleRename = () => itsI && setIsRenameModalOpen(true);
   const handleChangeIcon = () => itsI && setIsChangeIconModalOpen(true);
@@ -18,7 +19,7 @@ const UserBlock = ({
     <div
       className={`user_block ${itsI ? "itsI" : ""} ${
         isCurrentPlayer ? "is_current_player" : ""
-      } ${money <= 25 ? "no_cash" : ""}`}
+      } ${money <= smallBlind ? "no_cash" : ""}`}
     >
       <p onClick={handleRename}>{username}</p>
       <img

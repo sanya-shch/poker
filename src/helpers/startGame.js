@@ -1,4 +1,4 @@
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 import cards from "../constants/cards";
 import { randomize } from "./randomize";
@@ -6,7 +6,13 @@ import { db } from "../firebase";
 import { getNextPlayer } from "./getNextPlayer";
 import { gameActionTypes } from "../constants/gameActionTypes";
 
-export const startGame = ({ playerDataArr, id, dealerUid }) => {
+export const startGame = ({
+  playerDataArr,
+  id,
+  dealerUid,
+  smallBlind,
+  bigBlind,
+}) => {
   const randomizedCards = randomize(Object.keys(cards));
   const playerCards = playerDataArr.reduce(
     (acc, item) => {
@@ -22,15 +28,19 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
   );
 
   const playersList = playerDataArr
-    .filter((item) => item.money > 25)
+    .filter((item) => item.money > smallBlind)
     .map((item) => item.uid);
 
   const sbPlayerUid = getNextPlayer(playersList, dealerUid);
   const bbPlayerUid = getNextPlayer(playersList, sbPlayerUid);
 
   const lastActions = {
-    [sbPlayerUid]: { action: gameActionTypes.small_blind, number: 25 },
-    [bbPlayerUid]: { action: gameActionTypes.big_blind, number: 50, end: true },
+    [sbPlayerUid]: { action: gameActionTypes.small_blind, number: smallBlind },
+    [bbPlayerUid]: {
+      action: gameActionTypes.big_blind,
+      number: bigBlind,
+      end: true,
+    },
   };
 
   const newCurrentPlayerUid = getNextPlayer(playersList, bbPlayerUid);
@@ -43,18 +53,18 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
     last_actions: lastActions,
     bank: 75,
     player_data_arr: playerDataArr
-      .filter((item) => item.money > 25)
+      .filter((item) => item.money > smallBlind)
       .map((item) => {
         if (item.uid === sbPlayerUid) {
           return {
             ...item,
-            money: item.money - 25,
+            money: item.money - smallBlind,
             // chips: { ...item.chips, 25: item.chips[25] - 1 },
           };
         } else if (item.uid === bbPlayerUid) {
           return {
             ...item,
-            money: item.money - 50,
+            money: item.money - bigBlind,
             // chips: { ...item.chips, 25: item.chips[25] - 2 },
           };
         }
@@ -62,7 +72,7 @@ export const startGame = ({ playerDataArr, id, dealerUid }) => {
         return item;
       }),
     current_player_uid: newCurrentPlayerUid,
-    current_bet: 50,
+    current_bet: bigBlind,
     history_list: [
       {
         message: "Dealer",

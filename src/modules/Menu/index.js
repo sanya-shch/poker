@@ -28,6 +28,8 @@ const Menu = ({
   setIsHost,
   ongoingGame,
   withBackgroundAnimation = false,
+  smallBlind,
+  bigBlind,
   playerDataArr,
   playersList,
   dealerUid,
@@ -90,6 +92,7 @@ const Menu = ({
               setIsRenameModalOpen={setIsRenameModalOpen}
               setIsChangeIconModalOpen={setIsChangeIconModalOpen}
               setOpen={setOpen}
+              smallBlind={smallBlind}
             />
           </Suspense>
         ) : activeItem === "history" ? (
@@ -119,6 +122,8 @@ const Menu = ({
               isHost={isHost}
               setIsHost={setIsHost}
               withBackgroundAnimation={withBackgroundAnimation}
+              smallBlind={smallBlind}
+              bigBlind={bigBlind}
               id={id}
               ongoingGame={ongoingGame}
               uuid={uuid}

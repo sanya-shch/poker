@@ -14,6 +14,8 @@ const SettingsBlock = ({
   isHost,
   setIsHost,
   withBackgroundAnimation,
+  smallBlind,
+  bigBlind,
   id,
   ongoingGame,
   uuid,
@@ -40,11 +42,16 @@ const SettingsBlock = ({
 
   const handleToggle = async () => {
     await updateDoc(doc(db, "game_rooms_poker", id), {
-      with_background_animation: !withBackgroundAnimation,
+      game_setting__with_background_animation: !withBackgroundAnimation,
     });
   };
 
-  const [blind, setBlind] = useState(50);
+  const setBlinds = async (small, big) => {
+    await updateDoc(doc(db, "game_rooms_poker", id), {
+      game_setting__small_blind: small,
+      game_setting__big_blind: big,
+    });
+  };
 
   const handleClearHistory = async () => {
     await updateDoc(doc(db, "game_rooms_poker", id), {
@@ -119,30 +126,30 @@ const SettingsBlock = ({
             <p>Min bet</p>
 
             <button
-              className={blind === 50 ? "selected" : ""}
+              className={bigBlind === 50 ? "selected" : ""}
               type="button"
-              onClick={() => setBlind(50)}
+              onClick={() => setBlinds(25, 50)}
             >
               50
             </button>
             <button
-              className={blind === 100 ? "selected" : ""}
+              className={bigBlind === 100 ? "selected" : ""}
               type="button"
-              onClick={() => setBlind(100)}
+              onClick={() => setBlinds(50, 100)}
             >
               100
             </button>
             <button
-              className={blind === 200 ? "selected" : ""}
+              className={bigBlind === 200 ? "selected" : ""}
               type="button"
-              onClick={() => setBlind(200)}
+              onClick={() => setBlinds(100, 200)}
             >
               200
             </button>
             <button
-              className={blind === 500 ? "selected" : ""}
+              className={bigBlind === 500 ? "selected" : ""}
               type="button"
-              onClick={() => setBlind(500)}
+              onClick={() => setBlinds(250, 500)}
             >
               500
             </button>

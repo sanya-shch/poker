@@ -18,14 +18,16 @@ const StartBlock = ({
   dealerUid,
   setIsRenameModalOpen,
   setIsChangeIconModalOpen,
+  smallBlind,
+  bigBlind,
 }) => {
   const navigate = useNavigate();
 
   const { setToast } = useContext(ToastContext);
 
   const handleClickStart = () => {
-    if (playerDataArr?.filter((item) => item.money > 25).length >= 2) {
-      startGame({ playerDataArr, id, dealerUid });
+    if (playerDataArr?.filter((item) => item.money > smallBlind).length >= 2) {
+      startGame({ playerDataArr, id, dealerUid, smallBlind, bigBlind });
     } else {
       setToast({
         type: "danger",
@@ -48,7 +50,7 @@ const StartBlock = ({
     const player = playerDataArr.find((arr) => arr.uid === uuid);
 
     const playersList = playerDataArr
-      .filter((item) => item.money > 25)
+      .filter((item) => item.money > smallBlind)
       .map((item) => item.uid);
     const newDealerUid = getNextPlayer(playersList, dealerUid);
 
@@ -71,6 +73,7 @@ const StartBlock = ({
             money={player.money}
             setIsRenameModalOpen={setIsRenameModalOpen}
             setIsChangeIconModalOpen={setIsChangeIconModalOpen}
+            smallBlind={smallBlind}
           />
         ))}
       </div>

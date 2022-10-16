@@ -1,6 +1,7 @@
 export class RollCounterRange {
-  constructor(id) {
+  constructor(id, step) {
     this.el = document.querySelector(id);
+    this.step = step;
     this.srValue = null;
     this.fill = null;
     this.digitCols = null;
@@ -162,11 +163,11 @@ export class RollCounterRange {
     if (this.fill) {
       this.el.value =
         e.wheelDelta > 0
-          ? Number(this.el.value) + 50 < Number(this.el.max)
-            ? Number(this.el.value) + 50
+          ? Number(this.el.value) + this.step < Number(this.el.max)
+            ? Number(this.el.value) + this.step
             : Number(this.el.max)
-          : Number(this.el.value) - 50 >= Number(this.el.min)
-            ? Number(this.el.value) - 50
+          : Number(this.el.value) - this.step >= Number(this.el.min)
+            ? Number(this.el.value) - this.step
             : Number(this.el.min);
 
       const pct = this.el.value / this.el.max;

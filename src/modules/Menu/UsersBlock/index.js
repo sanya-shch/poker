@@ -18,6 +18,7 @@ const UsersBlock = ({
   setIsRenameModalOpen,
   setIsChangeIconModalOpen,
   setOpen,
+  smallBlind = 25,
 }) => {
   const players = useMemo(
     () =>
@@ -42,7 +43,7 @@ const UsersBlock = ({
     const player = playerDataArr.find((arr) => arr.uid === uid);
 
     const playersList = playerDataArr
-      .filter((item) => item.money > 25)
+      .filter((item) => item.money > smallBlind)
       .map((item) => item.uid);
     const newDealerUid = getNextPlayer(playersList, dealerUid);
 

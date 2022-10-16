@@ -98,7 +98,7 @@ const GamePage = () => {
     });
 
     const currentNumberOfPlayers = gameData.player_data_arr.filter(
-      (item) => item.money > 25
+      (item) => item.money > gameData.game_setting__small_blind
     ).length;
     const possibleNumberOfPlayers = 14;
 
@@ -126,7 +126,13 @@ const GamePage = () => {
       });
       navigate("/");
     }
-  }, [gameData?.banned_player_uid, uuid, navigate, setToast]);
+  }, [
+    gameData?.banned_player_uid,
+    uuid,
+    navigate,
+    setToast,
+    gameData?.game_setting__small_blind,
+  ]);
 
   const leaveIfGameDeleted = useCallback(() => {
     if (gameData.game_room_closed) {
@@ -200,7 +206,11 @@ const GamePage = () => {
         ongoingGame={ongoingGame}
         isHost={isHost}
         setIsHost={setIsHost}
-        withBackgroundAnimation={gameData?.with_background_animation}
+        withBackgroundAnimation={
+          gameData?.game_setting__with_background_animation
+        }
+        smallBlind={gameData?.game_setting__small_blind}
+        bigBlind={gameData?.game_setting__big_blind}
         playerDataArr={gameData?.player_data_arr}
         playersList={gameData?.players_list}
         dealerUid={gameData?.dealer_uid}
@@ -227,6 +237,8 @@ const GamePage = () => {
                 dealerUid={gameData?.dealer_uid}
                 setIsRenameModalOpen={setIsRenameModalOpen}
                 setIsChangeIconModalOpen={setIsChangeIconModalOpen}
+                smallBlind={gameData?.game_setting__small_blind}
+                bigBlind={gameData?.game_setting__big_blind}
               />
             </Suspense>
           )}
@@ -235,20 +247,21 @@ const GamePage = () => {
             gameData?.players_list?.includes(uuid) && (
               <Suspense>
                 <GameBlock
-                  midgamePlayerUid={gameData?.midgame_player_uid}
                   playerDataArr={gameData?.player_data_arr}
                   playerCards={gameData?.player_cards}
                   cardDeck={gameData?.card_deck}
                   currentPlayerUid={gameData?.current_player_uid}
                   playersList={gameData?.players_list}
-                  setOpenMenu={setOpenMenu}
                   uuid={uuid}
                   id={id}
                   dealerUid={gameData?.dealer_uid}
                   lastActions={gameData?.last_actions}
                   gameCards={gameData?.game_cards}
                   bankCount={gameData?.bank}
-                  withBackgroundAnimation={gameData?.with_background_animation}
+                  withBackgroundAnimation={
+                    gameData?.game_setting__with_background_animation
+                  }
+                  bigBlind={gameData?.game_setting__big_blind}
                   gameStage={gameData?.game_stage}
                   isHost={isHost}
                   currentBet={gameData?.current_bet}
@@ -292,6 +305,7 @@ const GamePage = () => {
                 dealerUid={gameData?.dealer_uid}
                 allInBanks={gameData?.all_in_banks}
                 bankCount={gameData?.bank}
+                smallBlind={gameData?.game_setting__small_blind}
               />
             </Suspense>
           )}

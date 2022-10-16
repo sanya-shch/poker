@@ -4,9 +4,9 @@ import { RollCounterRange } from "./RollCounterRange";
 
 import "./style.scss";
 
-const Range = ({ value, setValue, min = "0", max = "5000", step = "25" }) => {
+const Range = ({ value, setValue, min = "0", max = "5000", step }) => {
   React.useEffect(() => {
-    new RollCounterRange("#range2");
+    new RollCounterRange("#range2", step);
   }, []);
 
   return (
@@ -21,13 +21,14 @@ const Range = ({ value, setValue, min = "0", max = "5000", step = "25" }) => {
         step={step}
         onChange={(e) => setValue(e.target.value)}
         onWheel={(e) =>
-          setValue(e.nativeEvent.wheelDelta > 0
-            ? Number(value) + 50 <= Number(max)
-              ? Number(value) + 50
-              : Number(max)
-            : Number(value) - 50 >= Number(min)
-              ? Number(value) - 50
-              : Number(min)
+          setValue(
+            e.nativeEvent.wheelDelta > 0
+              ? Number(value) + step <= Number(max)
+                ? Number(value) + step
+                : Number(max)
+              : Number(value) - step >= Number(min)
+                ? Number(value) - step
+                : Number(min)
           )
         }
       />

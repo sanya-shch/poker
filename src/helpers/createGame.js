@@ -45,7 +45,6 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       game_stage: gameStages.start,
       game_cards: [],
       bank: 0,
-      with_background_animation: false,
       current_bet: 0,
       all_in_banks: {},
       messages_list: [],
@@ -53,6 +52,9 @@ export const createGame = async ({ uuid, gameId, setGameId, navigate }) => {
       messages_info: {},
       history_list: [],
       last_street_bank: 0,
+      game_setting__with_background_animation: false,
+      game_setting__small_blind: 25,
+      game_setting__big_blind: 50,
     });
 
     navigate(`/game/${gameId}`);

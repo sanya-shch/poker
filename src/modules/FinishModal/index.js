@@ -20,6 +20,7 @@ const FinishModal = ({
   dealerUid,
   allInBanks,
   bankCount,
+  smallBlind,
 }) => {
   const { mounted } = useMount({ opened: isOpen });
 
@@ -51,6 +52,7 @@ const FinishModal = ({
         dealerUid={dealerUid}
         allInBanks={allInBanks}
         bankCount={bankCount}
+        smallBlind={smallBlind}
       />
     </ReactPortal>
   );

@@ -27,7 +27,6 @@ import "./style.scss";
 const BackgroundCards = lazy(() => import("../BackgroundCards"));
 
 const GameBlock = ({
-  midgamePlayerUid,
   playerDataArr,
   playerCards,
   cardDeck,
@@ -35,12 +34,12 @@ const GameBlock = ({
   playersList,
   uuid,
   id,
-  setOpenMenu,
   dealerUid,
   lastActions,
   gameCards,
   bankCount,
   withBackgroundAnimation,
+  bigBlind,
   gameStage,
   isHost,
   currentBet = 0,
@@ -50,7 +49,7 @@ const GameBlock = ({
 }) => {
   // ¯\_(ツ)_/¯
   const [isRaise, setIsRaise] = useState(false);
-  const [value, setValue] = React.useState(currentBet + 50);
+  const [value, setValue] = React.useState(currentBet + bigBlind);
   const playerMoney = useMemo(
     () => playerDataArr.find((findItem) => findItem.uid === uuid)?.money || 0,
     [playerDataArr, uuid]
@@ -470,9 +469,9 @@ const GameBlock = ({
               <button onClick={handleBack}>Back</button>
               <div className="range_block">
                 <Range
-                  min={currentBet + 50}
+                  min={currentBet + (bigBlind || 50)}
                   max={(lastActions[uuid]?.number || 0) + playerMoney}
-                  step="50"
+                  step={bigBlind || "50"}
                   value={value}
                   setValue={setValue}
                 />
@@ -500,7 +499,7 @@ const GameBlock = ({
                 onClick={handleClickCheck}
               />
               {!isOnlyAllIn &&
-                (Number(currentBet) + 50 === Number(playerMoney) ? (
+                (Number(currentBet) + bigBlind === Number(playerMoney) ? (
                   <MainButton text="All in" onClick={handleClickAllin} />
                 ) : (
                   <MainButton
