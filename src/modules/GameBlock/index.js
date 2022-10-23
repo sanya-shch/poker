@@ -277,7 +277,11 @@ const GameBlock = ({
   const handleClickAllin = async () => {
     const nextUid = getNextPlayer(
       playersList.filter(
-        (item) => lastActions[item]?.action !== gameActionTypes.fold
+        (item) =>
+          !(
+            lastActions[item]?.action === gameActionTypes.fold ||
+            lastActions[item]?.action === gameActionTypes.all_in
+          )
       ),
       uuid
     );
@@ -335,12 +339,18 @@ const GameBlock = ({
   );
 
   const handleRoundOver = useCallback(async () => {
-    const nextUid = getNextPlayer(
-      playersList.filter(
-        (item) => lastActions[item]?.action !== gameActionTypes.fold
-      ),
-      dealerUid
+    const restPlayers = playersList.filter(
+      (item) =>
+        !(
+          lastActions[item]?.action === gameActionTypes.fold ||
+          lastActions[item]?.action === gameActionTypes.all_in
+        )
     );
+
+    const isOnePlayerAndInAllinCall =
+      restPlayers.length === 1 && lastActions[restPlayers[0]].end;
+
+    const nextUid = getNextPlayer(restPlayers, uuid);
 
     switch (gameStage) {
       case gameStages.start:
@@ -349,7 +359,8 @@ const GameBlock = ({
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
-              lastActions[item]?.action === gameActionTypes.all_in
+              lastActions[item]?.action === gameActionTypes.all_in ||
+              isOnePlayerAndInAllinCall
             )
               acc[item] = lastActions[item];
 
@@ -372,7 +383,8 @@ const GameBlock = ({
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
-              lastActions[item]?.action === gameActionTypes.all_in
+              lastActions[item]?.action === gameActionTypes.all_in ||
+              isOnePlayerAndInAllinCall
             )
               acc[item] = lastActions[item];
 
@@ -395,7 +407,8 @@ const GameBlock = ({
           last_actions: Object.keys(lastActions).reduce((acc, item) => {
             if (
               lastActions[item]?.action === gameActionTypes.fold ||
-              lastActions[item]?.action === gameActionTypes.all_in
+              lastActions[item]?.action === gameActionTypes.all_in ||
+              isOnePlayerAndInAllinCall
             )
               acc[item] = lastActions[item];
 

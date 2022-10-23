@@ -1225,7 +1225,8 @@
     .game_board_container {
       width: 700px;
       height: 400px;
-      margin: 100px 0;
+      //margin: 100px 0;
+      margin: 0;
 
       &:before {
         width: 750px;

@@ -58,6 +58,10 @@
         }
       }
 
+      &.active .item {
+        cursor: auto;
+      }
+
       &.active .item .icon {
         background-color: var(--clr);
         color: white;
