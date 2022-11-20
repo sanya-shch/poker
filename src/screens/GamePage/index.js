@@ -268,6 +268,7 @@ const GamePage = () => {
                   allInBanks={gameData?.all_in_banks}
                   setIsFinishModalOpen={setIsFinishModalOpen}
                   lastStreetBank={gameData?.last_street_bank}
+                  spendMoneyList={gameData?.spend_money}
                 />
               </Suspense>
             )}

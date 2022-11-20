@@ -88,5 +88,6 @@ export const startGame = ({
       },
     ],
     lastStreetBank: 0,
+    all_in_banks: {},
   });
 };

@@ -46,6 +46,7 @@ const GameBlock = ({
   allInBanks,
   setIsFinishModalOpen,
   lastStreetBank = 0,
+  spendMoneyList,
 }) => {
   // ¯\_(ツ)_/¯
   const [isRaise, setIsRaise] = useState(false);
@@ -168,14 +169,49 @@ const GameBlock = ({
             }
           : item
       ),
-      ...(isOnlyAllIn
-        ? {
-            all_in_banks: {
-              ...allInBanks,
-              [uuid]: { bank: lastStreetBank + spendMoney + playerMoney },
-            },
+      all_in_banks: {
+        ...Object.entries(allInBanks).reduce((acc, [key, value]) => {
+          if (value.gameStage === gameStage) {
+            const money = isOnlyAllIn
+              ? spendMoneyList[key].money < spendMoney + playerMoney
+                ? spendMoneyList[key].money
+                : spendMoney + playerMoney
+              : spendMoneyList[key].money < currentBet
+              ? spendMoneyList[key].money
+              : currentBet;
+
+            acc[key] = { ...value, bank: value.bank + money };
+          } else {
+            acc[key] = value;
           }
-        : {}),
+
+          return acc;
+        }, {}),
+        ...(isOnlyAllIn
+          ? {
+              [uuid]: {
+                bank:
+                  lastStreetBank +
+                  spendMoney +
+                  playerMoney +
+                  Object.keys(spendMoneyList).reduce((acc, item) => {
+                    if (spendMoneyList[item]) {
+                      acc +=
+                        spendMoneyList[item].money < spendMoney + playerMoney
+                          ? spendMoneyList[item].money
+                          : spendMoney + playerMoney;
+                    }
+                    return acc;
+                  }, 0),
+                gameStage,
+              },
+            }
+          : {}),
+      },
+      spend_money: {
+        ...spendMoneyList,
+        [uuid]: { money: isOnlyAllIn ? spendMoney + playerMoney : currentBet },
+      },
       history_list: arrayUnion({
         message: isOnlyAllIn
           ? gameActionTypes.all_in
@@ -251,14 +287,49 @@ const GameBlock = ({
             }
           : item
       ),
-      ...(isAllIn
-        ? {
-            all_in_banks: {
-              ...allInBanks,
-              [uuid]: { bank: bankCount + playerMoney },
-            },
+      all_in_banks: {
+        ...Object.entries(allInBanks).reduce((acc, [key, val]) => {
+          if (val.gameStage === gameStage) {
+            const money = isAllIn
+              ? spendMoneyList[key].money < spendMoney + playerMoney
+                ? spendMoneyList[key].money
+                : spendMoney + playerMoney
+              : spendMoneyList[key].money < Number(value)
+              ? spendMoneyList[key].money
+              : Number(value);
+
+            acc[key] = { ...val, bank: val.bank + money };
+          } else {
+            acc[key] = val;
           }
-        : {}),
+
+          return acc;
+        }, {}),
+        ...(isAllIn
+          ? {
+              [uuid]: {
+                bank:
+                  lastStreetBank +
+                  spendMoney +
+                  playerMoney +
+                  Object.keys(spendMoneyList).reduce((acc, item) => {
+                    if (spendMoneyList[item]) {
+                      acc +=
+                        spendMoneyList[item].money < spendMoney + playerMoney
+                          ? spendMoneyList[item].money
+                          : spendMoney + playerMoney;
+                    }
+                    return acc;
+                  }, 0),
+                gameStage,
+              },
+            }
+          : {}),
+      },
+      spend_money: {
+        ...spendMoneyList,
+        [uuid]: { money: isAllIn ? spendMoney + playerMoney : Number(value) },
+      },
       history_list: arrayUnion({
         message: isAllIn
           ? gameActionTypes.all_in
@@ -321,8 +392,24 @@ const GameBlock = ({
           : item
       ),
       all_in_banks: {
-        ...allInBanks,
-        [uuid]: { bank: bankCount + Number(playerMoney) },
+        ...Object.entries(allInBanks).reduce((acc, [key, value]) => {
+          if (value.gameStage === gameStage) {
+            const money = spendMoneyList[key].money < spendMoney + playerMoney
+              ? spendMoneyList[key].money
+              : spendMoney + playerMoney;
+
+            acc[key] = { ...value, bank: value.bank + money };
+          } else {
+            acc[key] = value;
+          }
+
+          return acc;
+        }, {}),
+        [uuid]: { bank: bankCount + Number(playerMoney), gameStage },
+      },
+      spend_money: {
+        ...spendMoneyList,
+        [uuid]: { money: spendMoney + playerMoney },
       },
       history_list: arrayUnion({
         message: gameActionTypes.all_in,
@@ -375,6 +462,7 @@ const GameBlock = ({
           }),
           card_deck: cardDeck.slice(4),
           last_street_bank: bankCount,
+          spend_money: {},
         });
         break;
       case gameStages.flop:
@@ -399,6 +487,7 @@ const GameBlock = ({
           }),
           card_deck: cardDeck.slice(2),
           last_street_bank: bankCount,
+          spend_money: {},
         });
         break;
       case gameStages.turn:
@@ -423,6 +512,7 @@ const GameBlock = ({
           }),
           card_deck: cardDeck.slice(2),
           last_street_bank: bankCount,
+          spend_money: {},
         });
         break;
       case gameStages.river:
