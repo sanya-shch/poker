@@ -126,19 +126,31 @@
         border-radius: 3px;
       }
 
+      //div:nth-of-type(1) {
+      //  background-color: #313131;
+      //  position: absolute;
+      //  top: 5px;
+      //  left: 10px;
+      //  transform: rotate(340deg);
+      //}
+      //div:nth-of-type(2) {
+      //  background-color: #414141;
+      //  position: absolute;
+      //  top: 5px;
+      //  left: 40px;
+      //  transform: rotate(25deg);
+      //}
       div:nth-of-type(1) {
         background-color: #313131;
         position: absolute;
-        top: 5px;
-        left: 10px;
-        transform: rotate(340deg);
+        top: -3px;
+        left: 0;
       }
       div:nth-of-type(2) {
         background-color: #414141;
         position: absolute;
-        top: 5px;
-        left: 40px;
-        transform: rotate(25deg);
+        top: 0;
+        left: 44px;
       }
     }
 
@@ -970,6 +982,7 @@
       }
       .player_5 {
         top: 5px;
+        left: 230px;
       }
       .player_6 {
         top: 5px;
@@ -977,6 +990,7 @@
       }
       .player_7 {
         top: 5px;
+        right: 230px;
       }
       .player_8 {
         top: 100px;
@@ -998,6 +1012,7 @@
     .players_10 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         left: 15px;
@@ -1033,11 +1048,13 @@
       }
       .player_10 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_9 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         left: 15px;
@@ -1049,6 +1066,7 @@
       }
       .player_4 {
         top: 5px;
+        left: 230px;
       }
       .player_5 {
         top: 5px;
@@ -1056,6 +1074,7 @@
       }
       .player_6 {
         top: 5px;
+        right: 230px;
       }
       .player_7 {
         top: 90px;
@@ -1067,11 +1086,13 @@
       }
       .player_9 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_8 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         left: 15px;
@@ -1083,9 +1104,11 @@
       }
       .player_4 {
         top: 5px;
+        left: 230px;
       }
       .player_5 {
         top: 5px;
+        right: 230px;
       }
       .player_6 {
         top: 90px;
@@ -1097,17 +1120,20 @@
       }
       .player_8 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_7 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         left: 15px;
       }
       .player_3 {
         top: 5px;
+        left: 230px;
       }
       .player_4 {
         top: 5px;
@@ -1115,41 +1141,48 @@
       }
       .player_5 {
         top: 5px;
+        right: 230px;
       }
       .player_6 {
         right: 15px;
       }
       .player_7 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_6 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         left: 15px;
       }
       .player_3 {
         top: 5px;
+        left: 230px;
       }
       .player_4 {
         top: 5px;
+        right: 230px;
       }
       .player_5 {
         right: 15px;
       }
       .player_6 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_5 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         top: 5px;
-        left: 260px;
+        left: 230px;
       }
       .player_3 {
         top: 5px;
@@ -1157,24 +1190,29 @@
       }
       .player_4 {
         top: 5px;
-        right: 260px;
+        right: 230px;
       }
       .player_5 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_4 {
       .player_1 {
         bottom: 30px;
+        left: 230px;
       }
       .player_2 {
         top: 5px;
+        left: 230px;
       }
       .player_3 {
         top: 5px;
+        right: 230px;
       }
       .player_4 {
         bottom: 30px;
+        right: 230px;
       }
     }
     .players_3 {
@@ -1440,7 +1478,7 @@
       }
       .player_11 {
         right: -30px;
-        bottom: 140px;
+        bottom: 115px;
         flex-direction: row;
 
         .player_action_block {
