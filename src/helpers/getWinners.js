@@ -73,26 +73,40 @@ export const getWinners = ({
       let bank =
         bankCount - allInBanks[filteredPlayersCombinations[0].uid].bank;
 
-      return [
-        ...newFilteredPlayersCombinations.map((item, index) => {
-          if (index + 1 === newFilteredPlayersCombinations.length) {
-            return { uid: item.uid, bank: bank };
-          } else {
-            const currentBank =
-              Math.floor(
-                bank / smallBlind / newFilteredPlayersCombinations.length
-              ) * smallBlind;
-
-            bank -= currentBank;
-
-            return { uid: item.uid, bank: currentBank };
+      if (lastActions[newFilteredPlayersCombinations[0].uid]?.action !==
+        gameActionTypes.all_in) {
+        return [
+          {
+            uid: filteredPlayersCombinations[0].uid,
+            bank: allInBanks[filteredPlayersCombinations[0].uid].bank,
+          },
+          {
+            uid: newFilteredPlayersCombinations[0].uid,
+            bank,
           }
-        }),
-        {
-          uid: filteredPlayersCombinations[0].uid,
-          bank: allInBanks[filteredPlayersCombinations[0].uid].bank,
-        },
-      ];
+        ];
+      } else {
+        return [
+          ...newFilteredPlayersCombinations.map((item, index) => {
+            if (index + 1 === newFilteredPlayersCombinations.length) {
+              return { uid: item.uid, bank: bank };
+            } else {
+              const currentBank =
+                Math.floor(
+                  bank / smallBlind / newFilteredPlayersCombinations.length
+                ) * smallBlind;
+
+              bank -= currentBank;
+
+              return { uid: item.uid, bank: currentBank };
+            }
+          }),
+          {
+            uid: filteredPlayersCombinations[0].uid,
+            bank: allInBanks[filteredPlayersCombinations[0].uid].bank,
+          },
+        ];
+      }
     } else {
       return [{ uid: filteredPlayersCombinations[0].uid, bank: bankCount }];
     }
